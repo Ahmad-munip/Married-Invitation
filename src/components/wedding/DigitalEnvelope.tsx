@@ -1,0 +1,79 @@
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Copy, Check, Gift } from "lucide-react";
+
+const accounts = [
+  { bank: "Bank BCA", number: "1234567890", name: "Ahmad Fauzan" },
+  { bank: "Bank Mandiri", number: "0987654321", name: "Sarah Putri" },
+];
+
+const DigitalEnvelope = () => {
+  const [show, setShow] = useState(false);
+  const [copied, setCopied] = useState<number | null>(null);
+
+  const copyToClipboard = (text: string, idx: number) => {
+    navigator.clipboard.writeText(text);
+    setCopied(idx);
+    setTimeout(() => setCopied(null), 2000);
+  };
+
+  return (
+    <section className="py-24 px-6">
+      <div className="max-w-lg mx-auto text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <p className="font-sans-elegant text-xs tracking-[0.3em] uppercase text-primary/70 mb-3">Wedding Gift</p>
+          <h2 className="font-script text-5xl gradient-gold-text mb-4">Amplop Digital</h2>
+          <div className="divider-gold w-32 mx-auto mb-6" />
+          <p className="font-serif text-muted-foreground mb-8">
+            Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika Anda ingin memberikan tanda kasih, kami menyediakan amplop digital.
+          </p>
+
+          <motion.button
+            onClick={() => setShow(!show)}
+            className="gradient-gold font-sans-elegant text-sm tracking-widest uppercase px-8 py-3 rounded-full text-primary-foreground inline-flex items-center gap-2 glow-gold cursor-pointer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Gift className="w-4 h-4" />
+            {show ? "Sembunyikan" : "Kirim Hadiah"}
+          </motion.button>
+        </motion.div>
+
+        {show && (
+          <motion.div
+            className="mt-8 space-y-4"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+          >
+            {accounts.map((acc, i) => (
+              <motion.div
+                key={i}
+                className="glass-strong rounded-xl p-6 relative overflow-hidden shine-effect"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.15 }}
+              >
+                <p className="font-sans-elegant text-xs tracking-widest text-primary mb-1">{acc.bank}</p>
+                <p className="font-serif text-2xl font-semibold text-foreground mb-1">{acc.number}</p>
+                <p className="font-serif text-sm text-muted-foreground mb-3">a.n. {acc.name}</p>
+                <button
+                  onClick={() => copyToClipboard(acc.number, i)}
+                  className="inline-flex items-center gap-2 text-primary font-sans-elegant text-xs tracking-widest uppercase hover:text-accent transition-colors cursor-pointer"
+                >
+                  {copied === i ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                  {copied === i ? "Tersalin!" : "Salin Nomor"}
+                </button>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
+      </div>
+    </section>
+  );
+};
+
+export default DigitalEnvelope;
