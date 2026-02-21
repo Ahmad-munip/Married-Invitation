@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
 import heroBg from "@/assets/hero-bg.jpg";
+import FloralFrame from "./FloralFrame";
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <FloralFrame positions={["top-left", "top-right", "bottom-left", "bottom-right"]} size="lg" />
       {/* Parallax Background */}
       <div className="absolute inset-0">
         <img

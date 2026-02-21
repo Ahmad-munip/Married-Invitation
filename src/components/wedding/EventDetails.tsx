@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Calendar, Clock, MapPin } from "lucide-react";
+import FloralFrame from "./FloralFrame";
 
 const events = [
   {
@@ -21,6 +22,8 @@ const events = [
 const EventDetails = () => {
   return (
     <section className="py-24 px-6 relative">
+      <FloralFrame positions={["top-left", "top-right"]} size="sm" />
+      <FloralFrame positions={["bottom-left", "bottom-right"]} size="sm" />
       <div className="max-w-5xl mx-auto">
         <motion.div
           className="text-center mb-16"
