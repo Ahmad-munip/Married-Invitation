@@ -55,11 +55,7 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
         >
           {/* Background */}
           <div className="absolute inset-0">
-            <img
-              src={heroBg}
-              alt="Wedding background"
-              className="h-full w-full object-cover"
-            />
+            <img src={heroBg} alt="Wedding background" className="h-full w-full object-cover" />
             <div className="absolute inset-0 bg-background/70" />
           </div>
 
@@ -109,9 +105,7 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
 
           {/* Rotating Rings */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div
-              className="absolute w-[300px] h-[300px] md:w-[450px] md:h-[450px] rounded-full border border-primary/10 animate-rotate-slow"
-            />
+            <div className="absolute w-[300px] h-[300px] md:w-[450px] md:h-[450px] rounded-full border border-primary/10 animate-rotate-slow" />
             <div
               className="absolute w-[380px] h-[380px] md:w-[550px] md:h-[550px] rounded-full border border-primary/5 animate-rotate-slow"
               style={{ animationDirection: "reverse", animationDuration: "30s" }}
@@ -120,9 +114,12 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
 
           {/* Light Sweep */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <div className="animate-light-sweep absolute inset-0" style={{
-              background: "linear-gradient(105deg, transparent 40%, hsl(40 90% 65% / 0.06) 50%, transparent 60%)",
-            }} />
+            <div
+              className="animate-light-sweep absolute inset-0"
+              style={{
+                background: "linear-gradient(105deg, transparent 40%, hsl(40 90% 65% / 0.06) 50%, transparent 60%)",
+              }}
+            />
           </div>
 
           {/* Corner Ornaments */}
@@ -142,12 +139,7 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
               animate={{ opacity: 0.6, scale: 1 }}
               transition={{ delay: 0.4 + i * 0.2, duration: 0.8 }}
             >
-              <path
-                d={corner.d}
-                stroke="hsl(40, 72%, 52%)"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
+              <path d={corner.d} stroke="hsl(40, 72%, 52%)" strokeWidth="1.5" strokeLinecap="round" />
               <path
                 d={corner.d}
                 stroke="hsl(40, 72%, 52%)"
@@ -181,7 +173,7 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.8, duration: 0.8 }}
             >
-              Ahmad & Sarah
+              Munip & Risma
             </motion.h1>
 
             <div className="divider-gold w-40 mx-auto mb-8" />
