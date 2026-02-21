@@ -1,13 +1,50 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, Send } from "lucide-react";
+import { Check, Send, WifiOff } from "lucide-react";
+
+const STORAGE_KEY = "wedding-rsvp-queue";
+
+interface RSVPData {
+  nama: string;
+  kehadiran: string;
+  jumlah: string;
+  ucapan: string;
+  timestamp: number;
+}
+
+/** Save RSVP to localStorage queue (offline-first) */
+const saveToQueue = (data: RSVPData) => {
+  const queue: RSVPData[] = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+  queue.push(data);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(queue));
+};
+
+const getQueueCount = (): number => {
+  return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]").length;
+};
 
 const RSVPSection = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [pendingCount, setPendingCount] = useState(getQueueCount);
   const [form, setForm] = useState({ nama: "", kehadiran: "hadir", jumlah: "1", ucapan: "" });
+
+  useEffect(() => {
+    const onOnline = () => setIsOnline(true);
+    const onOffline = () => setIsOnline(false);
+    window.addEventListener("online", onOnline);
+    window.addEventListener("offline", onOffline);
+    return () => {
+      window.removeEventListener("online", onOnline);
+      window.removeEventListener("offline", onOffline);
+    };
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const data: RSVPData = { ...form, timestamp: Date.now() };
+    saveToQueue(data);
+    setPendingCount(getQueueCount());
     setSubmitted(true);
   };
 
@@ -24,6 +61,32 @@ const RSVPSection = () => {
           <h2 className="font-script text-5xl gradient-gold-text mb-4">RSVP</h2>
           <div className="divider-gold w-32 mx-auto" />
         </motion.div>
+
+        {/* Offline indicator */}
+        {!isOnline && (
+          <motion.div
+            className="glass rounded-lg px-4 py-3 mb-6 flex items-center gap-3 text-primary"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <WifiOff className="w-4 h-4 shrink-0" />
+            <p className="font-sans-elegant text-xs">
+              Anda sedang offline. RSVP akan tersimpan dan dikirim otomatis saat online kembali.
+            </p>
+          </motion.div>
+        )}
+
+        {pendingCount > 0 && isOnline && !submitted && (
+          <motion.div
+            className="glass rounded-lg px-4 py-3 mb-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            <p className="font-sans-elegant text-xs text-muted-foreground">
+              {pendingCount} RSVP tersimpan menunggu sinkronisasi.
+            </p>
+          </motion.div>
+        )}
 
         <AnimatePresence mode="wait">
           {!submitted ? (
@@ -89,7 +152,7 @@ const RSVPSection = () => {
                 className="w-full gradient-gold font-sans-elegant text-sm tracking-widest uppercase py-4 rounded-lg text-primary-foreground flex items-center justify-center gap-2 hover:opacity-90 transition-opacity cursor-pointer"
               >
                 <Send className="w-4 h-4" />
-                Kirim RSVP
+                {isOnline ? "Kirim RSVP" : "Simpan RSVP (Offline)"}
               </button>
             </motion.form>
           ) : (
@@ -103,7 +166,11 @@ const RSVPSection = () => {
                 <Check className="w-8 h-8 text-primary-foreground" />
               </div>
               <h3 className="font-script text-3xl gradient-gold-text mb-3">Terima Kasih!</h3>
-              <p className="font-serif text-muted-foreground">Konfirmasi kehadiran Anda telah kami terima.</p>
+              <p className="font-serif text-muted-foreground">
+                {isOnline
+                  ? "Konfirmasi kehadiran Anda telah kami terima."
+                  : "RSVP tersimpan secara offline dan akan dikirim otomatis saat Anda kembali online."}
+              </p>
             </motion.div>
           )}
         </AnimatePresence>
