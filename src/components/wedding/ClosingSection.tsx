@@ -1,23 +1,14 @@
-import { useState, useRef, useEffect } from "react";
+import { RefObject } from "react";
 import { motion } from "framer-motion";
 import { Volume2, VolumeX } from "lucide-react";
 
-const ClosingSection = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+interface ClosingSectionProps {
+  audioRef: RefObject<HTMLAudioElement | null>;
+  isPlaying: boolean;
+  setIsPlaying: (v: boolean) => void;
+}
 
-  useEffect(() => {
-    // Create audio element - users can replace the src with their own music
-    audioRef.current = new Audio();
-    audioRef.current.loop = true;
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
-    };
-  }, []);
-
+const ClosingSection = ({ audioRef, isPlaying, setIsPlaying }: ClosingSectionProps) => {
   const toggleMusic = () => {
     if (!audioRef.current) return;
     if (isPlaying) {
