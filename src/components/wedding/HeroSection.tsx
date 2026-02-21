@@ -37,7 +37,7 @@ const HeroSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.3 }}
         >
-          Ahmad
+          Ahmad Munip
         </motion.h1>
 
         <motion.div
@@ -59,7 +59,7 @@ const HeroSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          Sarah
+          Risma Mawlina
         </motion.h1>
 
         <motion.p
