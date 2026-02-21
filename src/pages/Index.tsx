@@ -13,6 +13,7 @@ import DigitalEnvelope from "@/components/wedding/DigitalEnvelope";
 import WishesSection from "@/components/wedding/WishesSection";
 import MapsSection from "@/components/wedding/MapsSection";
 import ClosingSection from "@/components/wedding/ClosingSection";
+import { FloralDivider } from "@/components/wedding/FloralFrame";
 
 const MUSIC_URL = "https://cdn.pixabay.com/audio/2024/11/29/audio_f0c53efea1.mp3";
 
@@ -53,25 +54,25 @@ const Index = () => {
             <FloatingPetals />
             <HeroSection />
 
-            <div className="divider-gold w-40 mx-auto" />
+            <FloralDivider />
 
             <EventDetails />
             <CountdownTimer />
 
-            <div className="divider-gold w-40 mx-auto" />
+            <FloralDivider />
 
             <LoveStory />
 
-            <div className="divider-gold w-40 mx-auto" />
+            <FloralDivider />
 
             <Gallery />
 
-            <div className="divider-gold w-40 mx-auto" />
+            <FloralDivider />
 
             <RSVPSection />
             <DigitalEnvelope />
 
-            <div className="divider-gold w-40 mx-auto" />
+            <FloralDivider />
 
             <WishesSection />
             <MapsSection />
