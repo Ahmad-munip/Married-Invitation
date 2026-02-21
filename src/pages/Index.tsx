@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SplashScreen from "@/components/wedding/SplashScreen";
 import HeroSection from "@/components/wedding/HeroSection";
@@ -14,12 +14,33 @@ import WishesSection from "@/components/wedding/WishesSection";
 import MapsSection from "@/components/wedding/MapsSection";
 import ClosingSection from "@/components/wedding/ClosingSection";
 
+const MUSIC_URL = "https://cdn.pixabay.com/audio/2024/11/29/audio_f0c53efea1.mp3";
+
 const Index = () => {
   const [splashOpen, setSplashOpen] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const handleOpenInvitation = () => {
+    setSplashOpen(false);
+
+    // Initialize and play audio
+    if (!audioRef.current) {
+      const audio = new Audio(MUSIC_URL);
+      audio.loop = true;
+      audio.volume = 0.5;
+      audioRef.current = audio;
+    }
+    audioRef.current.play().then(() => {
+      setIsPlaying(true);
+    }).catch(() => {
+      // Autoplay blocked by browser — user can use the toggle
+    });
+  };
 
   return (
     <div className="min-h-screen bg-background">
-      <SplashScreen isOpen={splashOpen} onOpen={() => setSplashOpen(false)} />
+      <SplashScreen isOpen={splashOpen} onOpen={handleOpenInvitation} />
 
       <AnimatePresence>
         {!splashOpen && (
@@ -54,7 +75,11 @@ const Index = () => {
 
             <WishesSection />
             <MapsSection />
-            <ClosingSection />
+            <ClosingSection
+              audioRef={audioRef}
+              isPlaying={isPlaying}
+              setIsPlaying={setIsPlaying}
+            />
           </motion.div>
         )}
       </AnimatePresence>
