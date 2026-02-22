@@ -16,6 +16,27 @@ const LoveStory = () => {
       <div className="ambient-glow" style={{ width: 350, height: 350, top: "10%", right: "-10%" }} />
       <div className="ambient-glow" style={{ width: 250, height: 250, bottom: "15%", left: "-8%" }} />
 
+      {/* Bokeh circles */}
+      {[
+        { left: "5%", top: "20%", size: 90, opacity: 0.04 },
+        { left: "80%", top: "50%", size: 120, opacity: 0.03 },
+        { left: "40%", top: "80%", size: 80, opacity: 0.05 },
+      ].map((b, i) => (
+        <div
+          key={`bokeh-${i}`}
+          className="absolute rounded-full animate-bokeh pointer-events-none"
+          style={{
+            left: b.left,
+            top: b.top,
+            width: b.size,
+            height: b.size,
+            background: `radial-gradient(circle, hsl(40 60% 55% / ${b.opacity}), transparent 70%)`,
+            filter: "blur(18px)",
+            animationDuration: `${12 + i * 3}s`,
+          }}
+        />
+      ))}
+
       <div className="max-w-3xl mx-auto relative">
         <motion.div
           className="text-center mb-16"

@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useMemo } from "react";
+import { useMemo, lazy, Suspense } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
+
+const Particles3D = lazy(() => import("./Particles3D"));
 
 interface SplashScreenProps {
   isOpen: boolean;
@@ -61,6 +63,11 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
             <img src={heroBg} alt="Wedding background" className="h-full w-full object-cover" />
             <div className="absolute inset-0 bg-background/65" />
           </div>
+
+          {/* 3D Particles */}
+          <Suspense fallback={null}>
+            <Particles3D count={300} speed={0.2} size={0.025} className="!z-[1]" />
+          </Suspense>
 
           {/* Batik pattern overlay */}
           <div className="batik-pattern" style={{ opacity: 0.04 }} />

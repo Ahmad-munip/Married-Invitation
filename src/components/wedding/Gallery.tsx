@@ -22,6 +22,28 @@ const Gallery = () => {
       <div className="ambient-glow" style={{ width: 300, height: 300, top: "5%", left: "-5%" }} />
       <div className="ambient-glow" style={{ width: 250, height: 250, bottom: "10%", right: "-5%" }} />
 
+      {/* Floating orbs */}
+      {[
+        { left: "5%", top: "40%", size: 14 },
+        { left: "90%", top: "30%", size: 10 },
+        { left: "50%", top: "85%", size: 12 },
+      ].map((orb, i) => (
+        <motion.div
+          key={`orb-${i}`}
+          className="absolute rounded-full pointer-events-none"
+          style={{
+            left: orb.left,
+            top: orb.top,
+            width: orb.size,
+            height: orb.size,
+            background: "radial-gradient(circle, hsl(40 80% 60% / 0.35), transparent)",
+            boxShadow: "0 0 12px hsl(40 72% 52% / 0.2)",
+          }}
+          animate={{ y: [-8, 8, -8], opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 6 + i * 2, repeat: Infinity, ease: "easeInOut" }}
+        />
+      ))}
+
       <div className="max-w-5xl mx-auto relative">
         <motion.div
           className="text-center mb-16"
