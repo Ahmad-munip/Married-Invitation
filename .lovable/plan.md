@@ -1,85 +1,99 @@
 
 
-## Rencana: Partikel 3D, Objek Hiasan Tambahan, dan Audio Cues per Section
+## Rencana: Menambahkan Objek Akar/Vine dan Lebih Banyak Elemen Dekoratif
 
 ### Apa yang akan ditambahkan
 
-**1. Partikel 3D menggunakan React Three Fiber**
-Menambahkan canvas 3D di halaman depan (Splash Screen dan Hero Section) dengan partikel-partikel emas yang melayang dalam ruang 3D -- memberikan efek kedalaman dan kemewahan yang tidak bisa dicapai dengan CSS biasa.
+**1. Komponen baru: `VineRoots` -- Akar-akar dekoratif gold**
+Elemen SVG berupa akar/sulur tanaman yang merambat dari tepi layar. Akan tampil di sisi kiri dan kanan halaman, dengan animasi "tumbuh" saat user scroll. Akar-akar ini menggunakan SVG path yang berliku-liku (bezier curves) dengan cabang-cabang kecil dan titik-titik dekoratif.
 
-- **Splash Screen**: Canvas 3D dengan ratusan partikel gold kecil yang melayang perlahan, berputar di ruang 3D
-- **Hero Section**: Partikel 3D yang bergerak mengikuti scroll, memberikan efek parallax 3D
+**2. Komponen baru: `FloatingLeaves` -- Daun melayang**
+Daun-daun kecil bergaya gold yang melayang dan berputar perlahan di seluruh halaman (mirip floating petals tapi dengan bentuk daun yang lebih detail dan variasi ukuran).
 
-**2. Objek hiasan tambahan di seluruh halaman**
-- **Floating orbs**: Bola-bola cahaya gold transparan yang melayang di berbagai section
-- **Twinkling stars**: Bintang kecil yang berkedip-kedip di background seluruh halaman
-- **Particle trails**: Jejak partikel gold tipis yang mengikuti scroll
-- **Bokeh circles**: Lingkaran blur yang bergerak perlahan di background, mirip efek bokeh kamera
+**3. Komponen baru: `GoldDust` -- Debu emas halus**
+Partikel-partikel sangat kecil yang bergerak perlahan ke atas, memberikan efek "debu emas" yang melayang. Berbeda dari partikel 3D yang sudah ada -- ini lebih halus dan menggunakan CSS murni.
 
-**3. Background music control yang lebih baik**
-- Tombol play/pause yang sudah ada akan ditingkatkan dengan indikator visual (equalizer bars animasi saat musik bermain)
-- Volume control slider yang muncul saat hover pada tombol musik
+**4. Penambahan vine/akar lokal di setiap section**
+Setiap section akan mendapatkan akar kecil yang merambat dari sudut-sudutnya, menambah kesan organik dan natural.
 
 ### Detail Teknis
 
-**Dependency baru:**
-- `@react-three/fiber@^8.18` -- React renderer untuk Three.js
-- `three@^0.160` -- Library 3D
-- `@react-three/drei@^9.122.0` -- Helper untuk React Three Fiber
-
 **File baru:**
 
-1. **`src/components/wedding/Particles3D.tsx`**
-   - Komponen `GoldParticles3D` menggunakan `@react-three/fiber` Canvas
-   - Ratusan titik partikel emas dalam ruang 3D (menggunakan `Points` dari drei)
-   - Animasi rotasi perlahan menggunakan `useFrame`
-   - Render di belakang konten dengan `position: fixed` dan `pointer-events: none`
+1. **`src/components/wedding/VineRoots.tsx`**
+   - SVG path akar yang merambat dari sisi kiri dan kanan layar
+   - Animasi `pathLength` dari framer-motion agar tampak "tumbuh"
+   - Props: `side` (left/right/both), `density` (jumlah cabang)
+   - Posisi fixed agar tampil sepanjang halaman
 
-2. **`src/components/wedding/TwinklingStars.tsx`**
-   - 30-40 bintang kecil dengan posisi acak yang berkedip menggunakan framer-motion
-   - Masing-masing bintang punya timing berbeda agar terlihat natural
+2. **`src/components/wedding/FloatingLeaves.tsx`**
+   - 20 elemen daun SVG dengan bentuk berbeda-beda (3 variasi bentuk daun)
+   - Animasi CSS: rotate + float + fade
+   - Posisi acak, ukuran acak, timing acak
 
-3. **`src/components/wedding/BokehCircles.tsx`**
-   - Lingkaran blur besar (bokeh effect) yang melayang perlahan
-   - Warna gold/amber dengan opacity sangat rendah
-   - Animasi CSS float dengan durasi berbeda
+3. **`src/components/wedding/GoldDust.tsx`**
+   - 50+ partikel sangat kecil (1-3px) yang bergerak naik perlahan
+   - Menggunakan CSS keyframe `float-up` untuk performa optimal
+   - Warna gold dengan opacity sangat rendah (0.1-0.3)
 
 **File yang diubah:**
 
-4. **`src/pages/Index.tsx`**
-   - Import dan tambahkan `Particles3D` sebagai layer fixed di belakang konten (muncul setelah splash screen dibuka)
-   - Import dan tambahkan `TwinklingStars` sebagai layer global
-   - Import dan tambahkan `BokehCircles` sebagai layer global
+4. **`src/index.css`**
+   - Tambahkan keyframes: `grow-vine` (stroke-dashoffset animation), `leaf-float` (kombinasi rotate + translate), `dust-rise` (partikel naik perlahan)
+   - Class utility: `.animate-leaf`, `.animate-dust`
 
-5. **`src/components/wedding/SplashScreen.tsx`**
-   - Tambahkan `GoldParticles3D` canvas sebagai background layer 3D
-   - Partikel lebih banyak dan lebih aktif di splash screen
+5. **`src/pages/Index.tsx`**
+   - Import dan tambahkan `VineRoots` sebagai layer global (sisi kiri dan kanan)
+   - Import dan tambahkan `FloatingLeaves` sebagai layer global
+   - Import dan tambahkan `GoldDust` sebagai layer global
 
-6. **`src/components/wedding/ClosingSection.tsx`**
-   - Tingkatkan tombol musik dengan animasi equalizer bars (3 bar yang bounce saat musik bermain)
-   - Tambahkan volume slider yang muncul saat hover/tap pada tombol musik
+6. **`src/components/wedding/HeroSection.tsx`**
+   - Tambahkan akar/vine lokal yang merambat dari sudut bawah kiri dan bawah kanan
+   - Tambahkan beberapa elemen dekoratif kecil (titik-titik gold, lingkaran kecil)
 
-7. **`src/index.css`**
-   - Tambahkan keyframes: `twinkle`, `bokeh-float`, `eq-bounce`
-   - Class utility: `.animate-twinkle`, `.animate-bokeh`, `.eq-bar`
+7. **`src/components/wedding/SplashScreen.tsx`**
+   - Tambahkan vine corners yang merambat dari keempat sudut
+   - Tambahkan gold dust particles
 
-8. **`src/components/wedding/HeroSection.tsx`**
-   - Tambahkan floating orbs (bola cahaya gold transparan) di sekitar nama pasangan
+8. **`src/components/wedding/EventDetails.tsx`**
+   - Tambahkan vine kecil di sisi kiri dan kanan cards
+   - Tambahkan floating leaf accents
 
-9. **`src/components/wedding/EventDetails.tsx`**
-   - Tambahkan beberapa twinkling stars lokal di sekitar kartu acara
+9. **`src/components/wedding/LoveStory.tsx`**
+   - Vine mengikuti garis timeline (merambat dari atas ke bawah di tengah)
+   - Tambahkan leaf accents di sekitar love story items
 
-10. **`src/components/wedding/LoveStory.tsx`**
-    - Tambahkan bokeh circles di background section
+10. **`src/components/wedding/Gallery.tsx`**
+    - Vine frame di sekitar gallery grid
+    - Leaf accents di corner gallery
 
-11. **`src/components/wedding/Gallery.tsx`**
-    - Tambahkan floating orbs di sekitar gallery
+11. **`src/components/wedding/CountdownTimer.tsx`**
+    - Vine kecil di bawah dan atas section
+    - Gold dust di sekitar countdown boxes
+
+12. **`src/components/wedding/RSVPSection.tsx`**
+    - Vine accents di sudut form
+
+13. **`src/components/wedding/WishesSection.tsx`**
+    - Vine kecil di sisi section
+
+14. **`src/components/wedding/DigitalEnvelope.tsx`**
+    - Vine ornament di sekitar kartu bank
+
+15. **`src/components/wedding/MapsSection.tsx`**
+    - Vine frame tipis di sekitar map container
+
+16. **`src/components/wedding/ClosingSection.tsx`**
+    - Vine yang lebih besar dan kaya di seluruh section penutup
+
+17. **`src/components/wedding/FloralFrame.tsx`**
+    - Tambahkan komponen `SectionVine` -- vine/akar lokal yang bisa ditempatkan di section manapun
+    - Upgrade `VineCorner` dengan lebih banyak cabang dan detail
 
 ### Pendekatan Desain
-
-- Canvas 3D menggunakan `alpha: true` dan `position: fixed` agar transparan di atas background batik
-- Semua partikel 3D berwarna gold (hsl 40, 72%, 52%) dengan variasi brightness
-- Performance: jumlah partikel dibatasi (200-300 titik), menggunakan `Points` geometry yang efisien
-- Responsive: ukuran canvas mengikuti viewport, jumlah partikel dikurangi di mobile
-- Audio control menggunakan `audioRef` yang sudah ada di Index.tsx, ditambahkan volume slider
-
+- Semua vine/akar menggunakan warna gold (`hsl(40 72% 52%)`) dengan opacity 0.1-0.3
+- SVG path menggunakan bezier curves untuk tampilan organik
+- Animasi `pathLength` agar vine tampak "tumbuh"
+- Daun menggunakan 3 variasi bentuk untuk kesan natural
+- Gold dust sangat halus (opacity rendah) agar tidak mengganggu konten
+- Responsive: vine lebih simpel di mobile, lebih kaya di desktop
