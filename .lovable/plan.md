@@ -1,62 +1,85 @@
 
-## Rencana: Menambahkan Objek Dekoratif dan Background Batik Coklat
 
-### Apa yang akan berubah
+## Rencana: Partikel 3D, Objek Hiasan Tambahan, dan Audio Cues per Section
 
-**1. Warna background utama diubah menjadi coklat gelap (bukan hitam)**
-Saat ini background menggunakan hitam pekat (`0 0% 4%`). Akan diubah menjadi coklat gelap hangat agar tidak terlalu gelap dan sesuai nuansa batik. Warna-warna turunan (card, secondary, muted, border) juga disesuaikan ke nuansa coklat.
+### Apa yang akan ditambahkan
 
-**2. Background pattern batik SVG**
-Ditambahkan pattern batik yang dibuat langsung dengan CSS/SVG sebagai latar belakang halaman. Pattern ini berupa motif kawung/parang sederhana dengan warna coklat-gold yang sangat halus (opacity rendah), agar menyatu natural tanpa mengganggu konten.
+**1. Partikel 3D menggunakan React Three Fiber**
+Menambahkan canvas 3D di halaman depan (Splash Screen dan Hero Section) dengan partikel-partikel emas yang melayang dalam ruang 3D -- memberikan efek kedalaman dan kemewahan yang tidak bisa dicapai dengan CSS biasa.
 
-**3. Objek dekoratif tambahan**
-Beberapa elemen hias baru akan ditambahkan di seluruh halaman:
-- **Mandala rings** -- lingkaran ornamental bergaya batik di beberapa section (Hero, LoveStory, Gallery)
-- **Floating diamond shapes** -- bentuk wajik/belah ketupat kecil yang melayang perlahan di background (motif khas batik)
-- **Decorative corner ornaments yang lebih kaya** -- menambah detail pada FloralFrame yang sudah ada
-- **Section separator yang lebih ornamental** -- divider ditingkatkan dengan motif batik/kawung
-- **Ambient glow circles** -- lingkaran cahaya coklat-gold halus di background beberapa section
+- **Splash Screen**: Canvas 3D dengan ratusan partikel gold kecil yang melayang perlahan, berputar di ruang 3D
+- **Hero Section**: Partikel 3D yang bergerak mengikuti scroll, memberikan efek parallax 3D
+
+**2. Objek hiasan tambahan di seluruh halaman**
+- **Floating orbs**: Bola-bola cahaya gold transparan yang melayang di berbagai section
+- **Twinkling stars**: Bintang kecil yang berkedip-kedip di background seluruh halaman
+- **Particle trails**: Jejak partikel gold tipis yang mengikuti scroll
+- **Bokeh circles**: Lingkaran blur yang bergerak perlahan di background, mirip efek bokeh kamera
+
+**3. Background music control yang lebih baik**
+- Tombol play/pause yang sudah ada akan ditingkatkan dengan indikator visual (equalizer bars animasi saat musik bermain)
+- Volume control slider yang muncul saat hover pada tombol musik
 
 ### Detail Teknis
 
+**Dependency baru:**
+- `@react-three/fiber@^8.18` -- React renderer untuk Three.js
+- `three@^0.160` -- Library 3D
+- `@react-three/drei@^9.122.0` -- Helper untuk React Three Fiber
+
+**File baru:**
+
+1. **`src/components/wedding/Particles3D.tsx`**
+   - Komponen `GoldParticles3D` menggunakan `@react-three/fiber` Canvas
+   - Ratusan titik partikel emas dalam ruang 3D (menggunakan `Points` dari drei)
+   - Animasi rotasi perlahan menggunakan `useFrame`
+   - Render di belakang konten dengan `position: fixed` dan `pointer-events: none`
+
+2. **`src/components/wedding/TwinklingStars.tsx`**
+   - 30-40 bintang kecil dengan posisi acak yang berkedip menggunakan framer-motion
+   - Masing-masing bintang punya timing berbeda agar terlihat natural
+
+3. **`src/components/wedding/BokehCircles.tsx`**
+   - Lingkaran blur besar (bokeh effect) yang melayang perlahan
+   - Warna gold/amber dengan opacity sangat rendah
+   - Animasi CSS float dengan durasi berbeda
+
 **File yang diubah:**
 
-1. **`src/index.css`**
-   - Ubah CSS variables: `--background` dari hitam ke coklat gelap (`25 20% 10%`), `--card` ke coklat sedikit lebih terang, `--secondary`, `--muted`, `--border` semua ke nuansa coklat
-   - Tambahkan class `.batik-pattern` dengan SVG pattern inline (motif kawung/parang)
-   - Tambahkan keyframe `float-diamond` untuk animasi wajik melayang
-   - Tambahkan class `.ambient-glow` untuk lingkaran cahaya background
-
-2. **`src/pages/Index.tsx`**
-   - Tambahkan div dengan class `batik-pattern` sebagai layer background di belakang semua konten
-   - Tambahkan komponen `FloatingDiamonds` -- elemen wajik kecil yang melayang di seluruh halaman
-
-3. **`src/components/wedding/FloralFrame.tsx`**
-   - Perkaya SVG ornamen dengan elemen tambahan: spiral kecil, titik-titik dekoratif, dan garis lengkung ekstra
-   - Tambahkan komponen `MandalaRing` -- lingkaran ornamental SVG bergaya batik
-   - Upgrade `FloralDivider` dengan menambahkan motif kawung kecil di sisi kiri dan kanan
-
-4. **`src/components/wedding/HeroSection.tsx`**
-   - Tambahkan `MandalaRing` di belakang nama pasangan
-   - Tambahkan ambient glow circles
+4. **`src/pages/Index.tsx`**
+   - Import dan tambahkan `Particles3D` sebagai layer fixed di belakang konten (muncul setelah splash screen dibuka)
+   - Import dan tambahkan `TwinklingStars` sebagai layer global
+   - Import dan tambahkan `BokehCircles` sebagai layer global
 
 5. **`src/components/wedding/SplashScreen.tsx`**
-   - Tambahkan batik pattern layer di background
-   - Tambahkan floating diamond elements
-   - Sesuaikan overlay agar nuansa coklat terlihat
+   - Tambahkan `GoldParticles3D` canvas sebagai background layer 3D
+   - Partikel lebih banyak dan lebih aktif di splash screen
 
-6. **`src/components/wedding/EventDetails.tsx`**
-   - Tambahkan subtle batik pattern di background cards
-   - Tambahkan corner dot ornaments pada glass cards
+6. **`src/components/wedding/ClosingSection.tsx`**
+   - Tingkatkan tombol musik dengan animasi equalizer bars (3 bar yang bounce saat musik bermain)
+   - Tambahkan volume slider yang muncul saat hover/tap pada tombol musik
 
-7. **`src/components/wedding/LoveStory.tsx`**
-   - Tambahkan mandala ring di belakang timeline center dots
-   - Tambahkan ambient glow di background section
+7. **`src/index.css`**
+   - Tambahkan keyframes: `twinkle`, `bokeh-float`, `eq-bounce`
+   - Class utility: `.animate-twinkle`, `.animate-bokeh`, `.eq-bar`
 
-8. **`src/components/wedding/Gallery.tsx`**
-   - Tambahkan FloralFrame di section gallery
-   - Tambahkan ambient glow decoration
+8. **`src/components/wedding/HeroSection.tsx`**
+   - Tambahkan floating orbs (bola cahaya gold transparan) di sekitar nama pasangan
 
-9. **`src/components/wedding/ClosingSection.tsx`**
-   - Ubah "Ahmad & Sarah" menjadi "Munip & Risma" (perbaikan konsistensi)
-   - Tambahkan batik pattern di background section
+9. **`src/components/wedding/EventDetails.tsx`**
+   - Tambahkan beberapa twinkling stars lokal di sekitar kartu acara
+
+10. **`src/components/wedding/LoveStory.tsx`**
+    - Tambahkan bokeh circles di background section
+
+11. **`src/components/wedding/Gallery.tsx`**
+    - Tambahkan floating orbs di sekitar gallery
+
+### Pendekatan Desain
+
+- Canvas 3D menggunakan `alpha: true` dan `position: fixed` agar transparan di atas background batik
+- Semua partikel 3D berwarna gold (hsl 40, 72%, 52%) dengan variasi brightness
+- Performance: jumlah partikel dibatasi (200-300 titik), menggunakan `Points` geometry yang efisien
+- Responsive: ukuran canvas mengikuti viewport, jumlah partikel dikurangi di mobile
+- Audio control menggunakan `audioRef` yang sudah ada di Index.tsx, ditambahkan volume slider
+
