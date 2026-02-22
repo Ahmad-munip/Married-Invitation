@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import heroBg from "@/assets/hero-bg.jpg";
 import FloralFrame from "./FloralFrame";
 import { MandalaRing } from "./FloralFrame";
+import { SectionVine, LocalGoldDust } from "./SectionDecorations";
 
 const HeroSection = () => {
   return (
@@ -14,6 +15,11 @@ const HeroSection = () => {
       {/* Ambient glow */}
       <div className="ambient-glow" style={{ width: 400, height: 400, top: "20%", left: "-10%" }} />
       <div className="ambient-glow" style={{ width: 300, height: 300, bottom: "10%", right: "-5%" }} />
+      
+      {/* Section vines */}
+      <SectionVine side="left" />
+      <SectionVine side="right" />
+      <LocalGoldDust count={10} />
 
       {/* Floating orbs */}
       {[

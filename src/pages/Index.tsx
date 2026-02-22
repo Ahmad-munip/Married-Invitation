@@ -16,6 +16,9 @@ import ClosingSection from "@/components/wedding/ClosingSection";
 import { FloralDivider, FloatingDiamonds } from "@/components/wedding/FloralFrame";
 import TwinklingStars from "@/components/wedding/TwinklingStars";
 import BokehCircles from "@/components/wedding/BokehCircles";
+import VineRoots from "@/components/wedding/VineRoots";
+import FloatingLeaves from "@/components/wedding/FloatingLeaves";
+import GoldDust from "@/components/wedding/GoldDust";
 
 const Particles3D = lazy(() => import("@/components/wedding/Particles3D"));
 
@@ -55,6 +58,9 @@ const Index = () => {
             <FloatingDiamonds />
             <TwinklingStars />
             <BokehCircles />
+            <VineRoots />
+            <FloatingLeaves />
+            <GoldDust />
             <Suspense fallback={null}>
               <Particles3D count={250} speed={0.12} size={0.015} />
             </Suspense>

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
 import { MandalaRing } from "./FloralFrame";
+import { SectionVine, LocalGoldDust } from "./SectionDecorations";
 
 const stories = [
   { year: "2020", title: "Pertama Bertemu", desc: "Kami pertama kali bertemu di sebuah acara komunitas. Senyuman pertamamu yang membuatku jatuh hati." },
@@ -15,6 +16,9 @@ const LoveStory = () => {
       {/* Ambient glow */}
       <div className="ambient-glow" style={{ width: 350, height: 350, top: "10%", right: "-10%" }} />
       <div className="ambient-glow" style={{ width: 250, height: 250, bottom: "15%", left: "-8%" }} />
+      <SectionVine side="left" />
+      <SectionVine side="right" />
+      <LocalGoldDust count={8} />
 
       {/* Bokeh circles */}
       {[

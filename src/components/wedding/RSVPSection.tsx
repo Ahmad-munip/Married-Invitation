@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, Send, WifiOff } from "lucide-react";
+import { SectionVine } from "./SectionDecorations";
 
 const STORAGE_KEY = "wedding-rsvp-queue";
 
@@ -52,6 +53,8 @@ const RSVPSection = () => {
     <section className="py-24 px-6 relative overflow-hidden">
       <div className="ambient-glow" style={{ width: 300, height: 300, top: "5%", right: "-8%" }} />
       <div className="ambient-glow-warm" style={{ width: 250, height: 250, bottom: "10%", left: "-6%" }} />
+      <SectionVine side="left" />
+      <SectionVine side="right" />
       <div className="batik-pattern-local" />
       <div className="max-w-2xl mx-auto">
         <motion.div

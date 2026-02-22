@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
+import { SectionVine } from "./SectionDecorations";
 
 interface Wish {
   name: string;
@@ -29,6 +30,8 @@ const WishesSection = () => {
     <section className="py-24 px-6 relative overflow-hidden">
       <div className="ambient-glow" style={{ width: 280, height: 280, top: "10%", left: "-7%" }} />
       <div className="ambient-glow-warm" style={{ width: 220, height: 220, bottom: "15%", right: "-5%" }} />
+      <SectionVine side="left" />
+      <SectionVine side="right" />
       <div className="batik-pattern-local" />
       <div className="max-w-2xl mx-auto">
         <motion.div

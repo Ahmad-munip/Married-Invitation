@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Volume2, VolumeX } from "lucide-react";
 import FloralFrame from "./FloralFrame";
 import { Slider } from "@/components/ui/slider";
+import { SectionVine, LocalGoldDust } from "./SectionDecorations";
 
 interface ClosingSectionProps {
   audioRef: RefObject<HTMLAudioElement | null>;
@@ -36,6 +37,9 @@ const ClosingSection = ({ audioRef, isPlaying, setIsPlaying }: ClosingSectionPro
     <>
       <section className="py-32 px-6 relative overflow-hidden">
         <FloralFrame positions={["top-left", "top-right", "bottom-left", "bottom-right"]} size="md" />
+        <SectionVine side="left" />
+        <SectionVine side="right" />
+        <LocalGoldDust count={10} />
         
         {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/30 to-background" />
