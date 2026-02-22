@@ -1,42 +1,62 @@
 
-## Rencana: Menambahkan Hiasan Bingkai Natural pada Website
+## Rencana: Menambahkan Objek Dekoratif dan Background Batik Coklat
 
-### Apa yang akan ditambahkan
+### Apa yang akan berubah
 
-Bingkai dekoratif bergaya **floral gold** yang menyatu secara natural dengan desain website. Bingkai ini akan tampil di beberapa bagian utama sebagai elemen hiasan yang konsisten.
+**1. Warna background utama diubah menjadi coklat gelap (bukan hitam)**
+Saat ini background menggunakan hitam pekat (`0 0% 4%`). Akan diubah menjadi coklat gelap hangat agar tidak terlalu gelap dan sesuai nuansa batik. Warna-warna turunan (card, secondary, muted, border) juga disesuaikan ke nuansa coklat.
 
-### Detail Hiasan
+**2. Background pattern batik SVG**
+Ditambahkan pattern batik yang dibuat langsung dengan CSS/SVG sebagai latar belakang halaman. Pattern ini berupa motif kawung/parang sederhana dengan warna coklat-gold yang sangat halus (opacity rendah), agar menyatu natural tanpa mengganggu konten.
 
-**1. Komponen `FloralFrame` (baru)**
-Komponen reusable berisi SVG ornamen floral gold yang bisa ditempatkan di sudut-sudut section. Terdiri dari:
-- Lengkungan tanaman merambat (vine/leaf curves) di 4 sudut
-- Garis halus gold dengan opacity rendah agar menyatu dengan background gelap
-- Animasi fade-in saat discroll (menggunakan framer-motion whileInView)
-
-**2. Penempatan bingkai di section-section utama**
-- **Hero Section** -- bingkai floral di keempat sudut layar, mengelilingi nama pasangan
-- **Event Details** -- border ornamen di atas dan bawah area konten
-- **Love Story** -- hiasan sudut kiri-atas dan kanan-bawah
-- **Gallery** -- frame tipis di sekitar area gallery
-- **Closing Section** -- bingkai lengkap mengelilingi quote
-
-**3. Divider upgrade**
-Divider antar section yang sekarang berupa garis horizontal sederhana akan diganti menjadi divider floral -- garis gold dengan ornamen daun/bunga kecil di tengahnya.
+**3. Objek dekoratif tambahan**
+Beberapa elemen hias baru akan ditambahkan di seluruh halaman:
+- **Mandala rings** -- lingkaran ornamental bergaya batik di beberapa section (Hero, LoveStory, Gallery)
+- **Floating diamond shapes** -- bentuk wajik/belah ketupat kecil yang melayang perlahan di background (motif khas batik)
+- **Decorative corner ornaments yang lebih kaya** -- menambah detail pada FloralFrame yang sudah ada
+- **Section separator yang lebih ornamental** -- divider ditingkatkan dengan motif batik/kawung
+- **Ambient glow circles** -- lingkaran cahaya coklat-gold halus di background beberapa section
 
 ### Detail Teknis
 
-**File baru:**
-- `src/components/wedding/FloralFrame.tsx` -- komponen SVG bingkai floral dengan props untuk mengontrol posisi (top-left, top-right, bottom-left, bottom-right, atau full), ukuran, dan animasi
-
 **File yang diubah:**
-1. `src/components/wedding/HeroSection.tsx` -- tambahkan FloralFrame di keempat sudut
-2. `src/components/wedding/EventDetails.tsx` -- tambahkan ornamen border atas dan bawah
-3. `src/components/wedding/ClosingSection.tsx` -- tambahkan bingkai lengkap di sekitar quote
-4. `src/pages/Index.tsx` -- ganti divider-gold biasa dengan komponen FloralDivider yang lebih dekoratif
-5. `src/index.css` -- tambahkan keyframe `grow-vine` untuk animasi SVG path yang "tumbuh" secara natural menggunakan stroke-dashoffset
 
-### Pendekatan Desain
-- Semua ornamen menggunakan warna gold (`hsl(40 72% 52%)`) dengan opacity rendah (0.2-0.5) agar tidak mengganggu konten
-- SVG path digambar langsung di kode (bukan file terpisah) untuk performa optimal
-- Animasi `whileInView` agar bingkai muncul secara natural saat user scroll ke section tersebut
-- Responsive: ukuran bingkai menyesuaikan di mobile (lebih kecil) dan desktop (lebih besar)
+1. **`src/index.css`**
+   - Ubah CSS variables: `--background` dari hitam ke coklat gelap (`25 20% 10%`), `--card` ke coklat sedikit lebih terang, `--secondary`, `--muted`, `--border` semua ke nuansa coklat
+   - Tambahkan class `.batik-pattern` dengan SVG pattern inline (motif kawung/parang)
+   - Tambahkan keyframe `float-diamond` untuk animasi wajik melayang
+   - Tambahkan class `.ambient-glow` untuk lingkaran cahaya background
+
+2. **`src/pages/Index.tsx`**
+   - Tambahkan div dengan class `batik-pattern` sebagai layer background di belakang semua konten
+   - Tambahkan komponen `FloatingDiamonds` -- elemen wajik kecil yang melayang di seluruh halaman
+
+3. **`src/components/wedding/FloralFrame.tsx`**
+   - Perkaya SVG ornamen dengan elemen tambahan: spiral kecil, titik-titik dekoratif, dan garis lengkung ekstra
+   - Tambahkan komponen `MandalaRing` -- lingkaran ornamental SVG bergaya batik
+   - Upgrade `FloralDivider` dengan menambahkan motif kawung kecil di sisi kiri dan kanan
+
+4. **`src/components/wedding/HeroSection.tsx`**
+   - Tambahkan `MandalaRing` di belakang nama pasangan
+   - Tambahkan ambient glow circles
+
+5. **`src/components/wedding/SplashScreen.tsx`**
+   - Tambahkan batik pattern layer di background
+   - Tambahkan floating diamond elements
+   - Sesuaikan overlay agar nuansa coklat terlihat
+
+6. **`src/components/wedding/EventDetails.tsx`**
+   - Tambahkan subtle batik pattern di background cards
+   - Tambahkan corner dot ornaments pada glass cards
+
+7. **`src/components/wedding/LoveStory.tsx`**
+   - Tambahkan mandala ring di belakang timeline center dots
+   - Tambahkan ambient glow di background section
+
+8. **`src/components/wedding/Gallery.tsx`**
+   - Tambahkan FloralFrame di section gallery
+   - Tambahkan ambient glow decoration
+
+9. **`src/components/wedding/ClosingSection.tsx`**
+   - Ubah "Ahmad & Sarah" menjadi "Munip & Risma" (perbaikan konsistensi)
+   - Tambahkan batik pattern di background section
