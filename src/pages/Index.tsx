@@ -13,7 +13,7 @@ import DigitalEnvelope from "@/components/wedding/DigitalEnvelope";
 import WishesSection from "@/components/wedding/WishesSection";
 import MapsSection from "@/components/wedding/MapsSection";
 import ClosingSection from "@/components/wedding/ClosingSection";
-import { FloralDivider } from "@/components/wedding/FloralFrame";
+import { FloralDivider, FloatingDiamonds } from "@/components/wedding/FloralFrame";
 
 const MUSIC_URL = "https://cdn.pixabay.com/audio/2024/11/29/audio_f0c53efea1.mp3";
 
@@ -24,8 +24,6 @@ const Index = () => {
 
   const handleOpenInvitation = () => {
     setSplashOpen(false);
-
-    // Initialize and play audio
     if (!audioRef.current) {
       const audio = new Audio(MUSIC_URL);
       audio.loop = true;
@@ -34,45 +32,35 @@ const Index = () => {
     }
     audioRef.current
       .play()
-      .then(() => {
-        setIsPlaying(true);
-      })
-      .catch(() => {
-        // Autoplay blocked by browser — user can use the toggle
-      });
+      .then(() => setIsPlaying(true))
+      .catch(() => {});
   };
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Batik pattern background layer */}
+      <div className="batik-pattern" />
+      
       <SplashScreen isOpen={splashOpen} onOpen={handleOpenInvitation} />
 
       <AnimatePresence>
         {!splashOpen && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5, delay: 0.3 }}>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5, delay: 0.3 }} className="relative z-[2]">
             <ScrollProgress />
             <FloatingPetals />
+            <FloatingDiamonds />
             <HeroSection />
-
             <FloralDivider />
-
             <EventDetails />
             <CountdownTimer />
-
             <FloralDivider />
-
             <LoveStory />
-
             <FloralDivider />
-
             <Gallery />
-
             <FloralDivider />
-
             <RSVPSection />
             <DigitalEnvelope />
-
             <FloralDivider />
-
             <WishesSection />
             <MapsSection />
             <ClosingSection audioRef={audioRef} isPlaying={isPlaying} setIsPlaying={setIsPlaying} />

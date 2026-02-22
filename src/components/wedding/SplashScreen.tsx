@@ -8,7 +8,6 @@ interface SplashScreenProps {
   guestName?: string;
 }
 
-// Sparkle particle data
 const generateSparkles = (count: number) =>
   Array.from({ length: count }, (_, i) => ({
     id: i,
@@ -19,7 +18,6 @@ const generateSparkles = (count: number) =>
     duration: Math.random() * 2 + 1.5,
   }));
 
-// Splash petal data
 const generateSplashPetals = (count: number) =>
   Array.from({ length: count }, (_, i) => ({
     id: i,
@@ -31,14 +29,19 @@ const generateSplashPetals = (count: number) =>
   }));
 
 const cornerPaths = [
-  // Top-left
   { d: "M0,60 Q0,0 60,0", transform: "", origin: "top left" },
-  // Top-right
   { d: "M0,0 Q60,0 60,60", transform: "translate(100%, 0) scale(-1, 1)", origin: "top right" },
-  // Bottom-left
   { d: "M0,0 Q0,60 60,60", transform: "translate(0, 100%) scale(1, -1)", origin: "bottom left" },
-  // Bottom-right
   { d: "M60,0 Q0,0 0,60", transform: "translate(100%, 100%) scale(-1, -1)", origin: "bottom right" },
+];
+
+// Floating diamond elements for splash
+const splashDiamonds = [
+  { left: "8%", top: "20%", size: 7, duration: 6, delay: 0.5 },
+  { left: "88%", top: "30%", size: 5, duration: 7, delay: 1 },
+  { left: "12%", top: "75%", size: 6, duration: 5, delay: 2 },
+  { left: "82%", top: "70%", size: 8, duration: 8, delay: 0 },
+  { left: "50%", top: "12%", size: 5, duration: 6, delay: 3 },
 ];
 
 const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: SplashScreenProps) => {
@@ -56,8 +59,28 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
           {/* Background */}
           <div className="absolute inset-0">
             <img src={heroBg} alt="Wedding background" className="h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-background/70" />
+            <div className="absolute inset-0 bg-background/65" />
           </div>
+
+          {/* Batik pattern overlay */}
+          <div className="batik-pattern" style={{ opacity: 0.04 }} />
+
+          {/* Floating diamonds */}
+          {splashDiamonds.map((d, i) => (
+            <div
+              key={`diamond-${i}`}
+              className="absolute animate-float-diamond pointer-events-none"
+              style={{
+                left: d.left,
+                top: d.top,
+                width: d.size,
+                height: d.size,
+                background: "hsl(40 72% 52% / 0.2)",
+                animationDuration: `${d.duration}s`,
+                animationDelay: `${d.delay}s`,
+              }}
+            />
+          ))}
 
           {/* Sparkle Particles */}
           {sparkles.map((s) => (
@@ -72,20 +95,12 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
                 background: `radial-gradient(circle, hsl(40 90% 65%), transparent)`,
               }}
               initial={{ opacity: 0, scale: 0 }}
-              animate={{
-                opacity: [0, 1, 0],
-                scale: [0, 1.2, 0],
-              }}
-              transition={{
-                duration: s.duration,
-                delay: s.delay,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
+              animate={{ opacity: [0, 1, 0], scale: [0, 1.2, 0] }}
+              transition={{ duration: s.duration, delay: s.delay, repeat: Infinity, ease: "easeInOut" }}
             />
           ))}
 
-          {/* Floating Petals (lightweight splash version) */}
+          {/* Floating Petals */}
           {petals.map((p) => (
             <div
               key={`petal-${p.id}`}
@@ -116,9 +131,7 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             <div
               className="animate-light-sweep absolute inset-0"
-              style={{
-                background: "linear-gradient(105deg, transparent 40%, hsl(40 90% 65% / 0.06) 50%, transparent 60%)",
-              }}
+              style={{ background: "linear-gradient(105deg, transparent 40%, hsl(40 90% 65% / 0.06) 50%, transparent 60%)" }}
             />
           </div>
 
@@ -140,14 +153,7 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
               transition={{ delay: 0.4 + i * 0.2, duration: 0.8 }}
             >
               <path d={corner.d} stroke="hsl(40, 72%, 52%)" strokeWidth="1.5" strokeLinecap="round" />
-              <path
-                d={corner.d}
-                stroke="hsl(40, 72%, 52%)"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                transform="scale(0.6) translate(20, 20)"
-                opacity="0.4"
-              />
+              <path d={corner.d} stroke="hsl(40, 72%, 52%)" strokeWidth="1.5" strokeLinecap="round" transform="scale(0.6) translate(20, 20)" opacity="0.4" />
             </motion.svg>
           ))}
 
@@ -158,12 +164,7 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
           >
-            <motion.p
-              className="font-sans-elegant text-sm tracking-[0.3em] uppercase text-muted-foreground mb-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-            >
+            <motion.p className="font-sans-elegant text-sm tracking-[0.3em] uppercase text-muted-foreground mb-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
               The Wedding of
             </motion.p>
 
@@ -178,20 +179,10 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
 
             <div className="divider-gold w-40 mx-auto mb-8" />
 
-            <motion.p
-              className="font-serif text-lg text-foreground/80 mb-2"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.2 }}
-            >
+            <motion.p className="font-serif text-lg text-foreground/80 mb-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}>
               Kepada Yth.
             </motion.p>
-            <motion.p
-              className="font-serif text-xl text-foreground mb-10"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.4 }}
-            >
+            <motion.p className="font-serif text-xl text-foreground mb-10" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}>
               {guestName}
             </motion.p>
 

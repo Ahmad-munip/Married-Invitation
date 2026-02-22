@@ -1,19 +1,23 @@
 import { motion } from "framer-motion";
 import heroBg from "@/assets/hero-bg.jpg";
 import FloralFrame from "./FloralFrame";
+import { MandalaRing } from "./FloralFrame";
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <FloralFrame positions={["top-left", "top-right", "bottom-left", "bottom-right"]} size="lg" />
+      
+      {/* Mandala behind names */}
+      <MandalaRing size={350} className="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-40" />
+      
+      {/* Ambient glow */}
+      <div className="ambient-glow" style={{ width: 400, height: 400, top: "20%", left: "-10%" }} />
+      <div className="ambient-glow" style={{ width: 300, height: 300, bottom: "10%", right: "-5%" }} />
+
       {/* Parallax Background */}
       <div className="absolute inset-0">
-        <img
-          src={heroBg}
-          alt="Hero background"
-          className="h-full w-full object-cover scale-110"
-          style={{ transform: "scale(1.1)" }}
-        />
+        <img src={heroBg} alt="Hero background" className="h-full w-full object-cover scale-110" style={{ transform: "scale(1.1)" }} />
         <div className="absolute inset-0 bg-background/60" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-transparent to-background" />
       </div>

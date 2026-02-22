@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import FloralFrame from "./FloralFrame";
 import gallery1 from "@/assets/gallery-1.jpg";
 import gallery2 from "@/assets/gallery-2.jpg";
 import gallery3 from "@/assets/gallery-3.jpg";
@@ -14,8 +15,14 @@ const Gallery = () => {
   const [selected, setSelected] = useState<string | null>(null);
 
   return (
-    <section className="py-24 px-6">
-      <div className="max-w-5xl mx-auto">
+    <section className="py-24 px-6 relative overflow-hidden">
+      <FloralFrame positions={["top-left", "top-right", "bottom-left", "bottom-right"]} size="sm" />
+      
+      {/* Ambient glow */}
+      <div className="ambient-glow" style={{ width: 300, height: 300, top: "5%", left: "-5%" }} />
+      <div className="ambient-glow" style={{ width: 250, height: 250, bottom: "10%", right: "-5%" }} />
+
+      <div className="max-w-5xl mx-auto relative">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -27,7 +34,6 @@ const Gallery = () => {
           <div className="divider-gold w-32 mx-auto" />
         </motion.div>
 
-        {/* Masonry Grid */}
         <div className="columns-2 md:columns-3 gap-4 space-y-4">
           {images.map((img, i) => (
             <motion.div
@@ -39,12 +45,7 @@ const Gallery = () => {
               transition={{ delay: i * 0.1 }}
               onClick={() => setSelected(img)}
             >
-              <img
-                src={img}
-                alt={`Gallery ${i + 1}`}
-                className="w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                loading="lazy"
-              />
+              <img src={img} alt={`Gallery ${i + 1}`} className="w-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
             </motion.div>
           ))}
         </div>
@@ -60,10 +61,7 @@ const Gallery = () => {
             exit={{ opacity: 0 }}
             onClick={() => setSelected(null)}
           >
-            <button
-              className="absolute top-6 right-6 text-foreground/60 hover:text-foreground transition-colors"
-              onClick={() => setSelected(null)}
-            >
+            <button className="absolute top-6 right-6 text-foreground/60 hover:text-foreground transition-colors" onClick={() => setSelected(null)}>
               <X className="w-8 h-8" />
             </button>
             <motion.img

@@ -47,6 +47,12 @@ const EventDetails = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.2 }}
             >
+              {/* Corner dot ornaments */}
+              <div className="absolute top-3 left-3 w-1.5 h-1.5 rounded-full bg-primary/20" />
+              <div className="absolute top-3 right-3 w-1.5 h-1.5 rounded-full bg-primary/20" />
+              <div className="absolute bottom-3 left-3 w-1.5 h-1.5 rounded-full bg-primary/20" />
+              <div className="absolute bottom-3 right-3 w-1.5 h-1.5 rounded-full bg-primary/20" />
+
               <h3 className="font-script text-3xl text-primary mb-6">{event.title}</h3>
 
               <div className="space-y-4 text-foreground/80">
