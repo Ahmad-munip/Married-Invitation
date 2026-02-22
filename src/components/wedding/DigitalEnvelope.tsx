@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Copy, Check, Gift } from "lucide-react";
+import { SectionVine } from "./SectionDecorations";
 
 const accounts = [
   { bank: "Bank BCA", number: "1234567890", name: "Ahmad Fauzan" },
@@ -21,6 +22,8 @@ const DigitalEnvelope = () => {
     <section className="py-24 px-6 relative overflow-hidden">
       <div className="ambient-glow" style={{ width: 260, height: 260, top: "15%", right: "-6%" }} />
       <div className="ambient-glow-warm" style={{ width: 200, height: 200, bottom: "5%", left: "-5%" }} />
+      <SectionVine side="left" />
+      <SectionVine side="right" />
       <div className="max-w-lg mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

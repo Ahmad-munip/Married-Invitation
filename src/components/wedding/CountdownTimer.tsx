@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { SectionVine, LocalGoldDust } from "./SectionDecorations";
 
 const TARGET_DATE = new Date("2026-06-15T08:00:00+07:00").getTime();
 
@@ -39,6 +40,9 @@ const CountdownTimer = () => {
     <section className="py-20 px-6 relative overflow-hidden">
       <div className="ambient-glow-warm" style={{ width: 350, height: 350, top: "-10%", left: "50%", transform: "translateX(-50%)" }} />
       <div className="batik-pattern-local" />
+      <SectionVine side="left" />
+      <SectionVine side="right" />
+      <LocalGoldDust count={6} />
       <div className="max-w-3xl mx-auto text-center">
         <motion.p
           className="font-sans-elegant text-xs tracking-[0.3em] uppercase text-primary/70 mb-3"

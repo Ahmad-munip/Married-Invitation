@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Calendar, Clock, MapPin } from "lucide-react";
 import FloralFrame from "./FloralFrame";
+import { SectionVine, LocalGoldDust } from "./SectionDecorations";
 
 const events = [
   {
@@ -24,6 +25,9 @@ const EventDetails = () => {
     <section className="py-24 px-6 relative overflow-hidden">
       <FloralFrame positions={["top-left", "top-right"]} size="sm" />
       <FloralFrame positions={["bottom-left", "bottom-right"]} size="sm" />
+      <SectionVine side="left" />
+      <SectionVine side="right" />
+      <LocalGoldDust count={8} />
       
       {/* Local twinkling stars */}
       {Array.from({ length: 12 }).map((_, i) => (

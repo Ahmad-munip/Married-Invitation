@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useMemo, lazy, Suspense } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
+import { SectionVine, LocalGoldDust } from "./SectionDecorations";
 
 const Particles3D = lazy(() => import("./Particles3D"));
 
@@ -71,6 +72,13 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
 
           {/* Batik pattern overlay */}
           <div className="batik-pattern" style={{ opacity: 0.04 }} />
+
+          {/* Vine corners */}
+          <SectionVine side="left" className="!bottom-auto !top-0 rotate-180" />
+          <SectionVine side="right" className="!bottom-auto !top-0 rotate-180" />
+          <SectionVine side="left" />
+          <SectionVine side="right" />
+          <LocalGoldDust count={12} />
 
           {/* Floating diamonds */}
           {splashDiamonds.map((d, i) => (

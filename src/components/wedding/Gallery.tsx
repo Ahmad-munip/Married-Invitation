@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import FloralFrame from "./FloralFrame";
+import { SectionVine, LocalGoldDust } from "./SectionDecorations";
 import gallery1 from "@/assets/gallery-1.jpg";
 import gallery2 from "@/assets/gallery-2.jpg";
 import gallery3 from "@/assets/gallery-3.jpg";
@@ -17,6 +18,9 @@ const Gallery = () => {
   return (
     <section className="py-24 px-6 relative overflow-hidden">
       <FloralFrame positions={["top-left", "top-right", "bottom-left", "bottom-right"]} size="sm" />
+      <SectionVine side="left" />
+      <SectionVine side="right" />
+      <LocalGoldDust count={8} />
       
       {/* Ambient glow */}
       <div className="ambient-glow" style={{ width: 300, height: 300, top: "5%", left: "-5%" }} />
