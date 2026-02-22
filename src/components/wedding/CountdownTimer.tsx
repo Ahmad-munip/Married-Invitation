@@ -36,7 +36,9 @@ const CountdownTimer = () => {
   ];
 
   return (
-    <section className="py-20 px-6">
+    <section className="py-20 px-6 relative overflow-hidden">
+      <div className="ambient-glow-warm" style={{ width: 350, height: 350, top: "-10%", left: "50%", transform: "translateX(-50%)" }} />
+      <div className="batik-pattern-local" />
       <div className="max-w-3xl mx-auto text-center">
         <motion.p
           className="font-sans-elegant text-xs tracking-[0.3em] uppercase text-primary/70 mb-3"

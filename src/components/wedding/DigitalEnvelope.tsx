@@ -18,7 +18,9 @@ const DigitalEnvelope = () => {
   };
 
   return (
-    <section className="py-24 px-6">
+    <section className="py-24 px-6 relative overflow-hidden">
+      <div className="ambient-glow" style={{ width: 260, height: 260, top: "15%", right: "-6%" }} />
+      <div className="ambient-glow-warm" style={{ width: 200, height: 200, bottom: "5%", left: "-5%" }} />
       <div className="max-w-lg mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

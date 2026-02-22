@@ -3,7 +3,9 @@ import { MapPin, Navigation } from "lucide-react";
 
 const MapsSection = () => {
   return (
-    <section className="py-24 px-6">
+    <section className="py-24 px-6 relative overflow-hidden">
+      <div className="ambient-glow-warm" style={{ width: 300, height: 300, top: "0%", left: "-8%" }} />
+      <div className="ambient-glow" style={{ width: 250, height: 250, bottom: "5%", right: "-6%" }} />
       <div className="max-w-4xl mx-auto">
         <motion.div
           className="text-center mb-12"
