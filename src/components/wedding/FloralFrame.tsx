@@ -49,88 +49,13 @@ const VineCorner = ({ size, position, delay }: { size: "sm" | "md" | "lg"; posit
         style={{ transform: `rotate(${rotation}deg)` }}
         className="md:scale-100 scale-75 origin-top-left"
       >
-        {/* Main vine curve */}
-        <motion.path
-          d="M5 5 Q5 40 20 60 Q35 80 60 90 Q80 98 110 105"
-          stroke="hsl(40 72% 52%)"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-          fill="none"
-          opacity="0.35"
-          initial={{ pathLength: 0 }}
-          whileInView={{ pathLength: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 2, delay: delay + 0.3, ease: "easeInOut" }}
-        />
-        {/* Secondary branch */}
-        <motion.path
-          d="M5 5 Q15 15 18 35 Q20 50 30 65"
-          stroke="hsl(40 72% 52%)"
-          strokeWidth="1"
-          strokeLinecap="round"
-          fill="none"
-          opacity="0.25"
-          initial={{ pathLength: 0 }}
-          whileInView={{ pathLength: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.5, delay: delay + 0.6, ease: "easeInOut" }}
-        />
-        {/* Spiral accent */}
-        <motion.path
-          d="M25 50 Q30 45 35 50 Q30 55 25 50"
-          stroke="hsl(40 72% 52%)"
-          strokeWidth="0.8"
-          fill="none"
-          opacity="0.2"
-          initial={{ pathLength: 0 }}
-          whileInView={{ pathLength: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: delay + 0.8 }}
-        />
-        {/* Third branch */}
-        <motion.path
-          d="M20 60 Q40 65 55 75"
-          stroke="hsl(40 72% 52%)"
-          strokeWidth="0.8"
-          strokeLinecap="round"
-          fill="none"
-          opacity="0.2"
-          initial={{ pathLength: 0 }}
-          whileInView={{ pathLength: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2, delay: delay + 0.9 }}
-        />
-        {/* Leaf 1 */}
-        <motion.path
-          d="M18 35 Q25 28 30 35 Q25 42 18 35Z"
-          fill="hsl(40 72% 52%)"
-          opacity="0.2"
-          initial={{ scale: 0, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 0.2 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: delay + 1 }}
-        />
-        {/* Leaf 2 */}
-        <motion.path
-          d="M40 72 Q50 62 55 72 Q50 82 40 72Z"
-          fill="hsl(40 72% 52%)"
-          opacity="0.2"
-          initial={{ scale: 0, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 0.2 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: delay + 1.2 }}
-        />
-        {/* Leaf 3 */}
-        <motion.path
-          d="M70 88 Q78 80 84 88 Q78 96 70 88Z"
-          fill="hsl(40 72% 52%)"
-          opacity="0.15"
-          initial={{ scale: 0, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 0.15 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: delay + 1.4 }}
-        />
-        {/* Decorative dots */}
+        <motion.path d="M5 5 Q5 40 20 60 Q35 80 60 90 Q80 98 110 105" stroke="hsl(40 72% 52%)" strokeWidth="1.2" strokeLinecap="round" fill="none" opacity="0.35" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 2, delay: delay + 0.3, ease: "easeInOut" }} />
+        <motion.path d="M5 5 Q15 15 18 35 Q20 50 30 65" stroke="hsl(40 72% 52%)" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.25" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1.5, delay: delay + 0.6, ease: "easeInOut" }} />
+        <motion.path d="M25 50 Q30 45 35 50 Q30 55 25 50" stroke="hsl(40 72% 52%)" strokeWidth="0.8" fill="none" opacity="0.2" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1, delay: delay + 0.8 }} />
+        <motion.path d="M20 60 Q40 65 55 75" stroke="hsl(40 72% 52%)" strokeWidth="0.8" strokeLinecap="round" fill="none" opacity="0.2" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1.2, delay: delay + 0.9 }} />
+        <motion.path d="M18 35 Q25 28 30 35 Q25 42 18 35Z" fill="hsl(40 72% 52%)" opacity="0.2" initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 1, opacity: 0.2 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: delay + 1 }} />
+        <motion.path d="M40 72 Q50 62 55 72 Q50 82 40 72Z" fill="hsl(40 72% 52%)" opacity="0.2" initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 1, opacity: 0.2 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: delay + 1.2 }} />
+        <motion.path d="M70 88 Q78 80 84 88 Q78 96 70 88Z" fill="hsl(40 72% 52%)" opacity="0.15" initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 1, opacity: 0.15 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: delay + 1.4 }} />
         <circle cx="60" cy="90" r="2" fill="hsl(40 90% 65%)" opacity="0.3" />
         <circle cx="30" cy="65" r="1.5" fill="hsl(40 90% 65%)" opacity="0.25" />
         <circle cx="90" cy="100" r="1.8" fill="hsl(40 90% 65%)" opacity="0.2" />
@@ -162,36 +87,14 @@ export const MandalaRing = ({ size = 200, className = "" }: { size?: number; cla
     transition={{ duration: 3, ease: "easeOut" }}
   >
     <svg width={size} height={size} viewBox="0 0 200 200" fill="none" className="animate-rotate-slow" style={{ animationDuration: "40s" }}>
-      {/* Outer ring */}
       <circle cx="100" cy="100" r="90" stroke="hsl(40 72% 52%)" strokeWidth="0.5" opacity="0.15" />
       <circle cx="100" cy="100" r="80" stroke="hsl(40 72% 52%)" strokeWidth="0.3" opacity="0.1" />
-      {/* Kawung petals */}
       {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => (
-        <ellipse
-          key={angle}
-          cx="100"
-          cy="55"
-          rx="8"
-          ry="15"
-          fill="hsl(40 72% 52%)"
-          opacity="0.08"
-          transform={`rotate(${angle} 100 100)`}
-        />
+        <ellipse key={angle} cx="100" cy="55" rx="8" ry="15" fill="hsl(40 72% 52%)" opacity="0.08" transform={`rotate(${angle} 100 100)`} />
       ))}
-      {/* Inner kawung ring */}
       {[0, 60, 120, 180, 240, 300].map((angle) => (
-        <ellipse
-          key={`inner-${angle}`}
-          cx="100"
-          cy="72"
-          rx="5"
-          ry="10"
-          fill="hsl(40 72% 52%)"
-          opacity="0.06"
-          transform={`rotate(${angle} 100 100)`}
-        />
+        <ellipse key={`inner-${angle}`} cx="100" cy="72" rx="5" ry="10" fill="hsl(40 72% 52%)" opacity="0.06" transform={`rotate(${angle} 100 100)`} />
       ))}
-      {/* Center dot */}
       <circle cx="100" cy="100" r="3" fill="hsl(40 90% 65%)" opacity="0.15" />
       <circle cx="100" cy="100" r="6" stroke="hsl(40 72% 52%)" strokeWidth="0.5" opacity="0.1" />
     </svg>
@@ -234,63 +137,122 @@ export const FloatingDiamonds = () => {
   );
 };
 
-// Floral divider with kawung motifs
+// Ambient glow helper component
+export const AmbientGlows = ({ variant = "default" }: { variant?: "default" | "warm" | "subtle" }) => {
+  const configs = {
+    default: [
+      { width: 350, height: 350, top: "10%", right: "-8%", className: "ambient-glow" },
+      { width: 280, height: 280, bottom: "15%", left: "-6%", className: "ambient-glow" },
+    ],
+    warm: [
+      { width: 400, height: 400, top: "5%", left: "-10%", className: "ambient-glow-warm" },
+      { width: 300, height: 300, bottom: "10%", right: "-8%", className: "ambient-glow-warm" },
+    ],
+    subtle: [
+      { width: 250, height: 250, top: "20%", right: "-5%", className: "ambient-glow" },
+      { width: 200, height: 200, bottom: "20%", left: "-5%", className: "ambient-glow" },
+    ],
+  };
+
+  return (
+    <>
+      {configs[variant].map((glow, i) => (
+        <div key={i} className={glow.className} style={glow as React.CSSProperties} />
+      ))}
+    </>
+  );
+};
+
+// Floral divider with enhanced batik kawung motifs
 export const FloralDivider = ({ className = "" }: { className?: string }) => (
   <motion.div
-    className={`flex items-center justify-center gap-0 my-2 ${className}`}
+    className={`flex items-center justify-center gap-0 my-4 ${className}`}
     initial={{ opacity: 0 }}
     whileInView={{ opacity: 1 }}
     viewport={{ once: true }}
     transition={{ duration: 0.8 }}
   >
-    <svg width="220" height="28" viewBox="0 0 220 28" fill="none" className="w-52 md:w-64">
+    <svg width="300" height="32" viewBox="0 0 300 32" fill="none" className="w-64 md:w-80">
+      {/* Far left kawung cluster */}
+      <ellipse cx="20" cy="16" rx="4" ry="7" fill="hsl(40 72% 52%)" opacity="0.1" />
+      <ellipse cx="20" cy="16" rx="7" ry="4" fill="hsl(40 72% 52%)" opacity="0.07" />
+      <circle cx="20" cy="16" r="1.5" fill="hsl(40 90% 65%)" opacity="0.12" />
+
       {/* Left kawung */}
-      <ellipse cx="30" cy="14" rx="5" ry="8" fill="hsl(40 72% 52%)" opacity="0.15" />
-      <ellipse cx="30" cy="14" rx="8" ry="5" fill="hsl(40 72% 52%)" opacity="0.1" />
+      <ellipse cx="55" cy="16" rx="5" ry="9" fill="hsl(40 72% 52%)" opacity="0.15" />
+      <ellipse cx="55" cy="16" rx="9" ry="5" fill="hsl(40 72% 52%)" opacity="0.1" />
+      <circle cx="55" cy="16" r="2" fill="hsl(40 90% 65%)" opacity="0.15" />
+
       {/* Left vine */}
       <motion.path
-        d="M0 14 Q15 14 25 10 Q40 6 55 10 Q65 12 80 14"
+        d="M5 16 Q18 16 30 12 Q45 7 65 10 Q80 12 95 14 Q110 15 120 16"
         stroke="hsl(40 72% 52%)"
-        strokeWidth="1"
+        strokeWidth="0.8"
         strokeLinecap="round"
         fill="none"
-        opacity="0.4"
+        opacity="0.35"
         initial={{ pathLength: 0 }}
         whileInView={{ pathLength: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 1.2 }}
+        transition={{ duration: 1.4 }}
       />
-      {/* Left leaf */}
-      <path d="M50 9 Q55 4 60 9 Q55 14 50 9Z" fill="hsl(40 72% 52%)" opacity="0.2" />
-      {/* Center flower */}
-      <motion.path
-        d="M102 14 Q106 7 110 5 Q114 7 118 14 Q114 21 110 23 Q106 21 102 14Z"
-        fill="hsl(40 72% 52%)"
-        opacity="0.3"
-        initial={{ scale: 0 }}
-        whileInView={{ scale: 1 }}
+      {/* Left leaves */}
+      <path d="M72 9 Q77 4 82 9 Q77 14 72 9Z" fill="hsl(40 72% 52%)" opacity="0.18" />
+      <path d="M95 12 Q99 8 103 12 Q99 16 95 12Z" fill="hsl(40 72% 52%)" opacity="0.12" />
+
+      {/* Left batik dots arc */}
+      <circle cx="40" cy="10" r="1" fill="hsl(40 72% 52%)" opacity="0.15" />
+      <circle cx="85" cy="8" r="0.8" fill="hsl(40 72% 52%)" opacity="0.12" />
+      <circle cx="110" cy="13" r="0.8" fill="hsl(40 72% 52%)" opacity="0.1" />
+
+      {/* Center flower - larger with petals */}
+      <motion.g
+        initial={{ scale: 0, opacity: 0 }}
+        whileInView={{ scale: 1, opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.6 }}
-      />
-      <circle cx="110" cy="14" r="2.5" fill="hsl(40 90% 65%)" opacity="0.5" />
+        transition={{ duration: 0.8, delay: 0.5 }}
+      >
+        {/* Outer petals */}
+        <motion.path d="M140 16 Q144 8 150 5 Q156 8 160 16 Q156 24 150 27 Q144 24 140 16Z" fill="hsl(40 72% 52%)" opacity="0.25" />
+        <ellipse cx="150" cy="8" rx="3" ry="5" fill="hsl(40 72% 52%)" opacity="0.1" />
+        <ellipse cx="150" cy="24" rx="3" ry="5" fill="hsl(40 72% 52%)" opacity="0.1" />
+        <ellipse cx="140" cy="16" rx="5" ry="3" fill="hsl(40 72% 52%)" opacity="0.08" />
+        <ellipse cx="160" cy="16" rx="5" ry="3" fill="hsl(40 72% 52%)" opacity="0.08" />
+        <circle cx="150" cy="16" r="3" fill="hsl(40 90% 65%)" opacity="0.45" />
+        <circle cx="150" cy="16" r="1.5" fill="hsl(40 95% 72%)" opacity="0.6" />
+      </motion.g>
+
       {/* Right vine */}
       <motion.path
-        d="M220 14 Q205 14 195 10 Q180 6 165 10 Q155 12 140 14"
+        d="M295 16 Q282 16 270 12 Q255 7 235 10 Q220 12 205 14 Q190 15 180 16"
         stroke="hsl(40 72% 52%)"
-        strokeWidth="1"
+        strokeWidth="0.8"
         strokeLinecap="round"
         fill="none"
-        opacity="0.4"
+        opacity="0.35"
         initial={{ pathLength: 0 }}
         whileInView={{ pathLength: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 1.2 }}
+        transition={{ duration: 1.4 }}
       />
-      {/* Right leaf */}
-      <path d="M160 9 Q165 4 170 9 Q165 14 160 9Z" fill="hsl(40 72% 52%)" opacity="0.2" />
+      {/* Right leaves */}
+      <path d="M218 9 Q223 4 228 9 Q223 14 218 9Z" fill="hsl(40 72% 52%)" opacity="0.18" />
+      <path d="M197 12 Q201 8 205 12 Q201 16 197 12Z" fill="hsl(40 72% 52%)" opacity="0.12" />
+
+      {/* Right batik dots arc */}
+      <circle cx="260" cy="10" r="1" fill="hsl(40 72% 52%)" opacity="0.15" />
+      <circle cx="215" cy="8" r="0.8" fill="hsl(40 72% 52%)" opacity="0.12" />
+      <circle cx="190" cy="13" r="0.8" fill="hsl(40 72% 52%)" opacity="0.1" />
+
       {/* Right kawung */}
-      <ellipse cx="190" cy="14" rx="5" ry="8" fill="hsl(40 72% 52%)" opacity="0.15" />
-      <ellipse cx="190" cy="14" rx="8" ry="5" fill="hsl(40 72% 52%)" opacity="0.1" />
+      <ellipse cx="245" cy="16" rx="5" ry="9" fill="hsl(40 72% 52%)" opacity="0.15" />
+      <ellipse cx="245" cy="16" rx="9" ry="5" fill="hsl(40 72% 52%)" opacity="0.1" />
+      <circle cx="245" cy="16" r="2" fill="hsl(40 90% 65%)" opacity="0.15" />
+
+      {/* Far right kawung cluster */}
+      <ellipse cx="280" cy="16" rx="4" ry="7" fill="hsl(40 72% 52%)" opacity="0.1" />
+      <ellipse cx="280" cy="16" rx="7" ry="4" fill="hsl(40 72% 52%)" opacity="0.07" />
+      <circle cx="280" cy="16" r="1.5" fill="hsl(40 90% 65%)" opacity="0.12" />
     </svg>
   </motion.div>
 );
