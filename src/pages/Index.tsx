@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, lazy, Suspense } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SplashScreen from "@/components/wedding/SplashScreen";
 import HeroSection from "@/components/wedding/HeroSection";
@@ -14,6 +14,10 @@ import WishesSection from "@/components/wedding/WishesSection";
 import MapsSection from "@/components/wedding/MapsSection";
 import ClosingSection from "@/components/wedding/ClosingSection";
 import { FloralDivider, FloatingDiamonds } from "@/components/wedding/FloralFrame";
+import TwinklingStars from "@/components/wedding/TwinklingStars";
+import BokehCircles from "@/components/wedding/BokehCircles";
+
+const Particles3D = lazy(() => import("@/components/wedding/Particles3D"));
 
 const MUSIC_URL = "https://cdn.pixabay.com/audio/2024/11/29/audio_f0c53efea1.mp3";
 
@@ -49,6 +53,11 @@ const Index = () => {
             <ScrollProgress />
             <FloatingPetals />
             <FloatingDiamonds />
+            <TwinklingStars />
+            <BokehCircles />
+            <Suspense fallback={null}>
+              <Particles3D count={250} speed={0.12} size={0.015} />
+            </Suspense>
             <HeroSection />
             <FloralDivider />
             <EventDetails />

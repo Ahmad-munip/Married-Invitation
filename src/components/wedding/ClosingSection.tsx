@@ -1,7 +1,8 @@
-import { RefObject } from "react";
+import { RefObject, useState } from "react";
 import { motion } from "framer-motion";
 import { Volume2, VolumeX } from "lucide-react";
 import FloralFrame from "./FloralFrame";
+import { Slider } from "@/components/ui/slider";
 
 interface ClosingSectionProps {
   audioRef: RefObject<HTMLAudioElement | null>;
@@ -10,6 +11,9 @@ interface ClosingSectionProps {
 }
 
 const ClosingSection = ({ audioRef, isPlaying, setIsPlaying }: ClosingSectionProps) => {
+  const [showVolume, setShowVolume] = useState(false);
+  const [volume, setVolume] = useState(50);
+
   const toggleMusic = () => {
     if (!audioRef.current) return;
     if (isPlaying) {
@@ -18,6 +22,14 @@ const ClosingSection = ({ audioRef, isPlaying, setIsPlaying }: ClosingSectionPro
       audioRef.current.play().catch(() => {});
     }
     setIsPlaying(!isPlaying);
+  };
+
+  const handleVolume = (val: number[]) => {
+    const v = val[0];
+    setVolume(v);
+    if (audioRef.current) {
+      audioRef.current.volume = v / 100;
+    }
   };
 
   return (
@@ -76,14 +88,47 @@ const ClosingSection = ({ audioRef, isPlaying, setIsPlaying }: ClosingSectionPro
         </p>
       </footer>
 
-      {/* Music Control */}
-      <button
-        onClick={toggleMusic}
-        className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full glass-strong flex items-center justify-center glow-gold cursor-pointer transition-transform hover:scale-110"
-        aria-label={isPlaying ? "Pause music" : "Play music"}
+      {/* Music Control with equalizer and volume */}
+      <div
+        className="fixed bottom-6 right-6 z-40 flex flex-col items-center gap-2"
+        onMouseEnter={() => setShowVolume(true)}
+        onMouseLeave={() => setShowVolume(false)}
       >
-        {isPlaying ? <Volume2 className="w-5 h-5 text-primary" /> : <VolumeX className="w-5 h-5 text-primary/60" />}
-      </button>
+        {/* Volume slider */}
+        {showVolume && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            className="glass-strong rounded-full px-2 py-3 h-28 flex items-center"
+          >
+            <Slider
+              orientation="vertical"
+              value={[volume]}
+              onValueChange={handleVolume}
+              max={100}
+              step={1}
+              className="h-20"
+            />
+          </motion.div>
+        )}
+
+        <button
+          onClick={toggleMusic}
+          className="relative w-12 h-12 rounded-full glass-strong flex items-center justify-center glow-gold cursor-pointer transition-transform hover:scale-110"
+          aria-label={isPlaying ? "Pause music" : "Play music"}
+        >
+          {/* Equalizer bars */}
+          {isPlaying && (
+            <div className="absolute -top-1 left-1/2 -translate-x-1/2 flex gap-[2px]">
+              <div className="eq-bar" style={{ animationDuration: "0.4s" }} />
+              <div className="eq-bar" style={{ animationDuration: "0.6s", animationDelay: "0.1s" }} />
+              <div className="eq-bar" style={{ animationDuration: "0.5s", animationDelay: "0.2s" }} />
+            </div>
+          )}
+          {isPlaying ? <Volume2 className="w-5 h-5 text-primary" /> : <VolumeX className="w-5 h-5 text-primary/60" />}
+        </button>
+      </div>
     </>
   );
 };

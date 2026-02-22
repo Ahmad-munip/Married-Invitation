@@ -21,9 +21,25 @@ const events = [
 
 const EventDetails = () => {
   return (
-    <section className="py-24 px-6 relative">
+    <section className="py-24 px-6 relative overflow-hidden">
       <FloralFrame positions={["top-left", "top-right"]} size="sm" />
       <FloralFrame positions={["bottom-left", "bottom-right"]} size="sm" />
+      
+      {/* Local twinkling stars */}
+      {Array.from({ length: 12 }).map((_, i) => (
+        <div
+          key={`star-${i}`}
+          className="absolute rounded-full pointer-events-none"
+          style={{
+            left: `${10 + Math.random() * 80}%`,
+            top: `${10 + Math.random() * 80}%`,
+            width: 2,
+            height: 2,
+            background: "hsl(40 80% 70%)",
+            animation: `twinkle ${2 + Math.random() * 3}s ${Math.random() * 4}s ease-in-out infinite`,
+          }}
+        />
+      ))}
       <div className="max-w-5xl mx-auto">
         <motion.div
           className="text-center mb-16"

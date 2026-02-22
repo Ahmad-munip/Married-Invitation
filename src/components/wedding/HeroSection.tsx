@@ -15,6 +15,30 @@ const HeroSection = () => {
       <div className="ambient-glow" style={{ width: 400, height: 400, top: "20%", left: "-10%" }} />
       <div className="ambient-glow" style={{ width: 300, height: 300, bottom: "10%", right: "-5%" }} />
 
+      {/* Floating orbs */}
+      {[
+        { left: "10%", top: "30%", size: 18, delay: 0 },
+        { left: "85%", top: "25%", size: 12, delay: 1.5 },
+        { left: "70%", top: "65%", size: 15, delay: 3 },
+        { left: "20%", top: "70%", size: 10, delay: 2 },
+        { left: "50%", top: "15%", size: 14, delay: 4 },
+      ].map((orb, i) => (
+        <motion.div
+          key={`orb-${i}`}
+          className="absolute rounded-full pointer-events-none"
+          style={{
+            left: orb.left,
+            top: orb.top,
+            width: orb.size,
+            height: orb.size,
+            background: "radial-gradient(circle, hsl(40 80% 60% / 0.4), transparent)",
+            boxShadow: "0 0 15px hsl(40 72% 52% / 0.3)",
+          }}
+          animate={{ y: [-10, 10, -10], opacity: [0.3, 0.7, 0.3] }}
+          transition={{ duration: 5 + i, delay: orb.delay, repeat: Infinity, ease: "easeInOut" }}
+        />
+      ))}
+
       {/* Parallax Background */}
       <div className="absolute inset-0">
         <img src={heroBg} alt="Hero background" className="h-full w-full object-cover scale-110" style={{ transform: "scale(1.1)" }} />
