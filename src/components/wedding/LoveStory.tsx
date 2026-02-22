@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
+import { MandalaRing } from "./FloralFrame";
 
 const stories = [
   { year: "2020", title: "Pertama Bertemu", desc: "Kami pertama kali bertemu di sebuah acara komunitas. Senyuman pertamamu yang membuatku jatuh hati." },
@@ -10,8 +11,12 @@ const stories = [
 
 const LoveStory = () => {
   return (
-    <section className="py-24 px-6 relative">
-      <div className="max-w-3xl mx-auto">
+    <section className="py-24 px-6 relative overflow-hidden">
+      {/* Ambient glow */}
+      <div className="ambient-glow" style={{ width: 350, height: 350, top: "10%", right: "-10%" }} />
+      <div className="ambient-glow" style={{ width: 250, height: 250, bottom: "15%", left: "-8%" }} />
+
+      <div className="max-w-3xl mx-auto relative">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -23,9 +28,11 @@ const LoveStory = () => {
           <div className="divider-gold w-32 mx-auto" />
         </motion.div>
 
+        {/* Mandala behind timeline */}
+        <MandalaRing size={180} className="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-30" />
+
         {/* Timeline */}
         <div className="relative">
-          {/* Vertical line */}
           <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary/30 to-transparent -translate-x-1/2" />
 
           {stories.map((story, i) => (
@@ -37,19 +44,16 @@ const LoveStory = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              {/* Content */}
               <div className={`w-5/12 ${i % 2 === 0 ? "text-right pr-8" : "text-left pl-8"}`}>
                 <span className="font-sans-elegant text-xs tracking-widest text-primary">{story.year}</span>
                 <h3 className="font-serif text-xl font-semibold text-foreground mt-1 mb-2">{story.title}</h3>
                 <p className="font-serif text-sm text-muted-foreground leading-relaxed">{story.desc}</p>
               </div>
 
-              {/* Center dot */}
               <div className="absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-full glass-strong flex items-center justify-center glow-gold">
                 <Heart className="w-4 h-4 text-primary" fill="currentColor" />
               </div>
 
-              {/* Spacer */}
               <div className="w-5/12" />
             </motion.div>
           ))}

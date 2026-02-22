@@ -24,6 +24,7 @@ const ClosingSection = ({ audioRef, isPlaying, setIsPlaying }: ClosingSectionPro
     <>
       <section className="py-32 px-6 relative overflow-hidden">
         <FloralFrame positions={["top-left", "top-right", "bottom-left", "bottom-right"]} size="md" />
+        
         {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/30 to-background" />
 
@@ -34,9 +35,7 @@ const ClosingSection = ({ audioRef, isPlaying, setIsPlaying }: ClosingSectionPro
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <p className="font-sans-elegant text-xs tracking-[0.3em] uppercase text-primary/70 mb-6">
-              Thank You
-            </p>
+            <p className="font-sans-elegant text-xs tracking-[0.3em] uppercase text-primary/70 mb-6">Thank You</p>
 
             <h2 className="font-script text-4xl md:text-5xl gradient-gold-text mb-8 leading-relaxed">
               "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, supaya kamu merasa tenteram kepadanya."
@@ -64,7 +63,7 @@ const ClosingSection = ({ audioRef, isPlaying, setIsPlaying }: ClosingSectionPro
               transition={{ delay: 0.8 }}
             >
               <p className="font-serif text-muted-foreground mb-2">Kami yang berbahagia,</p>
-              <p className="font-script text-3xl gradient-gold-text">Ahmad & Sarah</p>
+              <p className="font-script text-3xl gradient-gold-text">Munip & Risma</p>
             </motion.div>
           </motion.div>
         </div>
@@ -73,21 +72,17 @@ const ClosingSection = ({ audioRef, isPlaying, setIsPlaying }: ClosingSectionPro
       {/* Footer */}
       <footer className="py-6 text-center border-t border-border/30">
         <p className="font-sans-elegant text-[10px] tracking-widest uppercase text-muted-foreground">
-          Made with love • Ahmad & Sarah Wedding 2026
+          Made with love • Munip & Risma Wedding 2026
         </p>
       </footer>
 
-      {/* Music Control - Fixed */}
+      {/* Music Control */}
       <button
         onClick={toggleMusic}
         className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full glass-strong flex items-center justify-center glow-gold cursor-pointer transition-transform hover:scale-110"
         aria-label={isPlaying ? "Pause music" : "Play music"}
       >
-        {isPlaying ? (
-          <Volume2 className="w-5 h-5 text-primary" />
-        ) : (
-          <VolumeX className="w-5 h-5 text-primary/60" />
-        )}
+        {isPlaying ? <Volume2 className="w-5 h-5 text-primary" /> : <VolumeX className="w-5 h-5 text-primary/60" />}
       </button>
     </>
   );
