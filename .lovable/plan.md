@@ -1,55 +1,52 @@
 
 
-## Rencana: Upgrade Card EventDetails -- 3D Premium dengan Dekorasi
+## Upgrade Visual Card Event Details
 
-### Apa yang berubah
+### Perubahan Warna
+Card akan diubah dari tema gelap ke **coklat terang (warm beige/tan)** yang lebih cerah dan hangat:
+- Background card: gradient `hsl(35 40% 88%)` ke `hsl(35 35% 82%)` (krem/beige)
+- Text: coklat tua `hsl(30 50% 20%)` agar kontras
+- Aksen tetap gold tapi lebih warm/hangat
 
-Card event (Akad Nikah & Resepsi) akan di-upgrade menjadi lebih premium, 3D, dan dekoratif:
+### Dekorasi Baru yang Ditambahkan
 
-### 1. Dekorasi Card yang Lebih Kaya
+**A. Ornamen Lebih Besar dan Detail**
+- Corner ornaments diperbesar (dari 12x12 menjadi 20x20) dengan desain yang lebih rumit: double-curl, titik-titik berjajar, dan daun kecil
+- Tambah **border frame dekoratif ganda** (double border dengan jarak) di sekeliling card
 
-Setiap card akan mendapatkan:
-- **Corner ornaments SVG** -- ornamen gold di keempat sudut card (bukan hanya titik kecil)
-- **Border glow gradient** -- border yang berubah warna gold saat hover
-- **Top ribbon/banner** -- label dekoratif di atas card (misalnya ikon kecil bintang atau hati)
-- **Background pattern** -- pola subtle di dalam card (islamic geometric pattern untuk Akad, floral untuk Resepsi)
-- **Animated ring/circle** di belakang ikon (Calendar, Clock, MapPin) yang pulse saat hover
-- **Divider yang lebih dekoratif** -- mengganti garis biasa dengan ornamen floral kecil
+**B. Objek Dekoratif Tambahan di Dalam Card**
+- **Floating mini hearts/stars** kecil yang melayang di dalam card (animasi drift)
+- **Garis-garis emas dekoratif** (horizontal filigree lines) di atas dan bawah title
+- **Rosette/medallion** di atas title card -- lingkaran dekoratif dengan pola bintang di dalamnya
+- **Dotted arc patterns** -- lengkungan titik-titik gold di background card
 
-### 2. Efek 3D yang Lebih Dinamis
+**C. Ikon yang Lebih Menarik**
+- Ikon Calendar/Clock/MapPin diberi background lingkaran gold solid (bukan hanya ring pulse)
+- Tambah **sparkle dots** kecil di sekitar ikon
 
-- **Mouse-tracking tilt** -- card mengikuti posisi mouse (menggunakan `onMouseMove` untuk menghitung `rotateX` dan `rotateY` berdasarkan posisi kursor)
-- **Depth layers** -- elemen di dalam card bergerak dengan kecepatan berbeda saat tilt (parallax internal), menciptakan kedalaman 3D
-- **Shine sweep** -- efek cahaya bergerak mengikuti posisi mouse
-- **Shadow dinamis** -- shadow berubah arah sesuai tilt
+**D. Bottom Decoration**
+- Tambah **swag/garland SVG** di bagian bawah card -- ornamen gantung seperti untaian bunga
 
-### 3. Animasi Masuk yang Lebih Menarik
-
-- Card muncul dengan efek "unfold" -- scale dari kecil ke besar dengan rotasi
-- Ikon-ikon di dalam card muncul berurutan (staggered) setelah card terbuka
+**E. Card Glow Border**
+- Border card menggunakan gradient gold yang animated (berputar pelan)
 
 ### Detail Teknis
 
 **File yang diubah:**
 
 1. **`src/components/wedding/EventDetails.tsx`**
-   - Tambah state `mouseX` dan `mouseY` per card menggunakan `onMouseMove`/`onMouseLeave`
-   - Hitung `rotateX` dan `rotateY` dari posisi mouse relatif terhadap card
-   - Tambah SVG corner ornaments (4 sudut)
-   - Tambah background pattern SVG (subtle, opacity rendah)
-   - Tambah ribbon/icon dekoratif di atas title
-   - Upgrade ikon Calendar/Clock/MapPin dengan animated ring background
-   - Tambah internal parallax: title dan ikon bergerak sedikit berlawanan arah tilt
-   - Shine gradient mengikuti posisi mouse
+   - Ubah background card dari `glass-strong` menjadi gradient coklat terang solid
+   - Perbesar dan perdetail `CornerOrnament` SVG
+   - Tambah komponen `FloatingMiniHearts` -- 5-6 heart/star kecil yang melayang
+   - Tambah komponen `Rosette` -- medallion dekoratif SVG di atas title
+   - Tambah komponen `FiligreeLine` -- garis emas dekoratif horizontal
+   - Tambah komponen `SwagGarland` -- ornamen gantung SVG di bawah card
+   - Tambah `DottedArcs` -- lengkungan titik background
+   - Upgrade `IconWithRing` menjadi lingkaran solid gold dengan sparkle
+   - Ubah warna teks ke coklat tua
+   - Tambah animated gradient border
 
 2. **`src/index.css`**
-   - Tambah keyframe `icon-pulse-ring` untuk animasi ring di belakang ikon
-   - Tambah class `.card-corner-ornament` untuk styling SVG sudut
-
-### Pendekatan
-- Mouse-tracking tilt menggunakan React state + inline transform (bukan framer-motion) untuk performa
-- Semua dekorasi SVG inline agar tidak perlu file tambahan
-- Corner ornaments menggunakan warna gold dengan opacity 0.2-0.4
-- Efek 3D hanya aktif di desktop (hover), di mobile card tetap statis dan rapi
-- `pointer-events-none` pada semua elemen dekoratif agar tidak mengganggu interaksi
-
+   - Tambah keyframe `mini-float` untuk floating hearts
+   - Tambah keyframe `border-rotate` untuk animated gradient border
+   - Tambah keyframe `sparkle-pop` untuk efek sparkle di ikon
