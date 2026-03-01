@@ -1,64 +1,36 @@
 
 
-## Terapkan Desain Premium ke Semua Form
+## Perbaikan Bug dan Visual
 
-### Apa yang berubah
+### Masalah yang Ditemukan
 
-Form di **RSVPSection**, **WishesSection**, dan **DigitalEnvelope** akan mendapatkan desain yang sama seperti card EventDetails: background coklat terang, corner ornaments, dekorasi, dan efek 3D.
+**1. Nama "Risma Mawlina" terpotong di mobile**
+Di HeroSection, nama "Risma Mawlina" pecah menjadi "Risma Mawli" + "na" di layar kecil karena font terlalu besar (`text-6xl`). Perlu penyesuaian ukuran font di mobile.
 
-### Perubahan per File
+**2. Select dropdown RSVP ada bullet/dot aneh**
+Elemen `<select>` menampilkan simbol bullet di depan option ("* Hadir"). Perlu tambah styling khusus untuk select.
 
-**1. `src/components/wedding/RSVPSection.tsx`**
-- Ganti `glass-strong` pada form container dengan background gradient coklat terang (`hsl(35 40% 88%)` ke `hsl(35 35% 82%)`)
-- Tambah `CornerOrnament` SVG di keempat sudut form
-- Tambah `FloatingMiniHearts` di dalam form
-- Tambah `FiligreeLine` di atas dan bawah judul form fields
-- Tambah animated gradient border (border-rotate)
-- Ubah warna label dan teks ke coklat tua
-- Input fields: background krem lebih terang dengan border gold subtle
-- Submit button: tetap gradient-gold, tambah glow effect
-- Success state juga pakai desain yang sama
+**3. Teks kutipan di Closing Section bertabrakan dengan tombol musik**
+Di mobile, kutipan Al-Quran di bagian bawah halaman bisa tertutup oleh tombol musik yang fixed di kanan bawah. Perlu padding-right atau margin pada area tersebut.
 
-**2. `src/components/wedding/WishesSection.tsx`**
-- Form submit: ganti `glass-strong` dengan background coklat terang + corner ornaments + dekorasi
-- Wish cards (list ucapan): ganti `glass` dengan style coklat terang yang lebih ringan
-- Input/textarea: background krem dengan border gold
-- Tambah `FiligreeLine` sebagai separator antara form dan list
+### Rencana Perbaikan
 
-**3. `src/components/wedding/DigitalEnvelope.tsx`**
-- Account cards: ganti `glass-strong` dengan background coklat terang + corner ornaments
-- Tambah `FloatingMiniHearts` dan dekorasi
-- Nomor rekening: warna coklat tua
-- Copy button: style gold yang lebih prominent
-- Animated gradient border pada setiap card
+**File: `src/components/wedding/HeroSection.tsx`**
+- Kurangi ukuran font nama di mobile dari `text-6xl` menjadi `text-5xl` agar tidak terpotong
+- Tambah `whitespace-nowrap` pada container nama untuk mencegah line break di tengah nama
 
-### Komponen yang Di-reuse
+**File: `src/components/wedding/CardDecorations.tsx`**
+- Tambah styling khusus untuk select element di `premiumInputClass` atau buat class terpisah `premiumSelectClass` dengan `appearance-none` dan custom arrow
 
-Komponen dekoratif dari EventDetails akan diekstrak atau diduplikasi:
-- `CornerOrnament` -- ornamen sudut SVG
-- `FloatingMiniHearts` -- heart/star melayang
-- `FiligreeLine` -- garis emas dekoratif horizontal
-- Pattern background (geometric/floral)
-- Animated gradient border CSS
+**File: `src/components/wedding/RSVPSection.tsx`**
+- Gunakan class select yang sudah diperbaiki pada elemen `<select>`
 
-### Pendekatan Teknis
+**File: `src/components/wedding/ClosingSection.tsx`**
+- Tambah `pb-16` atau padding bottom ekstra pada section quote agar tidak tertutup tombol musik di mobile
 
-Karena komponen dekorasi sudah ada di EventDetails, saya akan membuat file shared `src/components/wedding/CardDecorations.tsx` yang berisi semua komponen dekoratif yang bisa dipakai ulang di RSVP, Wishes, dan DigitalEnvelope. Ini menghindari duplikasi kode.
+### Detail Teknis
 
-**File baru:**
-- `src/components/wedding/CardDecorations.tsx` -- shared decorative components
-
-**File yang diubah:**
-- `src/components/wedding/EventDetails.tsx` -- import dari CardDecorations (refactor)
-- `src/components/wedding/RSVPSection.tsx` -- terapkan desain premium
-- `src/components/wedding/WishesSection.tsx` -- terapkan desain premium
-- `src/components/wedding/DigitalEnvelope.tsx` -- terapkan desain premium
-
-### Konsistensi Warna
-- Background form: `hsl(35 40% 88%)` ke `hsl(35 35% 82%)`
-- Teks utama: `hsl(30 50% 20%)` (coklat tua)
-- Label: `hsl(30 40% 35%)` (coklat medium)
-- Input background: `hsl(35 40% 92%)` (krem terang)
-- Input border: `hsl(35 45% 65% / 0.4)` (gold subtle)
-- Input focus ring: `hsl(35 55% 50% / 0.5)`
-
+1. HeroSection - ubah `text-6xl md:text-8xl lg:text-9xl` menjadi `text-4xl sm:text-5xl md:text-8xl lg:text-9xl` dan tambah `whitespace-nowrap` pada h1
+2. CardDecorations - export `premiumSelectClass` yang menambahkan `appearance-none` dan background arrow SVG
+3. RSVPSection - ganti `premiumInputClass` pada `<select>` dengan `premiumSelectClass`
+4. ClosingSection - tambah padding bottom pada container quote untuk menghindari overlap dengan music button
