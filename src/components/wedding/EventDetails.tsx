@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Calendar, Clock, MapPin, Heart, Star, Sparkles } from "lucide-react";
 import FloralFrame from "./FloralFrame";
 import { SectionVine, LocalGoldDust } from "./SectionDecorations";
+import { CornerOrnament, FloatingMiniHearts, FiligreeLine, DottedArcs, SwagGarland } from "./CardDecorations";
 
 const events = [
   {
@@ -29,84 +30,12 @@ const geometricPattern = `url("data:image/svg+xml,%3Csvg width='60' height='60' 
 
 const floralPattern = `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23a07830' stroke-width='0.5' opacity='0.15'%3E%3Ccircle cx='30' cy='30' r='8'/%3E%3Cellipse cx='30' cy='18' rx='4' ry='7'/%3E%3Cellipse cx='30' cy='42' rx='4' ry='7'/%3E%3Cellipse cx='18' cy='30' rx='7' ry='4'/%3E%3Cellipse cx='42' cy='30' rx='7' ry='4'/%3E%3Ccircle cx='30' cy='30' r='3'/%3E%3C/g%3E%3C/svg%3E")`;
 
-/* ─── Corner Ornament (larger, more detailed) ─── */
-const CornerOrnament = ({ position }: { position: "top-left" | "top-right" | "bottom-left" | "bottom-right" }) => {
-  const transforms: Record<string, string> = {
-    "top-left": "",
-    "top-right": "scaleX(-1)",
-    "bottom-left": "scaleY(-1)",
-    "bottom-right": "scale(-1,-1)",
-  };
-  const positions: Record<string, string> = {
-    "top-left": "top-0 left-0",
-    "top-right": "top-0 right-0",
-    "bottom-left": "bottom-0 left-0",
-    "bottom-right": "bottom-0 right-0",
-  };
-
-  return (
-    <svg
-      className={`absolute ${positions[position]} w-20 h-20 pointer-events-none card-corner-ornament`}
-      viewBox="0 0 80 80"
-      style={{ transform: transforms[position] }}
-    >
-      {/* Main curl */}
-      <path d="M0,0 C8,12 12,24 14,40 C16,28 20,18 32,10 C20,14 12,12 0,0Z" fill="hsl(35 55% 45% / 0.15)" />
-      <path d="M0,0 C8,12 12,24 14,40" stroke="hsl(35 55% 50% / 0.4)" strokeWidth="1" fill="none" />
-      <path d="M0,0 C12,8 24,12 40,14" stroke="hsl(35 55% 50% / 0.4)" strokeWidth="1" fill="none" />
-      {/* Secondary curl */}
-      <path d="M4,4 C10,14 14,22 16,34" stroke="hsl(35 55% 50% / 0.2)" strokeWidth="0.6" fill="none" />
-      <path d="M4,4 C14,10 22,14 34,16" stroke="hsl(35 55% 50% / 0.2)" strokeWidth="0.6" fill="none" />
-      {/* Leaf detail */}
-      <ellipse cx="20" cy="8" rx="5" ry="2.5" fill="hsl(35 55% 50% / 0.12)" transform="rotate(25 20 8)" />
-      <ellipse cx="8" cy="20" rx="2.5" ry="5" fill="hsl(35 55% 50% / 0.12)" transform="rotate(-25 8 20)" />
-      {/* Dot trail */}
-      <circle cx="10" cy="10" r="1.8" fill="hsl(35 55% 50% / 0.25)" />
-      <circle cx="18" cy="18" r="1.2" fill="hsl(35 55% 50% / 0.2)" />
-      <circle cx="25" cy="12" r="1" fill="hsl(35 55% 50% / 0.15)" />
-      <circle cx="12" cy="25" r="1" fill="hsl(35 55% 50% / 0.15)" />
-      <circle cx="30" cy="6" r="0.8" fill="hsl(35 55% 50% / 0.12)" />
-      <circle cx="6" cy="30" r="0.8" fill="hsl(35 55% 50% / 0.12)" />
-    </svg>
-  );
-};
-
-/* ─── Floating Mini Hearts ─── */
-const FloatingMiniHearts = () => {
-  const items = [
-    { left: "10%", top: "15%", size: 8, delay: 0 },
-    { left: "85%", top: "20%", size: 6, delay: 1.2 },
-    { left: "20%", top: "75%", size: 7, delay: 2.4 },
-    { left: "75%", top: "80%", size: 5, delay: 0.8 },
-    { left: "50%", top: "10%", size: 6, delay: 1.8 },
-    { left: "90%", top: "55%", size: 7, delay: 3.2 },
-  ];
-  return (
-    <>
-      {items.map((item, i) => (
-        <div
-          key={i}
-          className="absolute pointer-events-none animate-mini-float"
-          style={{ left: item.left, top: item.top, animationDelay: `${item.delay}s` }}
-        >
-          {i % 2 === 0 ? (
-            <Heart className="text-[hsl(35_55%_50%)] opacity-20" style={{ width: item.size, height: item.size }} fill="currentColor" />
-          ) : (
-            <Sparkles className="text-[hsl(35_55%_50%)] opacity-20" style={{ width: item.size, height: item.size }} />
-          )}
-        </div>
-      ))}
-    </>
-  );
-};
-
 /* ─── Rosette / Medallion ─── */
 const Rosette = () => (
   <div className="flex justify-center mb-2 pointer-events-none">
     <svg width="40" height="40" viewBox="0 0 40 40">
       <circle cx="20" cy="20" r="18" fill="none" stroke="hsl(35 55% 50% / 0.2)" strokeWidth="0.5" />
       <circle cx="20" cy="20" r="14" fill="none" stroke="hsl(35 55% 50% / 0.15)" strokeWidth="0.5" />
-      {/* Star pattern inside */}
       {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => (
         <line
           key={angle}
@@ -119,47 +48,6 @@ const Rosette = () => (
       ))}
       <circle cx="20" cy="20" r="4" fill="hsl(35 55% 50% / 0.1)" stroke="hsl(35 55% 50% / 0.2)" strokeWidth="0.5" />
       <circle cx="20" cy="20" r="1.5" fill="hsl(35 55% 50% / 0.25)" />
-    </svg>
-  </div>
-);
-
-/* ─── Filigree Line ─── */
-const FiligreeLine = () => (
-  <div className="flex items-center justify-center gap-2 my-3 pointer-events-none">
-    <div className="h-px w-12 bg-gradient-to-r from-transparent to-[hsl(35_55%_45%_/_0.3)]" />
-    <svg width="24" height="8" viewBox="0 0 24 8">
-      <path d="M0,4 Q6,0 12,4 Q18,8 24,4" stroke="hsl(35 55% 50% / 0.3)" strokeWidth="0.8" fill="none" />
-      <circle cx="12" cy="4" r="1.5" fill="hsl(35 55% 50% / 0.3)" />
-    </svg>
-    <div className="h-px w-12 bg-gradient-to-l from-transparent to-[hsl(35_55%_45%_/_0.3)]" />
-  </div>
-);
-
-/* ─── Dotted Arcs (background) ─── */
-const DottedArcs = () => (
-  <div className="absolute inset-0 pointer-events-none overflow-hidden">
-    <svg className="absolute w-full h-full" viewBox="0 0 300 400" preserveAspectRatio="none">
-      <path d="M-20,80 Q150,20 320,80" fill="none" stroke="hsl(35 55% 50% / 0.08)" strokeWidth="1" strokeDasharray="3 6" />
-      <path d="M-20,320 Q150,380 320,320" fill="none" stroke="hsl(35 55% 50% / 0.08)" strokeWidth="1" strokeDasharray="3 6" />
-      <path d="M50,-10 Q10,200 50,410" fill="none" stroke="hsl(35 55% 50% / 0.05)" strokeWidth="1" strokeDasharray="2 8" />
-      <path d="M250,-10 Q290,200 250,410" fill="none" stroke="hsl(35 55% 50% / 0.05)" strokeWidth="1" strokeDasharray="2 8" />
-    </svg>
-  </div>
-);
-
-/* ─── Swag Garland (bottom decoration) ─── */
-const SwagGarland = () => (
-  <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
-    <svg width="100%" height="30" viewBox="0 0 300 30" preserveAspectRatio="none">
-      <path d="M0,5 Q37.5,25 75,5 Q112.5,25 150,5 Q187.5,25 225,5 Q262.5,25 300,5" fill="none" stroke="hsl(35 55% 50% / 0.15)" strokeWidth="0.8" />
-      <path d="M0,8 Q37.5,28 75,8 Q112.5,28 150,8 Q187.5,28 225,8 Q262.5,28 300,8" fill="none" stroke="hsl(35 55% 50% / 0.08)" strokeWidth="0.5" />
-      {/* Small hanging dots */}
-      {[37.5, 112.5, 187.5, 262.5].map((x) => (
-        <g key={x}>
-          <line x1={x} y1="25" x2={x} y2="30" stroke="hsl(35 55% 50% / 0.12)" strokeWidth="0.5" />
-          <circle cx={x} cy="30" r="1.5" fill="hsl(35 55% 50% / 0.15)" />
-        </g>
-      ))}
     </svg>
   </div>
 );
