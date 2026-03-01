@@ -43,9 +43,9 @@ const FlipDigit = ({ value, label }: { value: number; label: string }) => {
           <motion.div
             key={value}
             className="font-serif text-3xl md:text-5xl font-bold gradient-gold-text mb-1"
-            initial={{ rotateX: -90, opacity: 0, filter: "blur(4px)" }}
-            animate={{ rotateX: 0, opacity: 1, filter: "blur(0px)" }}
-            exit={{ rotateX: 90, opacity: 0, filter: "blur(4px)" }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
             style={{ transformStyle: "preserve-3d" }}
           >
