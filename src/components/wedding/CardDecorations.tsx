@@ -157,3 +157,7 @@ export const premiumInputClass =
 
 export const premiumLabelClass =
   "block font-sans-elegant text-xs tracking-widest uppercase text-[hsl(30_40%_35%)] mb-2";
+
+export const premiumSelectClass =
+  `${premiumInputClass} appearance-none bg-no-repeat bg-[length:16px_16px] bg-[position:right_12px_center] pr-10` +
+  ` bg-[url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238B7355' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")]`;
