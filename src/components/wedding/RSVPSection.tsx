@@ -50,7 +50,7 @@ const RSVPSection = () => {
   };
 
   return (
-    <section className="py-24 px-6 relative overflow-hidden">
+    <section className="py-24 px-6 relative overflow-hidden z-10">
       <div className="ambient-glow" style={{ width: 300, height: 300, top: "5%", right: "-8%" }} />
       <div className="ambient-glow-warm" style={{ width: 250, height: 250, bottom: "10%", left: "-6%" }} />
       <SectionVine side="left" />

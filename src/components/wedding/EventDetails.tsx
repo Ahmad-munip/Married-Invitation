@@ -22,7 +22,7 @@ const events = [
 
 const EventDetails = () => {
   return (
-    <section className="py-24 px-6 relative overflow-hidden">
+    <section className="py-24 px-6 relative overflow-hidden z-10">
       <FloralFrame positions={["top-left", "top-right"]} size="sm" />
       <FloralFrame positions={["bottom-left", "bottom-right"]} size="sm" />
       <SectionVine side="left" />

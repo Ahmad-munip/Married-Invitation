@@ -27,7 +27,7 @@ const WishesSection = () => {
   };
 
   return (
-    <section className="py-24 px-6 relative overflow-hidden">
+    <section className="py-24 px-6 relative overflow-hidden z-10">
       <div className="ambient-glow" style={{ width: 280, height: 280, top: "10%", left: "-7%" }} />
       <div className="ambient-glow-warm" style={{ width: 220, height: 220, bottom: "15%", right: "-5%" }} />
       <SectionVine side="left" />

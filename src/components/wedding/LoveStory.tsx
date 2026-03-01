@@ -12,7 +12,7 @@ const stories = [
 
 const LoveStory = () => {
   return (
-    <section className="py-24 px-6 relative overflow-hidden">
+    <section className="py-24 px-6 relative overflow-hidden z-10">
       {/* Ambient glow */}
       <div className="ambient-glow" style={{ width: 350, height: 350, top: "10%", right: "-10%" }} />
       <div className="ambient-glow" style={{ width: 250, height: 250, bottom: "15%", left: "-8%" }} />
