@@ -6,7 +6,7 @@ import { SectionVine, LocalGoldDust } from "./SectionDecorations";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden z-10">
       <FloralFrame positions={["top-left", "top-right", "bottom-left", "bottom-right"]} size="lg" />
       
       {/* Mandala behind names */}

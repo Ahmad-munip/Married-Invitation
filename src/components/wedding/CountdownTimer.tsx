@@ -37,7 +37,7 @@ const CountdownTimer = () => {
   ];
 
   return (
-    <section className="py-20 px-6 relative overflow-hidden">
+    <section className="py-20 px-6 relative overflow-hidden z-10">
       <div className="ambient-glow-warm" style={{ width: 350, height: 350, top: "-10%", left: "50%", transform: "translateX(-50%)" }} />
       <div className="batik-pattern-local" />
       <SectionVine side="left" />

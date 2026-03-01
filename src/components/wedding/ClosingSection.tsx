@@ -35,7 +35,7 @@ const ClosingSection = ({ audioRef, isPlaying, setIsPlaying }: ClosingSectionPro
 
   return (
     <>
-      <section className="py-32 px-6 relative overflow-hidden">
+      <section className="py-32 px-6 relative overflow-hidden z-10">
         <FloralFrame positions={["top-left", "top-right", "bottom-left", "bottom-right"]} size="md" />
         <SectionVine side="left" />
         <SectionVine side="right" />

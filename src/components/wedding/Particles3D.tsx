@@ -57,7 +57,7 @@ const Particles3D = ({ count = 200, speed = 0.15, size = 0.02, className = "" }:
         camera={{ position: [0, 0, 5], fov: 60 }}
         gl={{ alpha: true, antialias: false }}
         dpr={[1, 1.5]}
-        style={{ background: "transparent" }}
+        style={{ background: "transparent", pointerEvents: "none" }}
       >
         <GoldParticlesInner count={count} speed={speed} size={size} />
       </Canvas>
