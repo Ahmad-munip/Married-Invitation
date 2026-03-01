@@ -4,7 +4,7 @@ import { Play, Pause } from "lucide-react";
 import FloralFrame from "./FloralFrame";
 import { SectionVine, LocalGoldDust } from "./SectionDecorations";
 
-const VIDEO_PLACEHOLDER = "https://cdn.pixabay.com/video/2021/04/06/69888-535102782_large.mp4";
+const VIDEO_PLACEHOLDER = "src/assets/video-placeholder.mp4"; // Replace with actual video path
 
 const VideoSection = () => {
   const [playing, setPlaying] = useState(false);

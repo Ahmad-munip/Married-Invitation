@@ -23,7 +23,7 @@ import GoldDust from "@/components/wedding/GoldDust";
 
 const Particles3D = lazy(() => import("@/components/wedding/Particles3D"));
 
-const MUSIC_URL = "https://cdn.pixabay.com/audio/2024/11/29/audio_f0c53efea1.mp3";
+const MUSIC_URL = "src/assets/wedding-music.mp3"; // Replace with actual music path
 
 const Index = () => {
   const [splashOpen, setSplashOpen] = useState(true);
