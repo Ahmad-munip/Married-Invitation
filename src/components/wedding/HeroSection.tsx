@@ -15,11 +15,10 @@ const WordReveal = ({ text, className, delay = 0 }: { text: string; className?: 
         <motion.span
           key={i}
           className="inline-block"
-          initial={{ opacity: 0, y: 30, rotateX: -90 }}
-          whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: delay + i * 0.04, ease: "easeOut" }}
-          style={{ transformStyle: "preserve-3d" }}
+          transition={{ duration: 0.5, delay: delay + i * 0.04, ease: "easeOut" }}
         >
           {char === " " ? "\u00A0" : char}
         </motion.span>
