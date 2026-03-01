@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, Send, WifiOff } from "lucide-react";
 import { SectionVine } from "./SectionDecorations";
-import { PremiumCardWrapper, FiligreeLine, premiumInputClass, premiumLabelClass } from "./CardDecorations";
+import { PremiumCardWrapper, FiligreeLine, premiumInputClass, premiumSelectClass, premiumLabelClass } from "./CardDecorations";
 
 const STORAGE_KEY = "wedding-rsvp-queue";
 
@@ -123,7 +123,7 @@ const RSVPSection = () => {
                     <select
                       value={form.kehadiran}
                       onChange={(e) => setForm({ ...form, kehadiran: e.target.value })}
-                      className={premiumInputClass}
+                      className={premiumSelectClass}
                     >
                       <option value="hadir">Hadir</option>
                       <option value="tidak">Tidak Hadir</option>

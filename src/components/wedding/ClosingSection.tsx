@@ -44,7 +44,7 @@ const ClosingSection = ({ audioRef, isPlaying, setIsPlaying }: ClosingSectionPro
         {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/30 to-background" />
 
-        <div className="relative z-10 max-w-2xl mx-auto text-center">
+        <div className="relative z-10 max-w-2xl mx-auto text-center pb-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
