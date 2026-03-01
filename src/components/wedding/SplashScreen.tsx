@@ -5,6 +5,8 @@ import { SectionVine, LocalGoldDust } from "./SectionDecorations";
 
 const Particles3D = lazy(() => import("./Particles3D"));
 
+const SPLASH_VIDEO_URL = "https://cdn.pixabay.com/video/2020/07/30/45349-445804517_large.mp4";
+
 interface SplashScreenProps {
   isOpen: boolean;
   onOpen: () => void;
@@ -13,22 +15,14 @@ interface SplashScreenProps {
 
 const generateSparkles = (count: number) =>
   Array.from({ length: count }, (_, i) => ({
-    id: i,
-    left: Math.random() * 100,
-    top: Math.random() * 100,
-    size: Math.random() * 4 + 2,
-    delay: Math.random() * 4,
-    duration: Math.random() * 2 + 1.5,
+    id: i, left: Math.random() * 100, top: Math.random() * 100,
+    size: Math.random() * 4 + 2, delay: Math.random() * 4, duration: Math.random() * 2 + 1.5,
   }));
 
 const generateSplashPetals = (count: number) =>
   Array.from({ length: count }, (_, i) => ({
-    id: i,
-    left: Math.random() * 100,
-    delay: Math.random() * 6,
-    duration: Math.random() * 6 + 8,
-    size: Math.random() * 10 + 8,
-    opacity: Math.random() * 0.3 + 0.1,
+    id: i, left: Math.random() * 100, delay: Math.random() * 6,
+    duration: Math.random() * 6 + 8, size: Math.random() * 10 + 8, opacity: Math.random() * 0.3 + 0.1,
   }));
 
 const cornerPaths = [
@@ -38,7 +32,6 @@ const cornerPaths = [
   { d: "M60,0 Q0,0 0,60", transform: "translate(100%, 100%) scale(-1, -1)", origin: "bottom right" },
 ];
 
-// Floating diamond elements for splash
 const splashDiamonds = [
   { left: "8%", top: "20%", size: 7, duration: 6, delay: 0.5 },
   { left: "88%", top: "30%", size: 5, duration: 7, delay: 1 },
@@ -59,9 +52,17 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
           exit={{ opacity: 0 }}
           transition={{ duration: 1.2, ease: "easeInOut" }}
         >
-          {/* Background */}
+          {/* Video Background */}
           <div className="absolute inset-0">
-            <img src={heroBg} alt="Wedding background" className="h-full w-full object-cover" />
+            <video
+              autoPlay muted loop playsInline
+              poster={heroBg}
+              className="h-full w-full object-cover"
+              onError={(e) => { (e.target as HTMLVideoElement).style.display = "none"; }}
+            >
+              <source src={SPLASH_VIDEO_URL} type="video/mp4" />
+            </video>
+            <img src={heroBg} alt="Wedding background" className="absolute inset-0 h-full w-full object-cover -z-10" />
             <div className="absolute inset-0 bg-background/65" />
           </div>
 
@@ -70,10 +71,8 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
             <Particles3D count={300} speed={0.2} size={0.025} className="!z-[1]" />
           </Suspense>
 
-          {/* Batik pattern overlay */}
           <div className="batik-pattern" style={{ opacity: 0.04 }} />
 
-          {/* Vine corners */}
           <SectionVine side="left" className="!bottom-auto !top-0 rotate-180" />
           <SectionVine side="right" className="!bottom-auto !top-0 rotate-180" />
           <SectionVine side="left" />
@@ -82,113 +81,57 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
 
           {/* Floating diamonds */}
           {splashDiamonds.map((d, i) => (
-            <div
-              key={`diamond-${i}`}
-              className="absolute animate-float-diamond pointer-events-none"
-              style={{
-                left: d.left,
-                top: d.top,
-                width: d.size,
-                height: d.size,
-                background: "hsl(40 72% 52% / 0.2)",
-                animationDuration: `${d.duration}s`,
-                animationDelay: `${d.delay}s`,
-              }}
-            />
+            <div key={`diamond-${i}`} className="absolute animate-float-diamond pointer-events-none"
+              style={{ left: d.left, top: d.top, width: d.size, height: d.size, background: "hsl(40 72% 52% / 0.2)", animationDuration: `${d.duration}s`, animationDelay: `${d.delay}s` }} />
           ))}
 
-          {/* Sparkle Particles */}
+          {/* Sparkles */}
           {sparkles.map((s) => (
-            <motion.div
-              key={`sparkle-${s.id}`}
-              className="absolute rounded-full"
-              style={{
-                left: `${s.left}%`,
-                top: `${s.top}%`,
-                width: s.size,
-                height: s.size,
-                background: `radial-gradient(circle, hsl(40 90% 65%), transparent)`,
-              }}
+            <motion.div key={`sparkle-${s.id}`} className="absolute rounded-full"
+              style={{ left: `${s.left}%`, top: `${s.top}%`, width: s.size, height: s.size, background: `radial-gradient(circle, hsl(40 90% 65%), transparent)` }}
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: [0, 1, 0], scale: [0, 1.2, 0] }}
-              transition={{ duration: s.duration, delay: s.delay, repeat: Infinity, ease: "easeInOut" }}
-            />
+              transition={{ duration: s.duration, delay: s.delay, repeat: Infinity, ease: "easeInOut" }} />
           ))}
 
-          {/* Floating Petals */}
+          {/* Petals */}
           {petals.map((p) => (
-            <div
-              key={`petal-${p.id}`}
-              className="absolute animate-petal pointer-events-none"
-              style={{
-                left: `${p.left}%`,
-                top: "-5%",
-                width: p.size,
-                height: p.size,
-                borderRadius: "50% 0 50% 0",
-                background: `hsl(40 72% 52% / ${p.opacity})`,
-                animationDuration: `${p.duration}s`,
-                animationDelay: `${p.delay}s`,
-              }}
-            />
+            <div key={`petal-${p.id}`} className="absolute animate-petal pointer-events-none"
+              style={{ left: `${p.left}%`, top: "-5%", width: p.size, height: p.size, borderRadius: "50% 0 50% 0", background: `hsl(40 72% 52% / ${p.opacity})`, animationDuration: `${p.duration}s`, animationDelay: `${p.delay}s` }} />
           ))}
 
           {/* Rotating Rings */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="absolute w-[300px] h-[300px] md:w-[450px] md:h-[450px] rounded-full border border-primary/10 animate-rotate-slow" />
-            <div
-              className="absolute w-[380px] h-[380px] md:w-[550px] md:h-[550px] rounded-full border border-primary/5 animate-rotate-slow"
-              style={{ animationDirection: "reverse", animationDuration: "30s" }}
-            />
+            <div className="absolute w-[380px] h-[380px] md:w-[550px] md:h-[550px] rounded-full border border-primary/5 animate-rotate-slow" style={{ animationDirection: "reverse", animationDuration: "30s" }} />
           </div>
 
           {/* Light Sweep */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <div
-              className="animate-light-sweep absolute inset-0"
-              style={{ background: "linear-gradient(105deg, transparent 40%, hsl(40 90% 65% / 0.06) 50%, transparent 60%)" }}
-            />
+            <div className="animate-light-sweep absolute inset-0" style={{ background: "linear-gradient(105deg, transparent 40%, hsl(40 90% 65% / 0.06) 50%, transparent 60%)" }} />
           </div>
 
           {/* Corner Ornaments */}
           {cornerPaths.map((corner, i) => (
-            <motion.svg
-              key={`corner-${i}`}
-              className="absolute w-16 h-16 md:w-24 md:h-24"
-              viewBox="0 0 60 60"
-              fill="none"
+            <motion.svg key={`corner-${i}`} className="absolute w-16 h-16 md:w-24 md:h-24" viewBox="0 0 60 60" fill="none"
               style={{
-                ...(i === 0 && { top: 16, left: 16 }),
-                ...(i === 1 && { top: 16, right: 16 }),
-                ...(i === 2 && { bottom: 16, left: 16 }),
-                ...(i === 3 && { bottom: 16, right: 16 }),
+                ...(i === 0 && { top: 16, left: 16 }), ...(i === 1 && { top: 16, right: 16 }),
+                ...(i === 2 && { bottom: 16, left: 16 }), ...(i === 3 && { bottom: 16, right: 16 }),
               }}
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 0.6, scale: 1 }}
-              transition={{ delay: 0.4 + i * 0.2, duration: 0.8 }}
-            >
+              initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 0.6, scale: 1 }} transition={{ delay: 0.4 + i * 0.2, duration: 0.8 }}>
               <path d={corner.d} stroke="hsl(40, 72%, 52%)" strokeWidth="1.5" strokeLinecap="round" />
               <path d={corner.d} stroke="hsl(40, 72%, 52%)" strokeWidth="1.5" strokeLinecap="round" transform="scale(0.6) translate(20, 20)" opacity="0.4" />
             </motion.svg>
           ))}
 
           {/* Content */}
-          <motion.div
-            className="relative z-10 text-center px-6"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-          >
+          <motion.div className="relative z-10 text-center px-6" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.3 }}>
             <motion.p className="font-sans-elegant text-sm tracking-[0.3em] uppercase text-muted-foreground mb-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
               The Wedding of
             </motion.p>
 
-            <motion.h1
-              className="font-script text-5xl md:text-7xl gradient-gold-text text-glow-gold mb-6"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-            >
+            <motion.h1 className="font-script text-5xl md:text-7xl gradient-gold-text text-glow-gold mb-6"
+              initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.8, duration: 0.8 }}>
               Munip & Risma
             </motion.h1>
 
@@ -204,12 +147,8 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
             <motion.button
               onClick={onOpen}
               className="relative gradient-gold font-sans-elegant text-sm tracking-widest uppercase px-10 py-4 rounded-full text-primary-foreground animate-pulse-glow cursor-pointer"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.8 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.8 }}
+              whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               Buka Undangan
             </motion.button>
           </motion.div>

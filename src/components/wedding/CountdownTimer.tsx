@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { SectionVine, LocalGoldDust } from "./SectionDecorations";
 
 const TARGET_DATE = new Date("2026-06-15T08:00:00+07:00").getTime();
@@ -10,6 +10,55 @@ interface TimeLeft {
   minutes: number;
   seconds: number;
 }
+
+const FlipDigit = ({ value, label }: { value: number; label: string }) => {
+  const prevValue = useRef(value);
+  const changed = prevValue.current !== value;
+  prevValue.current = value;
+  const display = String(value).padStart(2, "0");
+
+  return (
+    <motion.div
+      className="glass-strong rounded-xl p-4 md:p-6 min-w-[70px] md:min-w-[100px] glow-gold relative overflow-hidden"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+    >
+      {/* Pulse on change */}
+      <AnimatePresence>
+        {changed && (
+          <motion.div
+            className="absolute inset-0 rounded-xl pointer-events-none"
+            initial={{ opacity: 0.4 }}
+            animate={{ opacity: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8 }}
+            style={{ boxShadow: "inset 0 0 30px hsl(40 72% 52% / 0.4)" }}
+          />
+        )}
+      </AnimatePresence>
+
+      <div className="relative" style={{ perspective: "200px" }}>
+        <AnimatePresence mode="popLayout">
+          <motion.div
+            key={value}
+            className="font-serif text-3xl md:text-5xl font-bold gradient-gold-text mb-1"
+            initial={{ rotateX: -90, opacity: 0, filter: "blur(4px)" }}
+            animate={{ rotateX: 0, opacity: 1, filter: "blur(0px)" }}
+            exit={{ rotateX: 90, opacity: 0, filter: "blur(4px)" }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            style={{ transformStyle: "preserve-3d" }}
+          >
+            {display}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+      <div className="font-sans-elegant text-[10px] md:text-xs tracking-widest uppercase text-muted-foreground">
+        {label}
+      </div>
+    </motion.div>
+  );
+};
 
 const CountdownTimer = () => {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -62,22 +111,8 @@ const CountdownTimer = () => {
         </motion.h2>
 
         <div className="flex justify-center gap-4 md:gap-8">
-          {units.map((unit, i) => (
-            <motion.div
-              key={unit.label}
-              className="glass-strong rounded-xl p-4 md:p-6 min-w-[70px] md:min-w-[100px] glow-gold"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-            >
-              <div className="font-serif text-3xl md:text-5xl font-bold gradient-gold-text mb-1">
-                {String(unit.value).padStart(2, "0")}
-              </div>
-              <div className="font-sans-elegant text-[10px] md:text-xs tracking-widest uppercase text-muted-foreground">
-                {unit.label}
-              </div>
-            </motion.div>
+          {units.map((unit) => (
+            <FlipDigit key={unit.label} value={unit.value} label={unit.label} />
           ))}
         </div>
       </div>

@@ -324,6 +324,33 @@
   animation: leaf-float 4s ease-in-out infinite;
 }
 
+/* 3D card hover */
+.card-3d-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.card-3d-hover:hover {
+  transform: translateY(-8px) rotateX(2deg) rotateY(-1deg);
+}
+
+/* Section gradient transitions */
+.section-gradient-top {
+  position: relative;
+}
+
+.section-gradient-top::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, hsl(25 20% 10%), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

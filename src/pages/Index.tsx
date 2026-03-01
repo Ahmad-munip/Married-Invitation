@@ -13,6 +13,7 @@ import DigitalEnvelope from "@/components/wedding/DigitalEnvelope";
 import WishesSection from "@/components/wedding/WishesSection";
 import MapsSection from "@/components/wedding/MapsSection";
 import ClosingSection from "@/components/wedding/ClosingSection";
+import VideoSection from "@/components/wedding/VideoSection";
 import { FloralDivider, FloatingDiamonds } from "@/components/wedding/FloralFrame";
 import TwinklingStars from "@/components/wedding/TwinklingStars";
 import BokehCircles from "@/components/wedding/BokehCircles";
@@ -72,6 +73,8 @@ const Index = () => {
             <LoveStory />
             <FloralDivider />
             <Gallery />
+            <FloralDivider variant="simple" />
+            <VideoSection />
             <FloralDivider />
             <RSVPSection />
             <DigitalEnvelope />
