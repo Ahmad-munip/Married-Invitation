@@ -344,6 +344,44 @@
   opacity: 1;
 }
 
+/* Mini float for floating hearts */
+.animate-mini-float {
+  animation: mini-float 4s ease-in-out infinite;
+}
+
+@keyframes mini-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.2; }
+  25% { transform: translateY(-8px) rotate(5deg); opacity: 0.35; }
+  50% { transform: translateY(-3px) rotate(-3deg); opacity: 0.2; }
+  75% { transform: translateY(-10px) rotate(4deg); opacity: 0.3; }
+}
+
+/* Animated border rotation */
+.animate-border-rotate {
+  --border-angle: 0deg;
+  animation: border-rotate 6s linear infinite;
+}
+
+@keyframes border-rotate {
+  to { --border-angle: 360deg; }
+}
+
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* Sparkle pop for icon dots */
+.animate-sparkle-pop {
+  animation: sparkle-pop 2s ease-in-out infinite;
+}
+
+@keyframes sparkle-pop {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
 /* Section gradient transitions */
 .section-gradient-top {
   position: relative;
