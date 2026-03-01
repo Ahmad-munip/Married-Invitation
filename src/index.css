@@ -324,14 +324,24 @@
   animation: leaf-float 4s ease-in-out infinite;
 }
 
-/* 3D card hover */
-.card-3d-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  transform-style: preserve-3d;
+/* Icon pulse ring */
+.icon-pulse-ring {
+  animation: icon-pulse-ring 2s ease-in-out infinite;
 }
 
-.card-3d-hover:hover {
-  transform: translateY(-8px) rotateX(2deg) rotateY(-1deg);
+@keyframes icon-pulse-ring {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.3); opacity: 0; }
+}
+
+/* Corner ornament hover glow */
+.card-corner-ornament {
+  transition: opacity 0.3s ease;
+  opacity: 0.6;
+}
+
+.group:hover .card-corner-ornament {
+  opacity: 1;
 }
 
 /* Section gradient transitions */
