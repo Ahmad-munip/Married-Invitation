@@ -1,101 +1,55 @@
 
 
-## Rencana: Tambah Video dan Perbaikan Desain agar Lebih Menarik
+## Rencana: Upgrade Card EventDetails -- 3D Premium dengan Dekorasi
 
-### 1. Video Background di Hero Section
-Mengganti gambar statis di Hero Section dengan video cinematic yang di-loop. Video akan diputar otomatis tanpa suara (muted autoplay) sebagai latar belakang, dengan overlay gelap agar teks tetap terbaca.
+### Apa yang berubah
 
-- Menggunakan tag `<video>` dengan atribut `autoPlay`, `muted`, `loop`, `playsInline`
-- Video dari sumber gratis (CDN Pexels/Pixabay -- romantic/nature theme)
-- Fallback ke gambar `hero-bg.jpg` jika video gagal dimuat
-- Diterapkan juga di **Splash Screen** sebagai background
+Card event (Akad Nikah & Resepsi) akan di-upgrade menjadi lebih premium, 3D, dan dekoratif:
 
-### 2. Video Section Baru -- "Our Moments" 
-Menambahkan section baru khusus video setelah Gallery, berisi video embed (YouTube/self-hosted) dari momen pasangan. Menggunakan aspect ratio 16:9 dengan frame dekoratif gold.
+### 1. Dekorasi Card yang Lebih Kaya
 
-### 3. Perbaikan Desain agar Tidak Kaku dan Polos
+Setiap card akan mendapatkan:
+- **Corner ornaments SVG** -- ornamen gold di keempat sudut card (bukan hanya titik kecil)
+- **Border glow gradient** -- border yang berubah warna gold saat hover
+- **Top ribbon/banner** -- label dekoratif di atas card (misalnya ikon kecil bintang atau hati)
+- **Background pattern** -- pola subtle di dalam card (islamic geometric pattern untuk Akad, floral untuk Resepsi)
+- **Animated ring/circle** di belakang ikon (Calendar, Clock, MapPin) yang pulse saat hover
+- **Divider yang lebih dekoratif** -- mengganti garis biasa dengan ornamen floral kecil
 
-**A. Parallax Scroll Effect**
-- Hero background bergerak lebih lambat dari konten saat scroll (parallax)
-- Menggunakan `useScroll` dan `useTransform` dari framer-motion
+### 2. Efek 3D yang Lebih Dinamis
 
-**B. Staggered Section Animations**
-- Setiap section muncul dengan animasi yang lebih dinamis (tidak hanya fade-in sederhana)
-- Cards di EventDetails muncul satu per satu dengan efek "reveal" dari bawah
-- Timeline items di LoveStory muncul berurutan dengan delay yang lebih natural
+- **Mouse-tracking tilt** -- card mengikuti posisi mouse (menggunakan `onMouseMove` untuk menghitung `rotateX` dan `rotateY` berdasarkan posisi kursor)
+- **Depth layers** -- elemen di dalam card bergerak dengan kecepatan berbeda saat tilt (parallax internal), menciptakan kedalaman 3D
+- **Shine sweep** -- efek cahaya bergerak mengikuti posisi mouse
+- **Shadow dinamis** -- shadow berubah arah sesuai tilt
 
-**C. Hover Effects pada Cards**
-- Cards di EventDetails mendapatkan efek hover: slight tilt (3D perspective) + glow yang lebih intens
-- Gallery images mendapatkan overlay gold gradient saat hover
+### 3. Animasi Masuk yang Lebih Menarik
 
-**D. Gradient Background Transitions antar Section**
-- Menambahkan gradient smooth antar section agar transisi lebih halus (bukan potongan kasar)
-- Menggunakan `bg-gradient-to-b` yang overlap antar section
-
-**E. Animated Section Dividers**
-- FloralDivider ditingkatkan dengan animasi "draw" saat masuk viewport
-- Menambahkan variasi divider (tidak semua sama)
-
-**F. Text Reveal Animations**
-- Judul section muncul huruf per huruf atau kata per kata
-- Menggunakan framer-motion `staggerChildren`
-
-**G. Countdown Timer Enhancement**
-- Angka berubah dengan animasi flip (seperti flip clock)
-- Menambahkan efek pulse saat angka berubah
+- Card muncul dengan efek "unfold" -- scale dari kecil ke besar dengan rotasi
+- Ikon-ikon di dalam card muncul berurutan (staggered) setelah card terbuka
 
 ### Detail Teknis
 
 **File yang diubah:**
 
-1. **`src/components/wedding/HeroSection.tsx`**
-   - Ganti `<img>` background dengan `<video>` element
-   - Tambah parallax effect menggunakan `useScroll` + `useTransform`
-   - Tambah text reveal animation pada nama pasangan
+1. **`src/components/wedding/EventDetails.tsx`**
+   - Tambah state `mouseX` dan `mouseY` per card menggunakan `onMouseMove`/`onMouseLeave`
+   - Hitung `rotateX` dan `rotateY` dari posisi mouse relatif terhadap card
+   - Tambah SVG corner ornaments (4 sudut)
+   - Tambah background pattern SVG (subtle, opacity rendah)
+   - Tambah ribbon/icon dekoratif di atas title
+   - Upgrade ikon Calendar/Clock/MapPin dengan animated ring background
+   - Tambah internal parallax: title dan ikon bergerak sedikit berlawanan arah tilt
+   - Shine gradient mengikuti posisi mouse
 
-2. **`src/components/wedding/SplashScreen.tsx`**
-   - Tambah video background (sama seperti Hero)
-
-3. **`src/components/wedding/VideoSection.tsx`** (BARU)
-   - Section video baru dengan embed player
-   - Frame dekoratif gold di sekitar video
-   - Play button custom dengan animasi pulse
-
-4. **`src/components/wedding/EventDetails.tsx`**
-   - Tambah hover tilt effect pada cards (CSS `perspective` + `rotateX/Y`)
-   - Staggered animation pada card items
-
-5. **`src/components/wedding/CountdownTimer.tsx`**
-   - Animasi flip pada angka yang berubah
-   - Pulse glow effect saat angka berubah
-
-6. **`src/components/wedding/Gallery.tsx`**
-   - Gold gradient overlay saat hover pada gambar
-   - Staggered masonry animation
-
-7. **`src/components/wedding/LoveStory.tsx`**
-   - Timeline line yang "menggambar diri sendiri" saat scroll
-   - Staggered text reveal
-
-8. **`src/components/wedding/FloralFrame.tsx`**
-   - FloralDivider dengan animasi draw (pathLength animation)
-   - Variasi divider baru
-
-9. **`src/pages/Index.tsx`**
-   - Tambahkan `VideoSection` setelah Gallery
-   - Gradient overlap antar section
-
-10. **`src/index.css`**
-    - Tambah keyframes: `flip-digit`, `card-tilt`, `text-reveal`
-    - Class: `.card-3d-hover`, `.text-stagger`
-
-### Sumber Video
-- Hero/Splash background: Video gratis dari Pixabay CDN (romantic nature/bokeh)
-- Our Moments section: Placeholder YouTube embed yang bisa diganti nanti
+2. **`src/index.css`**
+   - Tambah keyframe `icon-pulse-ring` untuk animasi ring di belakang ikon
+   - Tambah class `.card-corner-ornament` untuk styling SVG sudut
 
 ### Pendekatan
-- Semua animasi menggunakan `will-change` dan `transform` untuk GPU acceleration
-- Video menggunakan `poster` attribute untuk loading cepat
-- Responsive: video dimatikan di koneksi lambat (`prefers-reduced-motion`)
-- Efek parallax hanya aktif di desktop (performa mobile)
+- Mouse-tracking tilt menggunakan React state + inline transform (bukan framer-motion) untuk performa
+- Semua dekorasi SVG inline agar tidak perlu file tambahan
+- Corner ornaments menggunakan warna gold dengan opacity 0.2-0.4
+- Efek 3D hanya aktif di desktop (hover), di mobile card tetap statis dan rapi
+- `pointer-events-none` pada semua elemen dekoratif agar tidak mengganggu interaksi
 
