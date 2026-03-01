@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Copy, Check, Gift } from "lucide-react";
 import { SectionVine } from "./SectionDecorations";
+import { PremiumCardWrapper, FiligreeLine } from "./CardDecorations";
 
 const accounts = [
   { bank: "Bank BCA", number: "1234567890", name: "Ahmad Fauzan" },
@@ -39,7 +40,7 @@ const DigitalEnvelope = () => {
 
           <motion.button
             onClick={() => setShow(!show)}
-            className="gradient-gold font-sans-elegant text-sm tracking-widest uppercase px-8 py-3 rounded-full text-primary-foreground inline-flex items-center gap-2 glow-gold cursor-pointer"
+            className="gradient-gold font-sans-elegant text-sm tracking-widest uppercase px-8 py-3 rounded-full text-primary-foreground inline-flex items-center gap-2 shadow-[0_0_20px_hsl(35_55%_50%_/_0.3)] cursor-pointer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -57,21 +58,26 @@ const DigitalEnvelope = () => {
             {accounts.map((acc, i) => (
               <motion.div
                 key={i}
-                className="glass-strong rounded-xl p-6 relative overflow-hidden shine-effect"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.15 }}
               >
-                <p className="font-sans-elegant text-xs tracking-widest text-primary mb-1">{acc.bank}</p>
-                <p className="font-serif text-2xl font-semibold text-foreground mb-1">{acc.number}</p>
-                <p className="font-serif text-sm text-muted-foreground mb-3">a.n. {acc.name}</p>
-                <button
-                  onClick={() => copyToClipboard(acc.number, i)}
-                  className="inline-flex items-center gap-2 text-primary font-sans-elegant text-xs tracking-widest uppercase hover:text-accent transition-colors cursor-pointer"
-                >
-                  {copied === i ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                  {copied === i ? "Tersalin!" : "Salin Nomor"}
-                </button>
+                <PremiumCardWrapper>
+                  <div className="p-6">
+                    <FiligreeLine />
+                    <p className="font-sans-elegant text-xs tracking-widest text-[hsl(30_40%_35%)] mb-1">{acc.bank}</p>
+                    <p className="font-serif text-2xl font-semibold text-[hsl(30_50%_20%)] mb-1">{acc.number}</p>
+                    <p className="font-serif text-sm text-[hsl(30_40%_35%_/_0.7)] mb-3">a.n. {acc.name}</p>
+                    <FiligreeLine />
+                    <button
+                      onClick={() => copyToClipboard(acc.number, i)}
+                      className="inline-flex items-center gap-2 gradient-gold px-4 py-2 rounded-lg text-primary-foreground font-sans-elegant text-xs tracking-widest uppercase hover:opacity-90 transition-opacity cursor-pointer shadow-[0_0_15px_hsl(35_55%_50%_/_0.25)]"
+                    >
+                      {copied === i ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                      {copied === i ? "Tersalin!" : "Salin Nomor"}
+                    </button>
+                  </div>
+                </PremiumCardWrapper>
               </motion.div>
             ))}
           </motion.div>

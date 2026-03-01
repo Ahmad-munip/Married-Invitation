@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import { SectionVine } from "./SectionDecorations";
+import { PremiumCardWrapper, FiligreeLine, CornerOrnament, premiumInputClass } from "./CardDecorations";
 
 interface Wish {
   name: string;
@@ -46,52 +47,67 @@ const WishesSection = () => {
         </motion.div>
 
         {/* Submit form */}
-        <motion.form
-          onSubmit={handleSubmit}
-          className="glass-strong rounded-2xl p-6 mb-8 space-y-4"
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          className="mb-8"
         >
-          <input
-            type="text"
-            placeholder="Nama Anda"
-            value={newWish.name}
-            onChange={(e) => setNewWish({ ...newWish, name: e.target.value })}
-            className="w-full bg-input/50 border border-border rounded-lg px-4 py-3 font-serif text-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all"
-          />
-          <textarea
-            placeholder="Tulis ucapan..."
-            rows={3}
-            value={newWish.message}
-            onChange={(e) => setNewWish({ ...newWish, message: e.target.value })}
-            className="w-full bg-input/50 border border-border rounded-lg px-4 py-3 font-serif text-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all resize-none"
-          />
-          <button
-            type="submit"
-            className="gradient-gold font-sans-elegant text-xs tracking-widest uppercase px-6 py-3 rounded-lg text-primary-foreground flex items-center gap-2 cursor-pointer hover:opacity-90 transition-opacity"
-          >
-            <MessageCircle className="w-3 h-3" />
-            Kirim Ucapan
-          </button>
-        </motion.form>
+          <PremiumCardWrapper>
+            <form onSubmit={handleSubmit} className="p-6 space-y-4">
+              <FiligreeLine />
+              <input
+                type="text"
+                placeholder="Nama Anda"
+                value={newWish.name}
+                onChange={(e) => setNewWish({ ...newWish, name: e.target.value })}
+                className={premiumInputClass}
+              />
+              <textarea
+                placeholder="Tulis ucapan..."
+                rows={3}
+                value={newWish.message}
+                onChange={(e) => setNewWish({ ...newWish, message: e.target.value })}
+                className={`${premiumInputClass} resize-none`}
+              />
+              <FiligreeLine />
+              <button
+                type="submit"
+                className="gradient-gold font-sans-elegant text-xs tracking-widest uppercase px-6 py-3 rounded-lg text-primary-foreground flex items-center gap-2 cursor-pointer hover:opacity-90 transition-opacity shadow-[0_0_20px_hsl(35_55%_50%_/_0.3)]"
+              >
+                <MessageCircle className="w-3 h-3" />
+                Kirim Ucapan
+              </button>
+            </form>
+          </PremiumCardWrapper>
+        </motion.div>
+
+        <FiligreeLine />
 
         {/* Wishes list */}
         <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2">
           {wishes.map((wish, i) => (
             <motion.div
               key={`${wish.name}-${i}`}
-              className="glass rounded-xl p-5"
+              className="relative rounded-xl p-5 overflow-hidden"
+              style={{
+                background: "linear-gradient(145deg, hsl(35 40% 90%), hsl(35 35% 85%))",
+                boxShadow: "0 2px 10px hsl(30 20% 30% / 0.08)",
+              }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
             >
-              <div className="flex items-center justify-between mb-2">
-                <span className="font-serif font-semibold text-foreground">{wish.name}</span>
-                <span className="font-sans-elegant text-[10px] text-muted-foreground">{wish.time}</span>
+              <CornerOrnament position="top-right" />
+              <CornerOrnament position="bottom-left" />
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-serif font-semibold text-[hsl(30_50%_20%)]">{wish.name}</span>
+                  <span className="font-sans-elegant text-[10px] text-[hsl(30_40%_35%_/_0.6)]">{wish.time}</span>
+                </div>
+                <p className="font-serif text-sm text-[hsl(30_40%_35%)] leading-relaxed">{wish.message}</p>
               </div>
-              <p className="font-serif text-sm text-foreground/80 leading-relaxed">{wish.message}</p>
             </motion.div>
           ))}
         </div>
