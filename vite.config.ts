@@ -6,9 +6,11 @@ import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  base: "./",
   server: {
-    host: "::",
+    host: true,
     port: 8080,
+    allowedHosts: true,
     hmr: {
       overlay: false,
     },
@@ -20,9 +22,9 @@ export default defineConfig(({ mode }) => ({
       registerType: "autoUpdate",
       includeAssets: ["favicon.ico"],
       manifest: {
-        name: "Ahmad & Sarah Wedding",
+        name: "Ahmad Munip & Risma Mawlina",
         short_name: "Wedding",
-        description: "Digital Wedding Invitation - Ahmad & Sarah",
+        description: "Digital Wedding Invitation - Ahmad & Risma",
         theme_color: "#0a0a0a",
         background_color: "#0a0a0a",
         display: "standalone",
@@ -34,6 +36,7 @@ export default defineConfig(({ mode }) => ({
       },
       workbox: {
         navigateFallbackDenylist: [/^\/~oauth/],
+        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
         globPatterns: ["**/*.{js,css,html,ico,png,jpg,jpeg,svg,webp,woff,woff2}"],
         runtimeCaching: [
           {

@@ -20,6 +20,9 @@ import BokehCircles from "@/components/wedding/BokehCircles";
 import VineRoots from "@/components/wedding/VineRoots";
 import FloatingLeaves from "@/components/wedding/FloatingLeaves";
 import GoldDust from "@/components/wedding/GoldDust";
+import AnimatedBackdrop from "@/components/wedding/AnimatedBackdrop";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { getGuestNameFromUrl } from "@/lib/guest";
 
 const Particles3D = lazy(() => import("@/components/wedding/Particles3D"));
 
@@ -29,6 +32,8 @@ const Index = () => {
   const [splashOpen, setSplashOpen] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const isMobile = useIsMobile();
+  const guestName = getGuestNameFromUrl();
 
   const handleOpenInvitation = () => {
     setSplashOpen(false);
@@ -49,12 +54,13 @@ const Index = () => {
       {/* Batik pattern background layer */}
       <div className="batik-pattern" />
       
-      <SplashScreen isOpen={splashOpen} onOpen={handleOpenInvitation} />
+      <SplashScreen isOpen={splashOpen} onOpen={handleOpenInvitation} guestName={guestName} />
 
       <AnimatePresence>
         {!splashOpen && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5, delay: 0.3 }} className="relative z-[2]">
             <ScrollProgress />
+            <AnimatedBackdrop />
             <FloatingPetals />
             <FloatingDiamonds />
             <TwinklingStars />
@@ -62,10 +68,12 @@ const Index = () => {
             <VineRoots />
             <FloatingLeaves />
             <GoldDust />
-            <Suspense fallback={null}>
-              <Particles3D count={250} speed={0.12} size={0.015} />
-            </Suspense>
-            <HeroSection />
+            {!isMobile && (
+              <Suspense fallback={null}>
+                <Particles3D count={160} speed={0.1} size={0.014} />
+              </Suspense>
+            )}
+            <HeroSection guestName={guestName} />
             <FloralDivider />
             <EventDetails />
             <CountdownTimer />
@@ -76,7 +84,7 @@ const Index = () => {
             <FloralDivider variant="simple" />
             <VideoSection />
             <FloralDivider />
-            <RSVPSection />
+            <RSVPSection guestName={guestName} />
             <DigitalEnvelope />
             <FloralDivider />
             <WishesSection />

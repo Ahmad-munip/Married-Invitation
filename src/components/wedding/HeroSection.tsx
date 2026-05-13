@@ -4,6 +4,7 @@ import heroBg from "@/assets/hero-bg.jpg";
 import FloralFrame from "./FloralFrame";
 import { MandalaRing } from "./FloralFrame";
 import { SectionVine, LocalGoldDust } from "./SectionDecorations";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const HERO_VIDEO_URL = "https://cdn.pixabay.com/video/2024/02/23/201643-916048197_large.mp4";
 
@@ -27,8 +28,13 @@ const WordReveal = ({ text, className, delay = 0 }: { text: string; className?: 
   );
 };
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  guestName?: string;
+}
+
+const HeroSection = ({ guestName }: HeroSectionProps) => {
   const sectionRef = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
@@ -72,14 +78,16 @@ const HeroSection = () => {
 
       {/* Parallax Video/Image Background */}
       <motion.div className="absolute inset-0" style={{ y: bgY, scale: bgScale }}>
-        <video
-          autoPlay muted loop playsInline
-          poster={heroBg}
-          className="h-full w-full object-cover"
-          onError={(e) => { (e.target as HTMLVideoElement).style.display = "none"; }}
-        >
-          <source src={HERO_VIDEO_URL} type="video/mp4" />
-        </video>
+        {!isMobile && (
+          <video
+            autoPlay muted loop playsInline preload="metadata"
+            poster={heroBg}
+            className="h-full w-full object-cover"
+            onError={(e) => { (e.target as HTMLVideoElement).style.display = "none"; }}
+          >
+            <source src={HERO_VIDEO_URL} type="video/mp4" />
+          </video>
+        )}
         <img src={heroBg} alt="Hero background" className="absolute inset-0 h-full w-full object-cover -z-10" />
         <div className="absolute inset-0 bg-background/65" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-transparent to-background" />
@@ -132,6 +140,19 @@ const HeroSection = () => {
         >
           15 . 06 . 2026
         </motion.p>
+
+        {guestName && (
+          <motion.div
+            className="mt-8 inline-flex flex-col items-center rounded-full border border-primary/25 bg-background/35 px-6 py-3 backdrop-blur-md"
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 1.35 }}
+          >
+            <span className="font-sans-elegant text-[10px] uppercase tracking-[0.28em] text-primary/70">Kepada Yth.</span>
+            <span className="font-serif text-lg text-foreground/90">{guestName}</span>
+          </motion.div>
+        )}
 
         {/* Scroll indicator */}
         <motion.div
