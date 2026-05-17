@@ -26,7 +26,7 @@ import { getGuestNameFromUrl } from "@/lib/guest";
 
 const Particles3D = lazy(() => import("@/components/wedding/Particles3D"));
 
-const MUSIC_URL = "src/assets/wedding-music.mp3"; // Replace with actual music path
+import MUSIC_URL from "@/assets/wedding-music.mp3";
 
 const Index = () => {
   const [splashOpen, setSplashOpen] = useState(true);
