@@ -8,19 +8,19 @@ import { CornerOrnament, FloatingMiniHearts, FiligreeLine, DottedArcs, SwagGarla
 const events = [
   {
     title: "Akad Nikah",
-    date: "Senin, 15 Juni 2026",
-    time: "08:00 - 10:00 WIB",
-    venue: "Masjid Al-Ikhlas",
-    address: "Jl. Kebahagiaan No. 1, Jakarta",
+    date: "Rabu, 10 Juni 2026",
+    time: "07:00 WIB",
+    venue: "Kediaman Mempelai Wanita",
+    address: "Sukowidi RT 002 RW 005, Kelurahan Sidomakmur, Kec Widodaren, Ngawi",
     icon: Star,
     patternType: "geometric" as const,
   },
   {
     title: "Resepsi",
-    date: "Senin, 15 Juni 2026",
-    time: "11:00 - 14:00 WIB",
-    venue: "The Grand Ballroom",
-    address: "Jl. Cinta Abadi No. 88, Jakarta",
+    date: "Rabu, 10 Juni 2026",
+    time: "10:00 WIB",
+    venue: "Kediaman Mempelai Wanita",
+    address: "Sukowidi RT 002 RW 005, Kelurahan Sidomakmur, Kec Widodaren, Ngawi",
     icon: Heart,
     patternType: "floral" as const,
   },
@@ -245,6 +245,10 @@ const EventCard = ({ event, index }: { event: typeof events[0]; index: number })
 const EventDetails = () => {
   return (
     <section className="py-24 px-6 relative overflow-hidden z-10">
+      <div className="absolute inset-0 z-[-2]">
+        <img src="/bg.jpeg" alt="Background" className="w-full h-full object-cover opacity-80" />
+      </div>
+      <div className="absolute inset-0 bg-background/60 z-[-1]" />
       <FloralFrame positions={["top-left", "top-right"]} size="sm" />
       <FloralFrame positions={["bottom-left", "bottom-right"]} size="sm" />
       <SectionVine side="left" />

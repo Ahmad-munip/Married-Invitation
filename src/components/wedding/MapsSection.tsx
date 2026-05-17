@@ -5,6 +5,10 @@ import { SectionVine } from "./SectionDecorations";
 const MapsSection = () => {
   return (
     <section className="py-24 px-6 relative overflow-hidden z-10">
+      <div className="absolute inset-0 z-[-2]">
+        <img src="/bg.jpeg" alt="Background" className="w-full h-full object-cover opacity-80" />
+      </div>
+      <div className="absolute inset-0 bg-background/60 z-[-1]" />
       <div className="ambient-glow-warm" style={{ width: 300, height: 300, top: "0%", left: "-8%" }} />
       <div className="ambient-glow" style={{ width: 250, height: 250, bottom: "5%", right: "-6%" }} />
       <SectionVine side="left" />
@@ -28,7 +32,7 @@ const MapsSection = () => {
           viewport={{ once: true }}
         >
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260322283!2d106.8195613!3d-6.194741!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5d2e764b12d%3A0x3d2ad6e1e0e9bcc8!2sMonumen%20Nasional!5e0!3m2!1sen!2sid!4v1650000000000!5m2!1sen!2sid"
+            src="https://maps.google.com/maps?q=Sukowidi+RT+002+RW+005,+Kelurahan+Sidomakmur,+Kec+Widodaren,+Ngawi&t=&z=15&ie=UTF8&iwloc=&output=embed"
             width="100%"
             height="350"
             style={{ border: 0 }}
@@ -37,16 +41,16 @@ const MapsSection = () => {
             referrerPolicy="no-referrer-when-downgrade"
             title="Wedding venue location"
           />
-          <div className="p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <MapPin className="w-5 h-5 text-primary" />
               <div>
-                <p className="font-serif font-semibold text-foreground">The Grand Ballroom</p>
-                <p className="font-sans-elegant text-xs text-muted-foreground">Jl. Cinta Abadi No. 88, Jakarta</p>
+                <p className="font-serif font-semibold text-foreground">Kediaman Mempelai Wanita</p>
+                <p className="font-sans-elegant text-xs text-muted-foreground mt-1 max-w-[250px]">Sukowidi RT 002 RW 005, Kelurahan Sidomakmur, Kec Widodaren, Ngawi</p>
               </div>
             </div>
             <a
-              href="https://goo.gl/maps/example"
+              href="https://share.google/M4xszPCNAaiCXgrZE"
               target="_blank"
               rel="noopener noreferrer"
               className="gradient-gold font-sans-elegant text-xs tracking-widest uppercase px-6 py-3 rounded-full text-primary-foreground inline-flex items-center gap-2"

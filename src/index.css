@@ -4,40 +4,40 @@
 
 @layer base {
   :root {
-    --background: 25 20% 10%;
-    --foreground: 40 20% 92%;
+    --background: 210 20% 98%;
+    --foreground: 215 40% 20%;
 
-    --card: 25 18% 13%;
-    --card-foreground: 40 20% 92%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 40% 20%;
 
-    --popover: 25 18% 13%;
-    --popover-foreground: 40 20% 92%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 40% 20%;
 
     --primary: 40 72% 52%;
-    --primary-foreground: 25 20% 6%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 25 15% 16%;
-    --secondary-foreground: 40 20% 88%;
+    --secondary: 210 20% 92%;
+    --secondary-foreground: 215 40% 20%;
 
-    --muted: 25 12% 18%;
-    --muted-foreground: 40 10% 55%;
+    --muted: 210 15% 94%;
+    --muted-foreground: 215 20% 45%;
 
-    --accent: 40 85% 58%;
-    --accent-foreground: 25 20% 6%;
+    --accent: 215 40% 45%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 30 20% 20%;
-    --input: 30 15% 17%;
+    --border: 210 15% 88%;
+    --input: 210 15% 92%;
     --ring: 40 72% 52%;
 
     --radius: 0.75rem;
 
     --gold-light: 40 90% 65%;
     --gold-dark: 35 65% 38%;
-    --glass: 30 10% 100% / 0.05;
-    --glass-border: 40 40% 30% / 0.3;
+    --glass: 0 0% 100% / 0.8;
+    --glass-border: 210 15% 90% / 0.5;
   }
 }
 
@@ -83,15 +83,15 @@
 
   .glass {
     background: hsl(var(--glass));
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid hsl(var(--glass-border));
   }
 
   .glass-strong {
     background: hsl(30 15% 15% / 0.4);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: 1px solid hsl(var(--glass-border));
   }
 
@@ -104,7 +104,7 @@
   }
 
   .text-glow-gold {
-    text-shadow: 0 0 20px hsl(40 72% 52% / 0.5), 0 0 40px hsl(40 72% 52% / 0.2);
+    text-shadow: 0 0 10px hsl(40 72% 52% / 0.1), 0 0 20px hsl(40 72% 52% / 0.05);
   }
 
   .shine-effect {
@@ -158,16 +158,16 @@
     position: absolute;
     border-radius: 50%;
     pointer-events: none;
-    background: radial-gradient(circle, hsl(30 45% 35% / 0.18), transparent 70%);
-    filter: blur(50px);
+    background: radial-gradient(circle, hsl(30 45% 35% / 0.15) 0%, hsl(30 45% 35% / 0.05) 40%, transparent 70%);
+    will-change: transform, opacity;
   }
 
   .ambient-glow-warm {
     position: absolute;
     border-radius: 50%;
     pointer-events: none;
-    background: radial-gradient(circle, hsl(25 40% 28% / 0.2), transparent 65%);
-    filter: blur(60px);
+    background: radial-gradient(circle, hsl(25 40% 28% / 0.18) 0%, hsl(25 40% 28% / 0.06) 40%, transparent 65%);
+    will-change: transform, opacity;
   }
 }
 
@@ -422,7 +422,6 @@
   width: min(70vw, 760px);
   height: min(70vw, 760px);
   border-radius: 9999px;
-  filter: blur(70px);
   opacity: 0.22;
   transform: translate3d(0, 0, 0);
   will-change: transform, opacity;
@@ -432,21 +431,21 @@
 .aurora-glow-1 {
   top: 6%;
   left: -22%;
-  background: radial-gradient(circle, hsl(40 90% 60% / 0.35), transparent 68%);
+  background: radial-gradient(circle, hsl(40 90% 60% / 0.35) 0%, hsl(40 90% 60% / 0.12) 40%, transparent 68%);
   animation: aurora-drift-1 18s ease-in-out infinite;
 }
 
 .aurora-glow-2 {
   right: -26%;
   top: 32%;
-  background: radial-gradient(circle, hsl(25 65% 45% / 0.28), transparent 70%);
+  background: radial-gradient(circle, hsl(25 65% 45% / 0.28) 0%, hsl(25 65% 45% / 0.1) 40%, transparent 70%);
   animation: aurora-drift-2 22s ease-in-out infinite;
 }
 
 .aurora-glow-3 {
   left: 20%;
   bottom: -34%;
-  background: radial-gradient(circle, hsl(44 95% 68% / 0.18), transparent 72%);
+  background: radial-gradient(circle, hsl(44 95% 68% / 0.18) 0%, hsl(44 95% 68% / 0.05) 40%, transparent 72%);
   animation: aurora-drift-3 26s ease-in-out infinite;
 }
 
@@ -511,7 +510,6 @@
   .aurora-glow {
     width: 78vw;
     height: 78vw;
-    filter: blur(42px);
     opacity: 0.16;
   }
 
@@ -525,8 +523,8 @@
 
   .glass,
   .glass-strong {
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 }
 

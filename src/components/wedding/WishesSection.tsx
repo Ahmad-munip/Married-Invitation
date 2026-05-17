@@ -29,6 +29,10 @@ const WishesSection = () => {
 
   return (
     <section className="py-24 px-6 relative overflow-hidden z-10">
+      <div className="absolute inset-0 z-[-2]">
+        <img src="/bg.jpeg" alt="Background" className="w-full h-full object-cover opacity-80" />
+      </div>
+      <div className="absolute inset-0 bg-background/60 z-[-1]" />
       <div className="ambient-glow" style={{ width: 280, height: 280, top: "10%", left: "-7%" }} />
       <div className="ambient-glow-warm" style={{ width: 220, height: 220, bottom: "15%", right: "-5%" }} />
       <SectionVine side="left" />

@@ -22,6 +22,10 @@ const VideoSection = () => {
 
   return (
     <section className="py-24 px-6 relative overflow-hidden z-10">
+      <div className="absolute inset-0 z-[-2]">
+        <img src="/bg.jpeg" alt="Background" className="w-full h-full object-cover opacity-80" />
+      </div>
+      <div className="absolute inset-0 bg-background/60 z-[-1]" />
       <FloralFrame positions={["top-left", "top-right"]} size="sm" />
       <SectionVine side="left" />
       <SectionVine side="right" />

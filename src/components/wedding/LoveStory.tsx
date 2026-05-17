@@ -35,6 +35,10 @@ const LoveStory = () => {
 
   return (
     <section className="py-24 px-6 relative overflow-hidden z-10">
+      <div className="absolute inset-0 z-[-2]">
+        <img src="/bg.jpeg" alt="Background" className="w-full h-full object-cover opacity-80" />
+      </div>
+      <div className="absolute inset-0 bg-background/60 z-[-1]" />
       <div className="ambient-glow" style={{ width: 350, height: 350, top: "10%", right: "-10%" }} />
       <div className="ambient-glow" style={{ width: 250, height: 250, bottom: "15%", left: "-8%" }} />
       <SectionVine side="left" />

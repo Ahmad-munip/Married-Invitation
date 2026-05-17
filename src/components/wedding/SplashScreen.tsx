@@ -1,11 +1,9 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useMemo, lazy, Suspense } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
 import { SectionVine, LocalGoldDust } from "./SectionDecorations";
 
 const Particles3D = lazy(() => import("./Particles3D"));
-
-const SPLASH_VIDEO_URL = "https://cdn.pixabay.com/video/2020/07/30/45349-445804517_large.mp4";
 
 interface SplashScreenProps {
   isOpen: boolean;
@@ -22,7 +20,7 @@ const generateSparkles = (count: number) =>
 const generateSplashPetals = (count: number) =>
   Array.from({ length: count }, (_, i) => ({
     id: i, left: Math.random() * 100, delay: Math.random() * 6,
-    duration: Math.random() * 6 + 8, size: Math.random() * 10 + 8, opacity: Math.random() * 0.3 + 0.1,
+    duration: Math.random() * 6 + 8, size: Math.random() * 10 + 8, opacity: Math.random() * 0.5 + 0.3,
   }));
 
 const cornerPaths = [
@@ -45,25 +43,12 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
   const petals = useMemo(() => generateSplashPetals(8), []);
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: "easeInOut" }}
-        >
-          {/* Video Background */}
+    <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-background">
+          {/* Image Background */}
           <div className="absolute inset-0">
-            <video
-              autoPlay muted loop playsInline
-              poster={heroBg}
-              className="h-full w-full object-cover"
-              onError={(e) => { (e.target as HTMLVideoElement).style.display = "none"; }}
-            >
-              <source src={SPLASH_VIDEO_URL} type="video/mp4" />
-            </video>
-            <img src={heroBg} alt="Wedding background" className="absolute inset-0 h-full w-full object-cover -z-10" />
-            <div className="absolute inset-0 bg-background/65" />
+            <img src="/bg.jpeg" alt="Wedding background" className="absolute inset-0 h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-black/20" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
           </div>
 
           {/* 3D Particles */}
@@ -82,7 +67,7 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
           {/* Floating diamonds */}
           {splashDiamonds.map((d, i) => (
             <div key={`diamond-${i}`} className="absolute animate-float-diamond pointer-events-none"
-              style={{ left: d.left, top: d.top, width: d.size, height: d.size, background: "hsl(40 72% 52% / 0.2)", animationDuration: `${d.duration}s`, animationDelay: `${d.delay}s` }} />
+              style={{ left: d.left, top: d.top, width: d.size, height: d.size, background: "hsl(40 72% 52% / 0.5)", animationDuration: `${d.duration}s`, animationDelay: `${d.delay}s` }} />
           ))}
 
           {/* Sparkles */}
@@ -102,13 +87,13 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
 
           {/* Rotating Rings */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="absolute w-[300px] h-[300px] md:w-[450px] md:h-[450px] rounded-full border border-primary/10 animate-rotate-slow" />
-            <div className="absolute w-[380px] h-[380px] md:w-[550px] md:h-[550px] rounded-full border border-primary/5 animate-rotate-slow" style={{ animationDirection: "reverse", animationDuration: "30s" }} />
+            <div className="absolute w-[300px] h-[300px] md:w-[450px] md:h-[450px] rounded-full border border-primary/40 animate-rotate-slow" />
+            <div className="absolute w-[380px] h-[380px] md:w-[550px] md:h-[550px] rounded-full border border-primary/20 animate-rotate-slow" style={{ animationDirection: "reverse", animationDuration: "30s" }} />
           </div>
 
           {/* Light Sweep */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <div className="animate-light-sweep absolute inset-0" style={{ background: "linear-gradient(105deg, transparent 40%, hsl(40 90% 65% / 0.06) 50%, transparent 60%)" }} />
+            <div className="animate-light-sweep absolute inset-0" style={{ background: "linear-gradient(105deg, transparent 40%, hsl(40 90% 65% / 0.2) 50%, transparent 60%)" }} />
           </div>
 
           {/* Corner Ornaments */}
@@ -118,21 +103,21 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
                 ...(i === 0 && { top: 16, left: 16 }), ...(i === 1 && { top: 16, right: 16 }),
                 ...(i === 2 && { bottom: 16, left: 16 }), ...(i === 3 && { bottom: 16, right: 16 }),
               }}
-              initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 0.6, scale: 1 }} transition={{ delay: 0.4 + i * 0.2, duration: 0.8 }}>
+              initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 0.9, scale: 1 }} transition={{ delay: 0.4 + i * 0.2, duration: 0.8 }}>
               <path d={corner.d} stroke="hsl(40, 72%, 52%)" strokeWidth="1.5" strokeLinecap="round" />
-              <path d={corner.d} stroke="hsl(40, 72%, 52%)" strokeWidth="1.5" strokeLinecap="round" transform="scale(0.6) translate(20, 20)" opacity="0.4" />
+              <path d={corner.d} stroke="hsl(40, 72%, 52%)" strokeWidth="1.5" strokeLinecap="round" transform="scale(0.6) translate(20, 20)" opacity="0.7" />
             </motion.svg>
           ))}
 
           {/* Content */}
           <motion.div className="relative z-10 text-center px-6" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.3 }}>
-            <motion.p className="font-sans-elegant text-sm tracking-[0.3em] uppercase text-muted-foreground mb-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
+            <motion.p className="font-sans-elegant text-sm tracking-[0.3em] uppercase text-primary/90 mb-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
               The Wedding of
             </motion.p>
 
             <motion.h1 className="font-script text-5xl md:text-7xl gradient-gold-text text-glow-gold mb-6"
               initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.8, duration: 0.8 }}>
-              Munip & Risma
+              Ayu & Nurohim
             </motion.h1>
 
             <div className="divider-gold w-40 mx-auto mb-8" />
@@ -152,9 +137,7 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
               Buka Undangan
             </motion.button>
           </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    </div>
   );
 };
 

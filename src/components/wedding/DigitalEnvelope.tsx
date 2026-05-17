@@ -5,8 +5,8 @@ import { SectionVine } from "./SectionDecorations";
 import { PremiumCardWrapper, FiligreeLine } from "./CardDecorations";
 
 const accounts = [
-  { bank: "Sea bank", number: "901042626110", name: "Ahmad Munip" },
-  { bank: "Sea bank", number: "901778571421", name: "Risma Mawlina" },
+  { bank: "BSI", number: "7210408023", name: "NUROHIM" },
+  { bank: "SEA BANK", number: "901428633139", name: "AYU ANDIKA VEMIDIAN" },
 ];
 
 const DigitalEnvelope = () => {
@@ -21,6 +21,10 @@ const DigitalEnvelope = () => {
 
   return (
     <section className="py-24 px-6 relative overflow-hidden z-10">
+      <div className="absolute inset-0 z-[-2]">
+        <img src="/bg.jpeg" alt="Background" className="w-full h-full object-cover opacity-80" />
+      </div>
+      <div className="absolute inset-0 bg-background/60 z-[-1]" />
       <div className="ambient-glow" style={{ width: 260, height: 260, top: "15%", right: "-6%" }} />
       <div className="ambient-glow-warm" style={{ width: 200, height: 200, bottom: "5%", left: "-5%" }} />
       <SectionVine side="left" />

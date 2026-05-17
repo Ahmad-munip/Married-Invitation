@@ -9,7 +9,7 @@ interface GoldParticlesProps {
   size?: number;
 }
 
-const GoldParticlesInner = ({ count = 200, speed = 0.15, size = 0.02 }: GoldParticlesProps) => {
+const GoldParticlesInner = ({ count = 120, speed = 0.15, size = 0.02 }: GoldParticlesProps) => {
   const ref = useRef<THREE.Points>(null!);
 
   const positions = useMemo(() => {
@@ -50,7 +50,7 @@ interface Particles3DProps {
   className?: string;
 }
 
-const Particles3D = ({ count = 200, speed = 0.15, size = 0.02, className = "" }: Particles3DProps) => {
+const Particles3D = ({ count = 120, speed = 0.15, size = 0.02, className = "" }: Particles3DProps) => {
   return (
     <div className={`fixed inset-0 pointer-events-none z-[1] ${className}`}>
       <Canvas

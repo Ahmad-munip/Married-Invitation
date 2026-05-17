@@ -6,7 +6,7 @@ import { MandalaRing } from "./FloralFrame";
 import { SectionVine, LocalGoldDust } from "./SectionDecorations";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-const HERO_VIDEO_URL = "https://cdn.pixabay.com/video/2024/02/23/201643-916048197_large.mp4";
+const HERO_VIDEO_URL = "/background.mp4";
 
 const WordReveal = ({ text, className, delay = 0 }: { text: string; className?: string; delay?: number }) => {
   const words = text.split("");
@@ -68,8 +68,8 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
           className="absolute rounded-full pointer-events-none"
           style={{
             left: orb.left, top: orb.top, width: orb.size, height: orb.size,
-            background: "radial-gradient(circle, hsl(40 80% 60% / 0.4), transparent)",
-            boxShadow: "0 0 15px hsl(40 72% 52% / 0.3)",
+            background: "radial-gradient(circle, hsl(40 80% 60% / 0.7), transparent)",
+            boxShadow: "0 0 15px hsl(40 72% 52% / 0.6)",
           }}
           animate={{ y: [-10, 10, -10], opacity: [0.3, 0.7, 0.3] }}
           transition={{ duration: 5 + i, delay: orb.delay, repeat: Infinity, ease: "easeInOut" }}
@@ -78,43 +78,98 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
 
       {/* Parallax Video/Image Background */}
       <motion.div className="absolute inset-0" style={{ y: bgY, scale: bgScale }}>
-        {!isMobile && (
           <video
             autoPlay muted loop playsInline preload="metadata"
             poster={heroBg}
-            className="h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover lg:hidden"
             onError={(e) => { (e.target as HTMLVideoElement).style.display = "none"; }}
           >
             <source src={HERO_VIDEO_URL} type="video/mp4" />
           </video>
-        )}
         <img src={heroBg} alt="Hero background" className="absolute inset-0 h-full w-full object-cover -z-10" />
-        <div className="absolute inset-0 bg-background/65" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-transparent to-background" />
+        <div className="absolute inset-0 bg-background/20" />
       </motion.div>
 
-      {/* Content with parallax */}
-      <motion.div className="relative z-10 text-center px-6" style={{ y: contentY }}>
+      {/* Content with parallax and animated frame */}
+      <motion.div className="relative z-10 w-full max-w-[400px] h-[85vh] max-h-[750px] mx-auto text-center px-4 flex flex-col items-center justify-center" style={{ y: contentY }}>
+        
+        {/* Animated Ornate Frame */}
+        <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
+          <svg viewBox="0 0 400 700" preserveAspectRatio="xMidYMid meet" className="w-full h-full drop-shadow-xl">
+            {/* Outer Frame */}
+            <motion.path
+               d="M 20 120 L 20 100 L 60 100 L 60 60 Q 200 -20, 340 60 L 340 100 L 380 100 L 380 120 L 380 580 L 380 600 L 340 600 L 340 640 Q 200 720, 60 640 L 60 600 L 20 600 Z"
+               stroke="hsl(40 72% 52%)" strokeWidth="2"
+               initial={{ pathLength: 0, opacity: 0, fill: "rgba(255, 255, 255, 0)" }}
+               whileInView={{ pathLength: 1, opacity: 1, fill: "rgba(255, 255, 255, 0.85)" }}
+               viewport={{ once: true }}
+               transition={{ duration: 3, delay: 3.5, ease: "easeInOut" }}
+            />
+            {/* Inner Frame */}
+            <motion.path
+               d="M 30 125 L 30 110 L 70 110 L 70 70 Q 200 0, 330 70 L 330 110 L 370 110 L 370 125 L 370 575 L 370 590 L 330 590 L 330 630 Q 200 700, 70 630 L 70 590 L 30 590 Z"
+               stroke="hsl(40 72% 52% / 0.6)" strokeWidth="1" fill="none"
+               initial={{ pathLength: 0, opacity: 0 }}
+               whileInView={{ pathLength: 1, opacity: 1 }}
+               viewport={{ once: true }}
+               transition={{ duration: 3, delay: 3.8, ease: "easeInOut" }}
+            />
+            {/* Top Crown Ornament */}
+            <motion.path
+               d="M 180 50 Q 200 20 220 50 Q 210 60 200 55 Q 190 60 180 50 Z"
+               stroke="hsl(40 72% 52%)" strokeWidth="1.5" fill="none"
+               initial={{ scale: 0, opacity: 0 }}
+               whileInView={{ scale: 1, opacity: 1 }}
+               viewport={{ once: true }}
+               transition={{ duration: 1, delay: 5.5, ease: "easeOut" }}
+               style={{ transformOrigin: "200px 40px" }}
+            />
+            {/* Bottom Crown Ornament */}
+            <motion.path
+               d="M 180 650 Q 200 680 220 650 Q 210 640 200 645 Q 190 640 180 650 Z"
+               stroke="hsl(40 72% 52%)" strokeWidth="1.5" fill="none"
+               initial={{ scale: 0, opacity: 0 }}
+               whileInView={{ scale: 1, opacity: 1 }}
+               viewport={{ once: true }}
+               transition={{ duration: 1, delay: 5.5, ease: "easeOut" }}
+               style={{ transformOrigin: "200px 660px" }}
+            />
+          </svg>
+        </div>
+
+        {/* Text Content */}
+        <div className="relative z-10 flex flex-col items-center justify-center w-full mt-4">
         <motion.p
-          className="font-sans-elegant text-xs tracking-[0.4em] uppercase text-primary/80 mb-6"
+          className="font-sans-elegant text-xs tracking-[0.4em] uppercase text-primary mb-6"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, delay: 3.5 }}
         >
           We Are Getting Married
         </motion.p>
 
-        <h1 className="font-script text-4xl sm:text-5xl md:text-8xl lg:text-9xl gradient-gold-text text-glow-gold mb-4 whitespace-nowrap">
-          <WordReveal text="Ahmad Munip" delay={0.3} />
+        <h1 className="font-script text-4xl sm:text-5xl md:text-7xl lg:text-8xl gradient-gold-text text-glow-gold mb-2 whitespace-nowrap">
+          <WordReveal text="Ayu Andika" delay={3.8} />
         </h1>
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 4.3 }}
+          className="mb-8"
+        >
+          <p className="font-serif text-lg text-foreground font-semibold mt-2">Ayu Andika Vemidian, S.Keb</p>
+          <p className="font-sans-elegant text-sm text-foreground/80 mt-1">Putri ke-4 dari Bapak Jamin (Alm) & Ibu Parni</p>
+          <p className="font-sans-elegant text-xs text-foreground/70 mt-1">Sukowidi RT 002 RW 005, Kelurahan Sidomakmur<br/>Kec Widodaren, Ngawi</p>
+        </motion.div>
 
         <motion.div
           className="flex items-center justify-center gap-6 mb-4"
           initial={{ opacity: 0, scaleX: 0 }}
           whileInView={{ opacity: 1, scaleX: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.8, duration: 0.6 }}
+          transition={{ delay: 4.3, duration: 0.6 }}
         >
           <div className="divider-gold w-20" />
           <motion.span
@@ -127,38 +182,51 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
           <div className="divider-gold w-20" />
         </motion.div>
 
-        <h1 className="font-script text-4xl sm:text-5xl md:text-8xl lg:text-9xl gradient-gold-text text-glow-gold mb-8 whitespace-nowrap">
-          <WordReveal text="Risma Mawlina" delay={0.6} />
+        <h1 className="font-script text-4xl sm:text-5xl md:text-7xl lg:text-8xl gradient-gold-text text-glow-gold mb-2 whitespace-nowrap">
+          <WordReveal text="Nurohim" delay={4.1} />
         </h1>
-
-        <motion.p
-          className="font-serif text-lg md:text-xl text-foreground/70 tracking-wide"
+        <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 1.2 }}
+          transition={{ delay: 4.6 }}
+          className="mb-8"
         >
-          15 . 06 . 2026
+          <p className="font-serif text-lg text-foreground font-semibold mt-2">Nurohim, S.Pd,</p>
+          <p className="font-sans-elegant text-sm text-foreground/80 mt-1">Putra ke-2 dari Bapak Sukid & Ibu Carsini</p>
+          <p className="font-sans-elegant text-xs text-foreground/70 mt-1">Karangbandung RT 03 RW 06<br/>Kec. Ketanggungan Brebes</p>
+        </motion.div>
+
+        <motion.p
+          className="font-serif text-lg md:text-xl text-foreground/80 tracking-wide"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 4.7 }}
+        >
+          10 . 06 . 2026
         </motion.p>
 
         {guestName && (
           <motion.div
-            className="mt-8 inline-flex flex-col items-center rounded-full border border-primary/25 bg-background/35 px-6 py-3 backdrop-blur-md"
+            className="mt-8 inline-flex flex-col items-center rounded-full border border-primary/40 bg-background/80 px-6 py-3 backdrop-blur-md"
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 1.35 }}
+            transition={{ delay: 4.85 }}
           >
             <span className="font-sans-elegant text-[10px] uppercase tracking-[0.28em] text-primary/70">Kepada Yth.</span>
             <span className="font-serif text-lg text-foreground/90">{guestName}</span>
           </motion.div>
         )}
+        </div>
 
         {/* Scroll indicator */}
         <motion.div
           className="absolute bottom-10 left-1/2 -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
+          initial={{ opacity: 0 }}
+          animate={{ y: [0, 10, 0], opacity: 1 }}
+          transition={{ repeat: Infinity, duration: 2, delay: 5 }}
         >
           <div className="w-6 h-10 rounded-full border-2 border-primary/40 flex justify-center pt-2">
             <motion.div

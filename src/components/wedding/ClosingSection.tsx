@@ -41,8 +41,13 @@ const ClosingSection = ({ audioRef, isPlaying, setIsPlaying }: ClosingSectionPro
         <SectionVine side="right" />
         <LocalGoldDust count={10} />
         
+        <div className="absolute inset-0 z-[-2]">
+          <img src="/bg.jpeg" alt="Background" className="w-full h-full object-cover opacity-80" />
+        </div>
+        <div className="absolute inset-0 bg-background/60 z-[-1]" />
+        
         {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/30 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/30 to-background pointer-events-none" />
 
         <div className="relative z-10 max-w-2xl mx-auto text-center pb-16">
           <motion.div
@@ -78,8 +83,19 @@ const ClosingSection = ({ audioRef, isPlaying, setIsPlaying }: ClosingSectionPro
               viewport={{ once: true }}
               transition={{ delay: 0.8 }}
             >
-              <p className="font-serif text-muted-foreground mb-2">Kami yang berbahagia,</p>
-              <p className="font-script text-3xl gradient-gold-text">Munip & Risma</p>
+              <p className="font-serif text-muted-foreground mb-2">Mohon do'a restu dari kami yang berbahagia,</p>
+              <p className="font-serif text-muted-foreground mt-4 mb-1">Hormat Kami</p>
+              <p className="font-script text-3xl gradient-gold-text">Jamin (Alm) - Parni</p>
+              
+              <div className="mt-10 pt-6 border-t border-primary/20 inline-block px-8">
+                <p className="font-sans-elegant text-[10px] uppercase tracking-[0.2em] text-primary/80 mb-2">Informasi Lebih Lanjut</p>
+                <p className="font-serif text-sm text-foreground/80 flex items-center justify-center gap-2">
+                  <span>Contact Person:</span>
+                  <a href="https://wa.me/6285850704044" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 transition-colors font-semibold">
+                    085850704044
+                  </a>
+                </p>
+              </div>
             </motion.div>
           </motion.div>
         </div>
@@ -88,7 +104,7 @@ const ClosingSection = ({ audioRef, isPlaying, setIsPlaying }: ClosingSectionPro
       {/* Footer */}
       <footer className="py-6 text-center border-t border-border/30">
         <p className="font-sans-elegant text-[10px] tracking-widest uppercase text-muted-foreground">
-          Made with love • Munip & Risma Wedding 2026
+          Made with love • Ayu & Nurohim Wedding 2026
         </p>
       </footer>
 

@@ -19,7 +19,7 @@ export const SectionVine = ({ side = "left", className = "" }: { side?: "left" |
         stroke="hsl(40 72% 52%)"
         strokeWidth="0.8"
         strokeLinecap="round"
-        opacity="0.2"
+        opacity="0.6"
         initial={{ pathLength: 0 }}
         whileInView={{ pathLength: 1 }}
         viewport={{ once: true }}
@@ -29,7 +29,7 @@ export const SectionVine = ({ side = "left", className = "" }: { side?: "left" |
         d="M5,70 Q12,62 10,55"
         stroke="hsl(40 72% 52%)"
         strokeWidth="0.6"
-        opacity="0.15"
+        opacity="0.5"
         initial={{ pathLength: 0 }}
         whileInView={{ pathLength: 1 }}
         viewport={{ once: true }}
@@ -39,7 +39,7 @@ export const SectionVine = ({ side = "left", className = "" }: { side?: "left" |
         d="M12,42 Q18,35 15,28"
         stroke="hsl(40 72% 52%)"
         strokeWidth="0.6"
-        opacity="0.12"
+        opacity="0.4"
         initial={{ pathLength: 0 }}
         whileInView={{ pathLength: 1 }}
         viewport={{ once: true }}
@@ -48,7 +48,7 @@ export const SectionVine = ({ side = "left", className = "" }: { side?: "left" |
       <motion.ellipse
         cx="28" cy="8" rx="4" ry="2"
         fill="hsl(40 72% 52%)"
-        opacity="0.12"
+        opacity="0.4"
         transform="rotate(-20 28 8)"
         initial={{ scale: 0 }}
         whileInView={{ scale: 1 }}
@@ -58,15 +58,15 @@ export const SectionVine = ({ side = "left", className = "" }: { side?: "left" |
       <motion.ellipse
         cx="10" cy="55" rx="3" ry="1.5"
         fill="hsl(40 72% 52%)"
-        opacity="0.1"
+        opacity="0.3"
         transform="rotate(15 10 55)"
         initial={{ scale: 0 }}
         whileInView={{ scale: 1 }}
         viewport={{ once: true }}
         transition={{ delay: 1.5 }}
       />
-      <circle cx="15" cy="30" r="1" fill="hsl(40 90% 65%)" opacity="0.15" />
-      <circle cx="6" cy="65" r="0.8" fill="hsl(40 90% 65%)" opacity="0.1" />
+      <circle cx="15" cy="30" r="1" fill="hsl(40 90% 65%)" opacity="0.4" />
+      <circle cx="6" cy="65" r="0.8" fill="hsl(40 90% 65%)" opacity="0.3" />
     </motion.svg>
   );
 };
@@ -81,9 +81,9 @@ export const LocalGoldDust = ({ count = 8 }: { count?: number }) => (
         style={{
           left: `${10 + Math.random() * 80}%`,
           bottom: 0,
-          width: 1.5,
-          height: 1.5,
-          background: `hsl(40 80% 60% / ${0.1 + Math.random() * 0.15})`,
+          width: 2,
+          height: 2,
+          background: `hsl(40 80% 60% / ${0.3 + Math.random() * 0.4})`,
           animationDuration: `${8 + Math.random() * 8}s`,
           animationDelay: `${Math.random() * 10}s`,
         }}

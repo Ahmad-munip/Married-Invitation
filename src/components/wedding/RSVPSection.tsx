@@ -168,19 +168,7 @@ const RSVPSection = ({ guestName = "" }: RSVPSectionProps) => {
           <div className="divider-gold w-32 mx-auto" />
         </motion.div>
 
-        <motion.div className="glass rounded-lg px-4 py-3 mb-6 flex items-start gap-3" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-          <Database className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-          <div>
-            <p className="font-sans-elegant text-xs uppercase tracking-widest text-primary/80 mb-1">
-              {RSVP_ENDPOINT ? "Google Sheet Connected" : "Demo Mode Lokal"}
-            </p>
-            <p className="font-serif text-sm text-foreground/70">
-              {RSVP_ENDPOINT
-                ? "Setiap RSVP akan dikirim otomatis ke Google Sheet."
-                : "Endpoint Google Sheet belum diisi. Data contoh disimpan lokal dulu untuk demo."}
-            </p>
-          </div>
-        </motion.div>
+
 
         {!isOnline && (
           <motion.div className="glass rounded-lg px-4 py-3 mb-6 flex items-center gap-3 text-primary" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}>
@@ -247,12 +235,10 @@ const RSVPSection = ({ guestName = "" }: RSVPSectionProps) => {
                   <h3 className="font-script text-3xl text-[hsl(30_50%_20%)] mb-3">Terima Kasih!</h3>
                   <FiligreeLine />
                   <p className="font-serif text-[hsl(30_40%_35%)]">
-                    {submitMode === "google-sheet" && "Konfirmasi Anda sudah dikirim ke Google Sheet."}
-                    {submitMode === "demo" && "Demo berhasil. Data tersimpan lokal karena endpoint Google Sheet belum diisi."}
-                    {submitMode === "queued" && "RSVP tersimpan dan akan dikirim saat koneksi/endpoint tersedia."}
+                    Konfirmasi kehadiran Anda telah berhasil kami terima.
                   </p>
-                  <button onClick={() => setSubmitted(false)} className="mt-8 font-sans-elegant text-xs uppercase tracking-widest text-primary hover:underline">
-                    Isi ulang demo
+                  <button onClick={() => setSubmitted(false)} className="mt-8 font-sans-elegant text-xs uppercase tracking-widest text-primary hover:underline cursor-pointer">
+                    Kirim RSVP Lainnya
                   </button>
                 </div>
               </PremiumCardWrapper>
@@ -260,26 +246,7 @@ const RSVPSection = ({ guestName = "" }: RSVPSectionProps) => {
           )}
         </AnimatePresence>
 
-        {!RSVP_ENDPOINT && demoSent.length > 0 && (
-          <motion.div className="mt-8 glass rounded-2xl p-5" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
-            <div className="flex items-center justify-between gap-4 mb-4">
-              <div>
-                <p className="font-sans-elegant text-xs uppercase tracking-widest text-primary/80">Demo data RSVP terakhir</p>
-                <p className="font-serif text-sm text-muted-foreground">Contoh data yang nanti masuk ke Google Sheet.</p>
-              </div>
-              <ExternalLink className="w-4 h-4 text-primary/70" />
-            </div>
-            <div className="space-y-3">
-              {demoSent.slice(0, 3).map((item) => (
-                <div key={`${item.timestamp}-${item.nama}`} className="rounded-xl border border-primary/15 bg-background/30 p-3">
-                  <p className="font-serif text-base text-foreground">{item.nama}</p>
-                  <p className="font-sans-elegant text-[11px] uppercase tracking-wider text-muted-foreground">{item.kehadiran} • {item.jumlah} tamu</p>
-                  {item.ucapan && <p className="mt-2 font-serif text-sm text-foreground/70">“{item.ucapan}”</p>}
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        )}
+
       </div>
     </section>
   );
