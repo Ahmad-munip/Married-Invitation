@@ -4,7 +4,6 @@ import { Play, Pause } from "lucide-react";
 import FloralFrame from "./FloralFrame";
 import { SectionVine, LocalGoldDust } from "./SectionDecorations";
 
-import VIDEO_PLACEHOLDER from "@/assets/video-placeholder.mp4";
 
 const VideoSection = () => {
   const [playing, setPlaying] = useState(false);
@@ -88,7 +87,7 @@ const VideoSection = () => {
               playsInline
               onEnded={() => setPlaying(false)}
             >
-              <source src={VIDEO_PLACEHOLDER} type="video/mp4" />
+              <source src="/background.mp4" type="video/mp4" />
             </video>
 
             {/* Play/Pause overlay */}
