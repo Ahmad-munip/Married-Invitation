@@ -79,6 +79,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    padding-right: 0.15em; /* Fix cursive font clipping issue on right edge */
   }
 
   .glass {
@@ -285,6 +286,19 @@
   border-radius: 1px;
   background: hsl(var(--primary));
   animation: eq-bounce ease-in-out infinite;
+}
+
+@keyframes marquee-vertical {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical 25s linear infinite;
+}
+
+.animate-marquee-vertical:hover {
+  animation-play-state: paused;
 }
 
 @keyframes dust-rise {
@@ -506,25 +520,50 @@
   70% { transform: rotate(18deg) translate3d(0, 12%, 0); opacity: 0; }
 }
 
+/* ─── GPU Acceleration (safe: only on animation classes, not overriding transforms) ─── */
+.animate-petal,
+.animate-float,
+.animate-bokeh,
+.animate-dust,
+.animate-leaf,
+.animate-mini-float,
+.animate-sparkle,
+.animate-rotate-slow,
+.animate-sparkle-pop,
+.aurora-glow,
+.light-ray {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
 @media (max-width: 767px) {
   .aurora-glow {
     width: 78vw;
     height: 78vw;
-    opacity: 0.16;
+    opacity: 0.12;
   }
 
   .light-rays {
-    opacity: 0.22;
+    opacity: 0.18;
   }
 
-  .light-ray:nth-child(n + 4) {
+  .light-ray:nth-child(n + 3) {
     display: none;
   }
 
   .glass,
   .glass-strong {
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .batik-pattern {
+    opacity: 0.05;
+  }
+
+  .ambient-glow,
+  .ambient-glow-warm {
+    opacity: 0.6;
   }
 }
 
@@ -542,3 +581,4 @@
     transition-duration: 0.001ms !important;
   }
 }
+

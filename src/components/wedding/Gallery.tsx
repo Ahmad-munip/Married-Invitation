@@ -12,6 +12,34 @@ import gallery6 from "@/assets/gallery-6.jpg";
 
 const images = [gallery1, gallery2, gallery3, gallery4, gallery5, gallery6];
 
+/* ─── Gold L-bracket corner for gallery frames ─── */
+const FrameCorner = ({ position }: { position: "top-left" | "top-right" | "bottom-left" | "bottom-right" }) => {
+  const transforms: Record<string, string> = {
+    "top-left": "",
+    "top-right": "scaleX(-1)",
+    "bottom-left": "scaleY(-1)",
+    "bottom-right": "scale(-1,-1)",
+  };
+  const positions: Record<string, string> = {
+    "top-left": "-top-[1px] -left-[1px]",
+    "top-right": "-top-[1px] -right-[1px]",
+    "bottom-left": "-bottom-[1px] -left-[1px]",
+    "bottom-right": "-bottom-[1px] -right-[1px]",
+  };
+
+  return (
+    <svg
+      className={`absolute ${positions[position]} w-7 h-7 pointer-events-none z-10 transition-all duration-500`}
+      viewBox="0 0 28 28"
+      style={{ transform: transforms[position] }}
+    >
+      <path d="M1,1 L1,12" stroke="hsl(38 55% 52%)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+      <path d="M1,1 L12,1" stroke="hsl(38 55% 52%)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+      <circle cx="1" cy="1" r="1.2" fill="hsl(38 55% 52% / 0.7)" />
+    </svg>
+  );
+};
+
 const Gallery = () => {
   const [selected, setSelected] = useState<string | null>(null);
 
@@ -43,28 +71,78 @@ const Gallery = () => {
           <div className="divider-gold w-32 mx-auto" />
         </motion.div>
 
-        <div className="columns-2 md:columns-3 gap-4 space-y-4">
+        <div className="columns-2 md:columns-3 gap-5 space-y-5">
           {images.map((img, i) => (
             <motion.div
               key={i}
-              className="break-inside-avoid cursor-pointer relative group mb-4 reveal-card"
+              className="break-inside-avoid cursor-pointer relative group mb-5"
               initial={{ opacity: 0, y: 40, scale: 0.95 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.12, duration: 0.6, ease: "easeOut" }}
               onClick={() => setSelected(img)}
             >
-              <div className="relative overflow-hidden rounded-2xl border-[6px] border-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] group-hover:shadow-[0_12px_40px_hsl(40_72%_52%_/_0.15)] transition-all duration-500">
-                <img src={img} alt={`Gallery ${i + 1}`} className="w-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1" loading="lazy" />
-                
-                {/* Elegant gold overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                {/* Zoom Icon */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="w-14 h-14 rounded-full bg-white/90 shadow-[0_0_20px_hsl(40_72%_52%_/_0.4)] flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-8 group-hover:translate-y-0 scale-75 group-hover:scale-100">
-                    <ZoomIn className="w-6 h-6" />
+              {/* Outer frame card */}
+              <div
+                className="relative p-[6px] rounded-2xl overflow-hidden transition-all duration-500"
+                style={{
+                  background: "linear-gradient(145deg, hsl(38 50% 82%), hsl(35 40% 76%))",
+                  boxShadow: "0 6px 24px hsl(30 30% 25% / 0.12), 0 2px 6px hsl(30 30% 25% / 0.06)",
+                }}
+              >
+                {/* Inner frame with ornaments */}
+                <div
+                  className="relative rounded-xl overflow-hidden"
+                  style={{
+                    background: "linear-gradient(170deg, hsl(38 45% 90%), hsl(35 40% 86%))",
+                  }}
+                >
+                  {/* Inner border */}
+                  <div className="absolute inset-2 rounded-lg border border-[hsl(38_55%_52%_/_0.15)] pointer-events-none z-10" />
+
+                  {/* Corner ornaments */}
+                  <div className="absolute inset-2 pointer-events-none z-10">
+                    <FrameCorner position="top-left" />
+                    <FrameCorner position="top-right" />
+                    <FrameCorner position="bottom-left" />
+                    <FrameCorner position="bottom-right" />
+                  </div>
+
+                  {/* Image with padding */}
+                  <div className="p-3">
+                    <div className="relative overflow-hidden rounded-lg">
+                      <img
+                        src={img}
+                        alt={`Gallery ${i + 1}`}
+                        className="w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        loading="lazy"
+                      />
+
+                      {/* Hover overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[hsl(30_30%_15%_/_0.5)] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <div className="absolute inset-0 bg-[hsl(38_55%_52%_/_0.08)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                      {/* Zoom icon */}
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div
+                          className="w-12 h-12 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-6 group-hover:translate-y-0 scale-75 group-hover:scale-100"
+                          style={{
+                            background: "hsl(38 45% 90% / 0.92)",
+                            boxShadow: "0 0 20px hsl(38 55% 52% / 0.3)",
+                          }}
+                        >
+                          <ZoomIn className="w-5 h-5 text-[hsl(30_40%_25%)]" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom decorative accent */}
+                  <div className="flex justify-center pb-3 pointer-events-none">
+                    <svg width="60" height="8" viewBox="0 0 60 8">
+                      <path d="M0,4 Q15,0 30,4 Q45,8 60,4" stroke="hsl(38 55% 52% / 0.25)" strokeWidth="0.6" fill="none" />
+                      <circle cx="30" cy="4" r="1.2" fill="hsl(38 55% 52% / 0.2)" />
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -81,8 +159,30 @@ const Gallery = () => {
             <button className="absolute top-6 right-6 text-foreground/60 hover:text-foreground transition-colors bg-white/50 hover:bg-white rounded-full p-2 backdrop-blur-md" onClick={() => setSelected(null)}>
               <X className="w-6 h-6" />
             </button>
-            <motion.img src={selected} alt="Gallery preview" className="max-w-full max-h-[85vh] rounded-xl object-contain border-[12px] border-white shadow-2xl"
-              initial={{ scale: 0.8, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.8, opacity: 0, y: 20 }} transition={{ type: "spring", damping: 25, stiffness: 300 }} />
+            {/* Lightbox with matching frame style */}
+            <motion.div
+              className="relative p-2 rounded-3xl max-w-full max-h-[88vh]"
+              style={{
+                background: "linear-gradient(145deg, hsl(38 50% 82%), hsl(35 40% 76%))",
+                boxShadow: "0 16px 60px hsl(30 30% 15% / 0.4), 0 4px 16px hsl(30 30% 15% / 0.2)",
+              }}
+              initial={{ scale: 0.8, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.8, opacity: 0, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div
+                className="relative rounded-2xl overflow-hidden p-3"
+                style={{ background: "linear-gradient(170deg, hsl(38 45% 90%), hsl(35 40% 86%))" }}
+              >
+                <img
+                  src={selected}
+                  alt="Gallery preview"
+                  className="max-w-full max-h-[80vh] rounded-xl object-contain"
+                />
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

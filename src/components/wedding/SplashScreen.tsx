@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { useMemo, lazy, Suspense } from "react";
-import heroBg from "@/assets/hero-bg.jpg";
 import { SectionVine, LocalGoldDust } from "./SectionDecorations";
 
 const Particles3D = lazy(() => import("./Particles3D"));
@@ -111,21 +110,30 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
 
           {/* Content */}
           <motion.div className="relative z-10 text-center px-6" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.3 }}>
-            <motion.p className="font-sans-elegant text-sm tracking-[0.3em] uppercase text-primary/90 mb-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
+            <motion.p className="font-sans-elegant text-sm tracking-[0.3em] uppercase text-primary/90 mb-4 font-semibold" 
+              style={{ textShadow: "0 2px 4px rgba(255,255,255,0.8), 0 0 10px rgba(255,255,255,0.6)" }}
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
               The Wedding of
             </motion.p>
 
-            <motion.h1 className="font-script text-5xl md:text-7xl gradient-gold-text text-glow-gold mb-6"
+            <motion.h1 className="font-script text-5xl md:text-7xl gradient-gold-text text-glow-gold mb-6 relative z-10 leading-tight"
+              style={{ filter: "drop-shadow(0 2px 6px rgba(255,255,255,0.8)) drop-shadow(0 0 15px rgba(255,255,255,0.4))", paddingRight: "0.1em" }}
               initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.8, duration: 0.8 }}>
-              Ayu & Nurohim
+              Ayu <br />
+              <span className="font-serif text-4xl md:text-5xl opacity-90 block my-1 gradient-gold-text">{"&"}</span>
+              Nurohim
             </motion.h1>
 
-            <div className="divider-gold w-40 mx-auto mb-8" />
+            <div className="divider-gold w-40 mx-auto mb-8 drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
 
-            <motion.p className="font-serif text-lg text-foreground/80 mb-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}>
+            <motion.p className="font-serif text-lg text-foreground/90 mb-2 font-semibold" 
+              style={{ textShadow: "0 1px 3px rgba(255,255,255,0.9), 0 0 12px rgba(255,255,255,0.8)" }}
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}>
               Kepada Yth.
             </motion.p>
-            <motion.p className="font-serif text-xl text-foreground mb-10" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}>
+            <motion.p className="font-serif text-xl text-foreground mb-10 font-bold" 
+              style={{ textShadow: "0 1px 4px rgba(255,255,255,0.9), 0 0 15px rgba(255,255,255,0.8)" }}
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}>
               {guestName}
             </motion.p>
 

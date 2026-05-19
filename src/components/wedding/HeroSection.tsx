@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import heroBg from "@/assets/hero-bg.jpg";
+const heroBg = "/bg.jpeg";
 import FloralFrame from "./FloralFrame";
 import { MandalaRing } from "./FloralFrame";
 import { SectionVine, LocalGoldDust } from "./SectionDecorations";
@@ -81,7 +81,7 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
           <video
             autoPlay muted loop playsInline preload="metadata"
             poster={heroBg}
-            className="absolute inset-0 h-full w-full object-cover lg:hidden"
+            className="absolute inset-0 h-full w-full object-cover"
             onError={(e) => { (e.target as HTMLVideoElement).style.display = "none"; }}
           >
             <source src={HERO_VIDEO_URL} type="video/mp4" />
@@ -221,18 +221,19 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
         )}
         </div>
 
-        {/* Scroll indicator */}
+        {/* Scroll Down Indicator */}
         <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-          initial={{ opacity: 0 }}
-          animate={{ y: [0, 10, 0], opacity: 1 }}
-          transition={{ repeat: Infinity, duration: 2, delay: 5 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 5.5 }}
         >
-          <div className="w-6 h-10 rounded-full border-2 border-primary/40 flex justify-center pt-2">
+          <span className="font-sans-elegant text-[10px] tracking-[0.3em] uppercase text-primary/70">Scroll Down</span>
+          <div className="w-5 h-8 rounded-full border border-primary/50 flex justify-center p-1 relative">
             <motion.div
-              className="w-1 h-2 rounded-full bg-primary/60"
-              animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
-              transition={{ repeat: Infinity, duration: 2 }}
+              className="w-1 h-2 bg-primary rounded-full"
+              animate={{ y: [0, 12, 0], opacity: [1, 0, 1] }}
+              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
             />
           </div>
         </motion.div>

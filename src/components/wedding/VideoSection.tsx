@@ -46,9 +46,9 @@ const VideoSection = () => {
           <div className="divider-gold w-32 mx-auto" />
         </motion.div>
 
-        {/* Video container with gold frame */}
+        {/* Video container with gold frame optimized for 1080x1920 portrait format */}
         <motion.div
-          className="relative rounded-2xl overflow-hidden"
+          className="relative rounded-2xl overflow-hidden max-w-[340px] md:max-w-[380px] mx-auto"
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
@@ -80,14 +80,14 @@ const VideoSection = () => {
             />
           ))}
 
-          <div className="aspect-video relative bg-background/50">
+          <div className="aspect-[9/16] relative bg-background/50">
             <video
               ref={videoRef}
               className="w-full h-full object-cover"
               playsInline
               onEnded={() => setPlaying(false)}
             >
-              <source src="/background.mp4" type="video/mp4" />
+              <source src="/pinus.mp4" type="video/mp4" />
             </video>
 
             {/* Play/Pause overlay */}

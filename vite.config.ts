@@ -22,9 +22,9 @@ export default defineConfig(({ mode }) => ({
       registerType: "autoUpdate",
       includeAssets: ["favicon.ico"],
       manifest: {
-        name: "Ahmad Munip & Risma Mawlina",
+        name: "Nur Rohim & Ayu",
         short_name: "Wedding",
-        description: "Digital Wedding Invitation - Ahmad & Risma",
+        description: "Digital Wedding Invitation - Nur Rohim & Ayu",
         theme_color: "#0a0a0a",
         background_color: "#0a0a0a",
         display: "standalone",

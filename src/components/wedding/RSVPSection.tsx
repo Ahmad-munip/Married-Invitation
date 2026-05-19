@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Check, Send, WifiOff, Database, ExternalLink } from "lucide-react";
 import { SectionVine } from "./SectionDecorations";
 import { PremiumCardWrapper, FiligreeLine, premiumInputClass, premiumSelectClass, premiumLabelClass } from "./CardDecorations";
+import MagneticButton from "./MagneticButton";
 
 const STORAGE_KEY = "wedding-rsvp-queue";
 const SENT_KEY = "wedding-rsvp-demo-sent";
@@ -217,10 +218,10 @@ const RSVPSection = ({ guestName = "" }: RSVPSectionProps) => {
 
                   <FiligreeLine />
 
-                  <button type="submit" disabled={isSubmitting} className="w-full gradient-gold font-sans-elegant text-sm tracking-widest uppercase py-4 rounded-lg text-primary-foreground flex items-center justify-center gap-2 hover:opacity-90 transition-opacity cursor-pointer shadow-[0_0_20px_hsl(35_55%_50%_/_0.3)] disabled:opacity-60 disabled:cursor-wait">
+                  <MagneticButton type="submit" disabled={isSubmitting} className="w-full gradient-gold font-sans-elegant text-sm tracking-widest uppercase py-4 rounded-lg text-primary-foreground flex items-center justify-center gap-2 hover:opacity-90 transition-opacity cursor-pointer shadow-[0_0_20px_hsl(35_55%_50%_/_0.3)] disabled:opacity-60 disabled:cursor-wait">
                     <Send className="w-4 h-4" />
                     {isSubmitting ? "Mengirim..." : isOnline ? "Kirim RSVP" : "Simpan RSVP (Offline)"}
-                  </button>
+                  </MagneticButton>
                 </form>
               </PremiumCardWrapper>
             </motion.div>
@@ -237,9 +238,9 @@ const RSVPSection = ({ guestName = "" }: RSVPSectionProps) => {
                   <p className="font-serif text-[hsl(30_40%_35%)]">
                     Konfirmasi kehadiran Anda telah berhasil kami terima.
                   </p>
-                  <button onClick={() => setSubmitted(false)} className="mt-8 font-sans-elegant text-xs uppercase tracking-widest text-primary hover:underline cursor-pointer">
+                  <MagneticButton onClick={() => setSubmitted(false)} className="mt-8 font-sans-elegant text-xs uppercase tracking-widest text-primary hover:underline cursor-pointer w-full flex justify-center">
                     Kirim RSVP Lainnya
-                  </button>
+                  </MagneticButton>
                 </div>
               </PremiumCardWrapper>
             </motion.div>

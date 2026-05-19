@@ -1,29 +1,32 @@
-import { useState, useRef, lazy, Suspense } from "react";
+import { useState, useRef, lazy, Suspense, useCallback } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { getGuestNameFromUrl } from "@/lib/guest";
 
+/* ─── Eager loads: critical above-fold components ─── */
 import SplashScreen from "@/components/wedding/SplashScreen";
 import HeroSection from "@/components/wedding/HeroSection";
-import FloatingPetals from "@/components/wedding/FloatingPetals";
 import ScrollProgress from "@/components/wedding/ScrollProgress";
-import EventDetails from "@/components/wedding/EventDetails";
-import CountdownTimer from "@/components/wedding/CountdownTimer";
-import LoveStory from "@/components/wedding/LoveStory";
-import Gallery from "@/components/wedding/Gallery";
-import RSVPSection from "@/components/wedding/RSVPSection";
-import DigitalEnvelope from "@/components/wedding/DigitalEnvelope";
-import WishesSection from "@/components/wedding/WishesSection";
-import MapsSection from "@/components/wedding/MapsSection";
-import ClosingSection from "@/components/wedding/ClosingSection";
-import VideoSection from "@/components/wedding/VideoSection";
+import FloatingPetals from "@/components/wedding/FloatingPetals";
+import AnimatedBackdrop from "@/components/wedding/AnimatedBackdrop";
+import BottomNav from "@/components/wedding/BottomNav";
 import { FloralDivider, FloatingDiamonds } from "@/components/wedding/FloralFrame";
 import TwinklingStars from "@/components/wedding/TwinklingStars";
 import BokehCircles from "@/components/wedding/BokehCircles";
 import VineRoots from "@/components/wedding/VineRoots";
 import FloatingLeaves from "@/components/wedding/FloatingLeaves";
 import GoldDust from "@/components/wedding/GoldDust";
-import AnimatedBackdrop from "@/components/wedding/AnimatedBackdrop";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { getGuestNameFromUrl } from "@/lib/guest";
 
+/* ─── Lazy loads: below-fold sections ─── */
+const EventDetails = lazy(() => import("@/components/wedding/EventDetails"));
+const CountdownTimer = lazy(() => import("@/components/wedding/CountdownTimer"));
+const LoveStory = lazy(() => import("@/components/wedding/LoveStory"));
+const Gallery = lazy(() => import("@/components/wedding/Gallery"));
+const RSVPSection = lazy(() => import("@/components/wedding/RSVPSection"));
+const DigitalEnvelope = lazy(() => import("@/components/wedding/DigitalEnvelope"));
+const WishesSection = lazy(() => import("@/components/wedding/WishesSection"));
+const MapsSection = lazy(() => import("@/components/wedding/MapsSection"));
+const ClosingSection = lazy(() => import("@/components/wedding/ClosingSection"));
+const VideoSection = lazy(() => import("@/components/wedding/VideoSection"));
 const Particles3D = lazy(() => import("@/components/wedding/Particles3D"));
 
 import MUSIC_URL from "@/assets/wedding-music.mp3";
@@ -35,7 +38,7 @@ const Index = () => {
   const isMobile = useIsMobile();
   const guestName = getGuestNameFromUrl();
 
-  const handleOpenInvitation = () => {
+  const handleOpenInvitation = useCallback(() => {
     setSplashOpen(false);
     if (!audioRef.current) {
       const audio = new Audio(MUSIC_URL);
@@ -51,7 +54,7 @@ const Index = () => {
     setTimeout(() => {
       window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
     }, 100);
-  };
+  }, []);
 
   return (
     <div className={`bg-background ${splashOpen ? "h-screen overflow-hidden" : "min-h-screen"} lg:flex lg:items-start`}>
@@ -65,7 +68,9 @@ const Index = () => {
          
          <div className="relative z-10 text-white mt-auto pb-32 flex flex-col items-center">
            <p className="font-script text-4xl mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">The Wedding of</p>
-           <h1 className="font-serif text-5xl md:text-7xl font-bold tracking-widest mb-4 uppercase drop-shadow-[0_4px_8px_rgba(0,0,0,0.9)]">Ayu & Nurohim</h1>
+           <h1 className="font-serif text-5xl md:text-7xl font-bold tracking-widest mb-4 uppercase drop-shadow-[0_4px_8px_rgba(0,0,0,0.9)] leading-tight">
+             Ayu <br /> <span className="font-serif text-4xl md:text-5xl opacity-80 block my-1" style={{ WebkitTextFillColor: "initial" }}>{"&"}</span> Nurohim
+           </h1>
            <p className="font-sans text-xl tracking-widest font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Rabu, 10 Juni 2026</p>
          </div>
       </div>
@@ -82,34 +87,60 @@ const Index = () => {
             <AnimatedBackdrop />
             <FloatingPetals />
             <FloatingDiamonds />
-            <TwinklingStars />
-            <BokehCircles />
-            <VineRoots />
-            <FloatingLeaves />
-            <GoldDust />
             {!isMobile && (
-              <Suspense fallback={null}>
-                <Particles3D count={160} speed={0.1} size={0.014} />
-              </Suspense>
+              <>
+                <TwinklingStars />
+                <BokehCircles />
+                <VineRoots />
+                <FloatingLeaves />
+                <GoldDust />
+                <Suspense fallback={null}>
+                  <Particles3D count={120} speed={0.1} size={0.014} />
+                </Suspense>
+              </>
             )}
             <HeroSection guestName={guestName} />
             <FloralDivider />
-            <EventDetails />
-            <CountdownTimer />
+            <Suspense fallback={null}>
+              <EventDetails />
+            </Suspense>
+            <Suspense fallback={null}>
+              <CountdownTimer />
+            </Suspense>
             <FloralDivider />
-            <LoveStory />
+            <Suspense fallback={null}>
+              <LoveStory />
+            </Suspense>
             <FloralDivider />
-            <Gallery />
+            <Suspense fallback={null}>
+              <Gallery />
+            </Suspense>
             <FloralDivider variant="simple" />
-            <VideoSection />
+            <Suspense fallback={null}>
+              <VideoSection />
+            </Suspense>
             <FloralDivider />
-            <RSVPSection guestName={guestName} />
-            <DigitalEnvelope />
+            <Suspense fallback={null}>
+              <RSVPSection guestName={guestName} />
+            </Suspense>
+            <Suspense fallback={null}>
+              <DigitalEnvelope />
+            </Suspense>
             <FloralDivider />
-            <WishesSection />
-            <MapsSection />
-            <ClosingSection audioRef={audioRef} isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
+            <Suspense fallback={null}>
+              <WishesSection />
+            </Suspense>
+            <Suspense fallback={null}>
+              <MapsSection />
+            </Suspense>
+            <Suspense fallback={null}>
+              <ClosingSection audioRef={audioRef} isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
+            </Suspense>
       </div>
+      
+      {/* Fixed UI Overlays */}
+      <BottomNav splashOpen={splashOpen} />
+      
       </div>
     </div>
   );

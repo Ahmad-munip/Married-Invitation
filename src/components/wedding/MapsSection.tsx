@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { MapPin, Navigation } from "lucide-react";
+import MagneticButton from "./MagneticButton";
 import { SectionVine } from "./SectionDecorations";
 
 const MapsSection = () => {
@@ -49,15 +50,13 @@ const MapsSection = () => {
                 <p className="font-sans-elegant text-xs text-muted-foreground mt-1 max-w-[250px]">Sukowidi RT 002 RW 005, Kelurahan Sidomakmur, Kec Widodaren, Ngawi</p>
               </div>
             </div>
-            <a
-              href="https://share.google/M4xszPCNAaiCXgrZE"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="gradient-gold font-sans-elegant text-xs tracking-widest uppercase px-6 py-3 rounded-full text-primary-foreground inline-flex items-center gap-2"
+            <MagneticButton
+              onClick={() => window.open("https://www.google.com/maps/dir/?api=1&destination=Sukowidi+RT+002+RW+005,+Kelurahan+Sidomakmur,+Kec+Widodaren,+Ngawi", "_blank")}
+              className="gradient-gold font-sans-elegant text-xs tracking-widest uppercase px-6 py-3 rounded-full text-primary-foreground flex items-center gap-2"
             >
               <Navigation className="w-3 h-3" />
               Buka Maps
-            </a>
+            </MagneticButton>
           </div>
         </motion.div>
       </div>

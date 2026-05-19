@@ -6,6 +6,7 @@ import { PremiumCardWrapper, FiligreeLine, CornerOrnament, premiumInputClass } f
 
 interface Wish {
   name: string;
+  phone?: string;
   message: string;
   time: string;
 }
@@ -16,15 +17,54 @@ const initialWishes: Wish[] = [
   { name: "Dani Pratama", message: "Happy wedding! Semoga dilancarkan acaranya dan diberkahi pernikahannya!", time: "1 hari lalu" },
 ];
 
+// Nanti URL dari Google Sheets akan dimasukkan ke sini
+const SCRIPT_URL = "";
+
 const WishesSection = () => {
   const [wishes, setWishes] = useState<Wish[]>(initialWishes);
-  const [newWish, setNewWish] = useState({ name: "", message: "" });
+  const [newWish, setNewWish] = useState({ name: "", phone: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Jika SCRIPT_URL sudah diisi, ambil data dari Google Sheets
+  /* 
+  useEffect(() => {
+    if (!SCRIPT_URL) return;
+    fetch(SCRIPT_URL)
+      .then(res => res.json())
+      .then(data => {
+        if (data && Array.isArray(data) && data.length > 0) {
+          setWishes(data);
+        }
+      })
+      .catch(err => console.error("Error fetching wishes:", err));
+  }, []);
+  */
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newWish.name || !newWish.message) return;
-    setWishes([{ ...newWish, time: "Baru saja" }, ...wishes]);
-    setNewWish({ name: "", message: "" });
+    
+    setIsSubmitting(true);
+    
+    // Tampilkan langsung di layar (optimistic UI)
+    const optimisticWish = { ...newWish, time: "Baru saja" };
+    setWishes([optimisticWish, ...wishes]);
+    
+    if (SCRIPT_URL) {
+      try {
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain" },
+          body: JSON.stringify(newWish)
+        });
+      } catch (err) {
+        console.error("Error saving wish:", err);
+      }
+    }
+    
+    setNewWish({ name: "", phone: "", message: "" });
+    setIsSubmitting(false);
   };
 
   return (
@@ -63,24 +103,37 @@ const WishesSection = () => {
               <input
                 type="text"
                 placeholder="Nama Anda"
+                required
                 value={newWish.name}
                 onChange={(e) => setNewWish({ ...newWish, name: e.target.value })}
                 className={premiumInputClass}
+                disabled={isSubmitting}
+              />
+              <input
+                type="tel"
+                placeholder="No HP / WhatsApp (Opsional)"
+                value={newWish.phone}
+                onChange={(e) => setNewWish({ ...newWish, phone: e.target.value })}
+                className={premiumInputClass}
+                disabled={isSubmitting}
               />
               <textarea
                 placeholder="Tulis ucapan..."
+                required
                 rows={3}
                 value={newWish.message}
                 onChange={(e) => setNewWish({ ...newWish, message: e.target.value })}
                 className={`${premiumInputClass} resize-none`}
+                disabled={isSubmitting}
               />
               <FiligreeLine />
               <button
                 type="submit"
-                className="gradient-gold font-sans-elegant text-xs tracking-widest uppercase px-6 py-3 rounded-lg text-primary-foreground flex items-center gap-2 cursor-pointer hover:opacity-90 transition-opacity shadow-[0_0_20px_hsl(35_55%_50%_/_0.3)]"
+                disabled={isSubmitting || !newWish.name || !newWish.message}
+                className="gradient-gold font-sans-elegant text-xs tracking-widest uppercase px-6 py-3 rounded-lg text-primary-foreground flex items-center gap-2 cursor-pointer hover:opacity-90 transition-opacity shadow-[0_0_20px_hsl(35_55%_50%_/_0.3)] disabled:opacity-50"
               >
                 <MessageCircle className="w-3 h-3" />
-                Kirim Ucapan
+                {isSubmitting ? "Mengirim..." : "Kirim Ucapan"}
               </button>
             </form>
           </PremiumCardWrapper>
@@ -88,32 +141,35 @@ const WishesSection = () => {
 
         <FiligreeLine />
 
-        {/* Wishes list */}
-        <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2">
-          {wishes.map((wish, i) => (
-            <motion.div
-              key={`${wish.name}-${i}`}
-              className="relative rounded-xl p-5 overflow-hidden"
-              style={{
-                background: "linear-gradient(145deg, hsl(35 40% 90%), hsl(35 35% 85%))",
-                boxShadow: "0 2px 10px hsl(30 20% 30% / 0.08)",
-              }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-            >
-              <CornerOrnament position="top-right" />
-              <CornerOrnament position="bottom-left" />
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="font-serif font-semibold text-[hsl(30_50%_20%)]">{wish.name}</span>
-                  <span className="font-sans-elegant text-[10px] text-[hsl(30_40%_35%_/_0.6)]">{wish.time}</span>
+        {/* Wishes list - Marquee style */}
+        <div className="relative h-[400px] overflow-hidden mt-8 fade-edges mask-image-vertical">
+          {/* Top/Bottom gradient fade masks to blend into background */}
+          <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-background to-transparent z-20 pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-background to-transparent z-20 pointer-events-none" />
+          
+          <div className="animate-marquee-vertical flex flex-col gap-4 pt-4 hover-trigger">
+            {/* Double the wishes array to create seamless infinite loop */}
+            {[...wishes, ...wishes].map((wish, i) => (
+              <div
+                key={`${wish.name}-${i}`}
+                className="relative rounded-xl p-5 overflow-hidden mx-2 flex-shrink-0"
+                style={{
+                  background: "linear-gradient(145deg, hsl(35 40% 90%), hsl(35 35% 85%))",
+                  boxShadow: "0 2px 10px hsl(30 20% 30% / 0.08)",
+                }}
+              >
+                <CornerOrnament position="top-right" />
+                <CornerOrnament position="bottom-left" />
+                <div className="relative z-10">
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                    <span className="font-serif font-semibold text-[hsl(30_50%_20%)] break-words max-w-[70%]">{wish.name}</span>
+                    <span className="font-sans-elegant text-[10px] text-[hsl(30_40%_35%_/_0.6)] shrink-0">{wish.time}</span>
+                  </div>
+                  <p className="font-serif text-sm text-[hsl(30_40%_35%)] leading-relaxed">{wish.message}</p>
                 </div>
-                <p className="font-serif text-sm text-[hsl(30_40%_35%)] leading-relaxed">{wish.message}</p>
               </div>
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
