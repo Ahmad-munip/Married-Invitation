@@ -1,4 +1,4 @@
-import { useState, useRef, lazy, Suspense, useCallback } from "react";
+import { useState, useRef, useEffect, lazy, Suspense, useCallback } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { getGuestNameFromUrl } from "@/lib/guest";
 
@@ -36,6 +36,43 @@ const Index = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const isMobile = useIsMobile();
   const guestName = getGuestNameFromUrl();
+
+  const wasPlayingBeforeHideRef = useRef(false);
+  const isPlayingRef = useRef(isPlaying);
+
+  // Terus sinkronkan isPlaying ke ref
+  useEffect(() => {
+    isPlayingRef.current = isPlaying;
+  }, [isPlaying]);
+
+  // Efek mematikan lagu saat ganti tab (Page Visibility API)
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (!audioRef.current) return;
+
+      if (document.hidden) {
+        if (isPlayingRef.current) {
+          audioRef.current.pause();
+          setIsPlaying(false);
+          wasPlayingBeforeHideRef.current = true;
+        } else {
+          wasPlayingBeforeHideRef.current = false;
+        }
+      } else {
+        if (wasPlayingBeforeHideRef.current) {
+          audioRef.current.play()
+            .then(() => setIsPlaying(true))
+            .catch(() => {});
+          wasPlayingBeforeHideRef.current = false;
+        }
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
 
   const handleOpenInvitation = useCallback(() => {
     setSplashOpen(false);
