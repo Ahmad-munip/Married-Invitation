@@ -7,7 +7,7 @@ import MagneticButton from "./MagneticButton";
 
 const STORAGE_KEY = "wedding-rsvp-queue";
 const SENT_KEY = "wedding-rsvp-demo-sent";
-const RSVP_ENDPOINT = import.meta.env.VITE_RSVP_ENDPOINT as string | undefined;
+const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzYWcnR1yR-ruiVVXC6n3Xf4iq6ilfk1bIRRi0ntnLCgoIpzETem0YZCT13RRScKPOq/exec";
 
 interface RSVPData {
   nama: string;

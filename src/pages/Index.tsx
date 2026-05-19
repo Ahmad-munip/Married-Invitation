@@ -23,7 +23,6 @@ const LoveStory = lazy(() => import("@/components/wedding/LoveStory"));
 const Gallery = lazy(() => import("@/components/wedding/Gallery"));
 const RSVPSection = lazy(() => import("@/components/wedding/RSVPSection"));
 const DigitalEnvelope = lazy(() => import("@/components/wedding/DigitalEnvelope"));
-const WishesSection = lazy(() => import("@/components/wedding/WishesSection"));
 const MapsSection = lazy(() => import("@/components/wedding/MapsSection"));
 const ClosingSection = lazy(() => import("@/components/wedding/ClosingSection"));
 const VideoSection = lazy(() => import("@/components/wedding/VideoSection"));
@@ -127,9 +126,6 @@ const Index = () => {
               <DigitalEnvelope />
             </Suspense>
             <FloralDivider />
-            <Suspense fallback={null}>
-              <WishesSection />
-            </Suspense>
             <Suspense fallback={null}>
               <MapsSection />
             </Suspense>
