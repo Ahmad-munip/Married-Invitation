@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import { SectionVine } from "./SectionDecorations";
@@ -17,16 +17,14 @@ const initialWishes: Wish[] = [
   { name: "Dani Pratama", message: "Happy wedding! Semoga dilancarkan acaranya dan diberkahi pernikahannya!", time: "1 hari lalu" },
 ];
 
-// Nanti URL dari Google Sheets akan dimasukkan ke sini
-const SCRIPT_URL = "";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzYWcnR1yR-ruiVVXC6n3Xf4iq6ilfk1bIRRi0ntnLCgoIpzETem0YZCT13RRScKPOq/exec";
 
 const WishesSection = () => {
   const [wishes, setWishes] = useState<Wish[]>(initialWishes);
   const [newWish, setNewWish] = useState({ name: "", phone: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Jika SCRIPT_URL sudah diisi, ambil data dari Google Sheets
-  /* 
+  // Ambil data ucapan dari Google Sheets saat halaman dimuat
   useEffect(() => {
     if (!SCRIPT_URL) return;
     fetch(SCRIPT_URL)
@@ -38,7 +36,6 @@ const WishesSection = () => {
       })
       .catch(err => console.error("Error fetching wishes:", err));
   }, []);
-  */
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
