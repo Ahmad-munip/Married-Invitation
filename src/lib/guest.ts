@@ -29,7 +29,7 @@ export const getGuestNameFromUrl = () => {
 
 export const createInvitationLink = (baseUrl: string, guestName: string) => {
   const normalizedBaseUrl = baseUrl.trim().replace(/\?+$/, "");
-  const url = new URL(normalizedBaseUrl || "https://example.com");
+  const url = new URL(normalizedBaseUrl || "https://rohimarried.vercel.app");
   url.searchParams.set("to", cleanGuestName(guestName) || DEFAULT_GUEST_NAME);
   return url.toString();
 };
