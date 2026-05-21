@@ -4,6 +4,7 @@ import { Volume2, VolumeX } from "lucide-react";
 import FloralFrame from "./FloralFrame";
 import { Slider } from "@/components/ui/slider";
 import { SectionVine, LocalGoldDust } from "./SectionDecorations";
+import { WEDDING_CONFIG } from "@/config/wedding";
 
 interface ClosingSectionProps {
   audioRef: RefObject<HTMLAudioElement | null>;
@@ -85,7 +86,7 @@ const ClosingSection = ({ audioRef, isPlaying, setIsPlaying }: ClosingSectionPro
             >
               <p className="font-serif text-muted-foreground mb-2">Mohon do'a restu dari kami yang berbahagia,</p>
               <p className="font-serif text-muted-foreground mt-4 mb-1">Hormat Kami</p>
-              <p className="font-script text-3xl gradient-gold-text">Jamin (Alm) - Parni</p>
+              <p className="font-script text-3xl gradient-gold-text">{WEDDING_CONFIG.bride.shortName} & {WEDDING_CONFIG.groom.shortName}</p>
               
               <div className="mt-10 pt-6 border-t border-primary/20 inline-block px-8">
                 <p className="font-sans-elegant text-[10px] uppercase tracking-[0.2em] text-primary/80 mb-2">Informasi Lebih Lanjut</p>
