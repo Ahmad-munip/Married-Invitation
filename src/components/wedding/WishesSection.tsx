@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { MessageCircle } from "lucide-react";
 import { SectionVine } from "./SectionDecorations";
-import { PremiumCardWrapper, FiligreeLine, CornerOrnament, premiumInputClass } from "./CardDecorations";
+import { FiligreeLine, CornerOrnament } from "./CardDecorations";
+import { WEDDING_CONFIG } from "@/config/wedding";
 
 interface Wish {
   name: string;
@@ -17,12 +17,10 @@ const initialWishes: Wish[] = [
   { name: "Dani Pratama", message: "Happy wedding! Semoga dilancarkan acaranya dan diberkahi pernikahannya!", time: "1 hari lalu" },
 ];
 
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzYWcnR1yR-ruiVVXC6n3Xf4iq6ilfk1bIRRi0ntnLCgoIpzETem0YZCT13RRScKPOq/exec";
+const SCRIPT_URL = WEDDING_CONFIG.endpoints.googleSheets;
 
 const WishesSection = () => {
   const [wishes, setWishes] = useState<Wish[]>(initialWishes);
-  const [newWish, setNewWish] = useState({ name: "", phone: "", message: "" });
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Ambil data ucapan dari Google Sheets saat halaman dimuat
   useEffect(() => {
@@ -36,33 +34,6 @@ const WishesSection = () => {
       })
       .catch(err => console.error("Error fetching wishes:", err));
   }, []);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newWish.name || !newWish.message) return;
-    
-    setIsSubmitting(true);
-    
-    // Tampilkan langsung di layar (optimistic UI)
-    const optimisticWish = { ...newWish, time: "Baru saja" };
-    setWishes([optimisticWish, ...wishes]);
-    
-    if (SCRIPT_URL) {
-      try {
-        await fetch(SCRIPT_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "text/plain" },
-          body: JSON.stringify(newWish)
-        });
-      } catch (err) {
-        console.error("Error saving wish:", err);
-      }
-    }
-    
-    setNewWish({ name: "", phone: "", message: "" });
-    setIsSubmitting(false);
-  };
 
   return (
     <section className="py-24 px-6 relative overflow-hidden z-10">
@@ -85,55 +56,6 @@ const WishesSection = () => {
           <p className="font-sans-elegant text-xs tracking-[0.3em] uppercase text-primary/70 mb-3">Wishes</p>
           <h2 className="font-script text-5xl gradient-gold-text mb-4">Ucapan & Doa</h2>
           <div className="divider-gold w-32 mx-auto" />
-        </motion.div>
-
-        {/* Submit form */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-8"
-        >
-          <PremiumCardWrapper>
-            <form onSubmit={handleSubmit} className="p-6 space-y-4">
-              <FiligreeLine />
-              <input
-                type="text"
-                placeholder="Nama Anda"
-                required
-                value={newWish.name}
-                onChange={(e) => setNewWish({ ...newWish, name: e.target.value })}
-                className={premiumInputClass}
-                disabled={isSubmitting}
-              />
-              <input
-                type="tel"
-                placeholder="No HP / WhatsApp (Opsional)"
-                value={newWish.phone}
-                onChange={(e) => setNewWish({ ...newWish, phone: e.target.value })}
-                className={premiumInputClass}
-                disabled={isSubmitting}
-              />
-              <textarea
-                placeholder="Tulis ucapan..."
-                required
-                rows={3}
-                value={newWish.message}
-                onChange={(e) => setNewWish({ ...newWish, message: e.target.value })}
-                className={`${premiumInputClass} resize-none`}
-                disabled={isSubmitting}
-              />
-              <FiligreeLine />
-              <button
-                type="submit"
-                disabled={isSubmitting || !newWish.name || !newWish.message}
-                className="gradient-gold font-sans-elegant text-xs tracking-widest uppercase px-6 py-3 rounded-lg text-primary-foreground flex items-center gap-2 cursor-pointer hover:opacity-90 transition-opacity shadow-[0_0_20px_hsl(35_55%_50%_/_0.3)] disabled:opacity-50"
-              >
-                <MessageCircle className="w-3 h-3" />
-                {isSubmitting ? "Mengirim..." : "Kirim Ucapan"}
-              </button>
-            </form>
-          </PremiumCardWrapper>
         </motion.div>
 
         <FiligreeLine />

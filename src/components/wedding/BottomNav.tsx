@@ -25,14 +25,21 @@ const BottomNav = ({ splashOpen }: BottomNavProps) => {
         setIsVisible(false);
       }
 
-      // Very simple active section detector based on scroll position
-      const scrollY = window.scrollY;
-      const height = window.innerHeight;
-      
-      if (scrollY < height * 1.5) setActiveSection("hero");
-      else if (scrollY < height * 3) setActiveSection("cerita");
-      else if (scrollY < height * 4.5) setActiveSection("galeri");
-      else setActiveSection("rsvp");
+      // Dynamic active section detector based on actual element offsets
+      const sections = ["hero", "cerita", "galeri", "rsvp"];
+      const scrollPosition = window.scrollY + window.innerHeight * 0.4;
+
+      for (const sectionId of sections) {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveSection(sectionId);
+            break;
+          }
+        }
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -47,16 +54,11 @@ const BottomNav = ({ splashOpen }: BottomNavProps) => {
   ];
 
   const scrollTo = (id: string) => {
-    const height = window.innerHeight;
-    let targetY = 0;
-    
-    if (id === "hero") targetY = height;
-    else if (id === "cerita") targetY = height * 2.5;
-    else if (id === "galeri") targetY = height * 3.8;
-    else if (id === "rsvp") targetY = height * 5.5;
-
-    window.scrollTo({ top: targetY, behavior: "smooth" });
-    setActiveSection(id);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      setActiveSection(id);
+    }
   };
 
   return (

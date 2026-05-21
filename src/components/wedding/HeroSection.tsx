@@ -5,6 +5,7 @@ import FloralFrame from "./FloralFrame";
 import { MandalaRing } from "./FloralFrame";
 import { SectionVine, LocalGoldDust } from "./SectionDecorations";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { WEDDING_CONFIG } from "@/config/wedding";
 
 const HERO_VIDEO_URL = "/background.mp4";
 
@@ -44,7 +45,7 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
   const bgScale = useTransform(scrollYProgress, [0, 1], [1.1, 1.3]);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden z-10">
+    <section ref={sectionRef} id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden z-10">
       <FloralFrame positions={["top-left", "top-right", "bottom-left", "bottom-right"]} size="lg" />
       <MandalaRing size={350} className="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-40" />
       
@@ -78,6 +79,7 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
 
       {/* Parallax Video/Image Background */}
       <motion.div className="absolute inset-0" style={{ y: bgY, scale: bgScale }}>
+        {!isMobile && (
           <video
             autoPlay muted loop playsInline preload="metadata"
             poster={heroBg}
@@ -86,6 +88,7 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
           >
             <source src={HERO_VIDEO_URL} type="video/mp4" />
           </video>
+        )}
         <img src={heroBg} alt="Hero background" className="absolute inset-0 h-full w-full object-cover -z-10" />
         <div className="absolute inset-0 bg-background/20" />
       </motion.div>
@@ -150,7 +153,7 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
         </motion.p>
 
         <h1 className="font-script text-4xl sm:text-5xl md:text-7xl lg:text-8xl gradient-gold-text text-glow-gold mb-2 whitespace-nowrap">
-          <WordReveal text="Ayu Andika" delay={3.8} />
+          <WordReveal text={WEDDING_CONFIG.bride.shortName} delay={3.8} />
         </h1>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -159,9 +162,9 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
           transition={{ delay: 4.3 }}
           className="mb-8"
         >
-          <p className="font-serif text-lg text-foreground font-semibold mt-2">Ayu Andika Vemidian, S.Keb</p>
-          <p className="font-sans-elegant text-sm text-foreground/80 mt-1">Putri ke-4 dari Bapak Jamin (Alm) & Ibu Parni</p>
-          <p className="font-sans-elegant text-xs text-foreground/70 mt-1">Sukowidi RT 002 RW 005, Kelurahan Sidomakmur<br/>Kec Widodaren, Ngawi</p>
+          <p className="font-serif text-lg text-foreground font-semibold mt-2">{WEDDING_CONFIG.bride.fullName}</p>
+          <p className="font-sans-elegant text-sm text-foreground/80 mt-1">{WEDDING_CONFIG.bride.parents}</p>
+          <p className="font-sans-elegant text-xs text-foreground/70 mt-1">{WEDDING_CONFIG.bride.address}</p>
         </motion.div>
 
         <motion.div
@@ -183,7 +186,7 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
         </motion.div>
 
         <h1 className="font-script text-4xl sm:text-5xl md:text-7xl lg:text-8xl gradient-gold-text text-glow-gold mb-2 whitespace-nowrap">
-          <WordReveal text="Nurohim" delay={4.1} />
+          <WordReveal text={WEDDING_CONFIG.groom.shortName} delay={4.1} />
         </h1>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -192,9 +195,9 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
           transition={{ delay: 4.6 }}
           className="mb-8"
         >
-          <p className="font-serif text-lg text-foreground font-semibold mt-2">Nurohim, S.Pd,</p>
-          <p className="font-sans-elegant text-sm text-foreground/80 mt-1">Putra ke-2 dari Bapak Sukid & Ibu Carsini</p>
-          <p className="font-sans-elegant text-xs text-foreground/70 mt-1">Karangbandung RT 03 RW 06<br/>Kec. Ketanggungan Brebes</p>
+          <p className="font-serif text-lg text-foreground font-semibold mt-2">{WEDDING_CONFIG.groom.fullName}</p>
+          <p className="font-sans-elegant text-sm text-foreground/80 mt-1">{WEDDING_CONFIG.groom.parents}</p>
+          <p className="font-sans-elegant text-xs text-foreground/70 mt-1">{WEDDING_CONFIG.groom.address}</p>
         </motion.div>
 
         <motion.p
@@ -204,7 +207,7 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
           viewport={{ once: true }}
           transition={{ delay: 4.7 }}
         >
-          10 . 06 . 2026
+          {WEDDING_CONFIG.dates.isoDate.split("-").reverse().join(" . ")}
         </motion.p>
 
         {guestName && (

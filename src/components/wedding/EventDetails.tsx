@@ -4,36 +4,37 @@ import { Calendar as CalendarIcon, Clock, MapPin, Heart, Star, Sparkles, Calenda
 import FloralFrame from "./FloralFrame";
 import MagneticButton from "./MagneticButton";
 import { SectionVine, LocalGoldDust } from "./SectionDecorations";
+import { WEDDING_CONFIG } from "@/config/wedding";
 
 const events = [
   {
     title: "Akad Nikah",
-    date: "Rabu, 10 Juni 2026",
-    time: "07:00 WIB",
-    venue: "Kediaman Mempelai Wanita",
-    address: "Sukowidi RT 002 RW 005, Kelurahan Sidomakmur, Kec Widodaren, Ngawi",
+    date: WEDDING_CONFIG.dates.dayDate,
+    time: WEDDING_CONFIG.venues.akad.time,
+    venue: WEDDING_CONFIG.venues.akad.place,
+    address: WEDDING_CONFIG.venues.akad.address,
     label: "Holy Ceremony",
     icon: Star,
     calendarData: {
-      text: "Akad Nikah Ayu & Nurohim",
-      dates: "20260610T000000Z/20260610T030000Z",
-      details: "Acara Akad Nikah Ayu & Nurohim",
-      location: "Sukowidi RT 002 RW 005, Kelurahan Sidomakmur, Kec Widodaren, Ngawi",
+      text: `Akad Nikah ${WEDDING_CONFIG.bride.shortName} & ${WEDDING_CONFIG.groom.shortName}`,
+      dates: WEDDING_CONFIG.dates.googleCalendarAkad,
+      details: `Acara Akad Nikah ${WEDDING_CONFIG.bride.shortName} & ${WEDDING_CONFIG.groom.shortName}`,
+      location: WEDDING_CONFIG.venues.akad.address,
     }
   },
   {
     title: "Resepsi",
-    date: "Rabu, 10 Juni 2026",
-    time: "10:00 WIB",
-    venue: "Kediaman Mempelai Wanita",
-    address: "Sukowidi RT 002 RW 005, Kelurahan Sidomakmur, Kec Widodaren, Ngawi",
+    date: WEDDING_CONFIG.dates.dayDate,
+    time: WEDDING_CONFIG.venues.resepsi.time,
+    venue: WEDDING_CONFIG.venues.resepsi.place,
+    address: WEDDING_CONFIG.venues.resepsi.address,
     label: "Celebration",
     icon: Heart,
     calendarData: {
-      text: "Resepsi Pernikahan Ayu & Nurohim",
-      dates: "20260610T030000Z/20260610T080000Z",
-      details: "Acara Resepsi Pernikahan Ayu & Nurohim",
-      location: "Sukowidi RT 002 RW 005, Kelurahan Sidomakmur, Kec Widodaren, Ngawi",
+      text: `Resepsi Pernikahan ${WEDDING_CONFIG.bride.shortName} & ${WEDDING_CONFIG.groom.shortName}`,
+      dates: WEDDING_CONFIG.dates.googleCalendarResepsi,
+      details: `Acara Resepsi Pernikahan ${WEDDING_CONFIG.bride.shortName} & ${WEDDING_CONFIG.groom.shortName}`,
+      location: WEDDING_CONFIG.venues.resepsi.address,
     }
   },
 ];
@@ -236,7 +237,9 @@ const WaxSeal = () => (
       {/* Inner ring */}
       <div className="absolute w-10 h-10 rounded-full border border-[hsl(35_80%_60%_/_0.4)]" />
       {/* Initial */}
-      <span className="font-script text-xl text-[hsl(35_80%_75%)] relative z-10" style={{ textShadow: "0 1px 2px rgba(0,0,0,0.3)", paddingTop: "2px" }}>A&N</span>
+      <span className="font-script text-xl text-[hsl(35_80%_75%)] relative z-10" style={{ textShadow: "0 1px 2px rgba(0,0,0,0.3)", paddingTop: "2px" }}>
+        {WEDDING_CONFIG.bride.shortName[0] + "&" + WEDDING_CONFIG.groom.shortName[0]}
+      </span>
     </div>
   </div>
 );

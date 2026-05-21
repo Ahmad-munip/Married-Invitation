@@ -4,10 +4,11 @@ import { Check, Send, WifiOff, Database, ExternalLink } from "lucide-react";
 import { SectionVine } from "./SectionDecorations";
 import { PremiumCardWrapper, FiligreeLine, premiumInputClass, premiumSelectClass, premiumLabelClass } from "./CardDecorations";
 import MagneticButton from "./MagneticButton";
+import { WEDDING_CONFIG } from "@/config/wedding";
 
 const STORAGE_KEY = "wedding-rsvp-queue";
 const SENT_KEY = "wedding-rsvp-demo-sent";
-const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzYWcnR1yR-ruiVVXC6n3Xf4iq6ilfk1bIRRi0ntnLCgoIpzETem0YZCT13RRScKPOq/exec";
+const RSVP_ENDPOINT = WEDDING_CONFIG.endpoints.googleSheets;
 
 interface RSVPData {
   nama: string;
@@ -151,7 +152,7 @@ const RSVPSection = ({ guestName = "" }: RSVPSectionProps) => {
   };
 
   return (
-    <section className="py-24 px-6 relative overflow-hidden z-10">
+    <section id="rsvp" className="py-24 px-6 relative overflow-hidden z-10">
       <div className="ambient-glow" style={{ width: 300, height: 300, top: "5%", right: "-8%" }} />
       <div className="ambient-glow-warm" style={{ width: 250, height: 250, bottom: "10%", left: "-6%" }} />
       <SectionVine side="left" />

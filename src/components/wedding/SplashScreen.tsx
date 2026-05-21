@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
-import { useMemo, lazy, Suspense } from "react";
+import { useMemo } from "react";
 import { SectionVine, LocalGoldDust } from "./SectionDecorations";
-
-const Particles3D = lazy(() => import("./Particles3D"));
+import { WEDDING_CONFIG } from "@/config/wedding";
 
 interface SplashScreenProps {
   isOpen: boolean;
@@ -50,10 +49,7 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
           </div>
 
-          {/* 3D Particles */}
-          <Suspense fallback={null}>
-            <Particles3D count={300} speed={0.2} size={0.025} className="!z-[1]" />
-          </Suspense>
+
 
           <div className="batik-pattern" style={{ opacity: 0.04 }} />
 
@@ -119,9 +115,9 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
             <motion.h1 className="font-script text-5xl md:text-7xl gradient-gold-text text-glow-gold mb-6 relative z-10 leading-tight"
               style={{ filter: "drop-shadow(0 2px 6px rgba(255,255,255,0.8)) drop-shadow(0 0 15px rgba(255,255,255,0.4))", paddingRight: "0.1em" }}
               initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.8, duration: 0.8 }}>
-              Ayu <br />
+              {WEDDING_CONFIG.bride.shortName} <br />
               <span className="font-serif text-4xl md:text-5xl opacity-90 block my-1 gradient-gold-text">{"&"}</span>
-              Nurohim
+              {WEDDING_CONFIG.groom.shortName}
             </motion.h1>
 
             <div className="divider-gold w-40 mx-auto mb-8 drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]" />

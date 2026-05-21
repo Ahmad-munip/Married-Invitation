@@ -15,6 +15,7 @@ import BokehCircles from "@/components/wedding/BokehCircles";
 import VineRoots from "@/components/wedding/VineRoots";
 import FloatingLeaves from "@/components/wedding/FloatingLeaves";
 import GoldDust from "@/components/wedding/GoldDust";
+import { WEDDING_CONFIG } from "@/config/wedding";
 
 /* ─── Lazy loads: below-fold sections ─── */
 const EventDetails = lazy(() => import("@/components/wedding/EventDetails"));
@@ -26,7 +27,7 @@ const DigitalEnvelope = lazy(() => import("@/components/wedding/DigitalEnvelope"
 const MapsSection = lazy(() => import("@/components/wedding/MapsSection"));
 const ClosingSection = lazy(() => import("@/components/wedding/ClosingSection"));
 const VideoSection = lazy(() => import("@/components/wedding/VideoSection"));
-const Particles3D = lazy(() => import("@/components/wedding/Particles3D"));
+const WishesSection = lazy(() => import("@/components/wedding/WishesSection"));
 
 import MUSIC_URL from "@/assets/wedding-music.mp3";
 
@@ -97,17 +98,19 @@ const Index = () => {
       
       {/* LEFT PANE: Desktop Only Fixed Video Cover */}
       <div className="hidden lg:flex lg:w-[60%] lg:sticky lg:top-0 lg:h-screen lg:flex-col lg:items-center lg:justify-center text-center overflow-hidden">
-         <video autoPlay muted loop playsInline preload="metadata" className="absolute inset-0 w-full h-full object-cover">
-            <source src="/background.mp4" type="video/mp4" />
-         </video>
+         {!isMobile && (
+           <video autoPlay muted loop playsInline preload="metadata" className="absolute inset-0 w-full h-full object-cover">
+              <source src="/background.mp4" type="video/mp4" />
+           </video>
+         )}
          <div className="absolute inset-0 bg-black/20" />
          
          <div className="relative z-10 text-white mt-auto pb-32 flex flex-col items-center">
-           <p className="font-script text-4xl mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">The Wedding of</p>
-           <h1 className="font-serif text-5xl md:text-7xl font-bold tracking-widest mb-4 uppercase drop-shadow-[0_4px_8px_rgba(0,0,0,0.9)] leading-tight">
-             Ayu <br /> <span className="font-serif text-4xl md:text-5xl opacity-80 block my-1" style={{ WebkitTextFillColor: "initial" }}>{"&"}</span> Nurohim
-           </h1>
-           <p className="font-sans text-xl tracking-widest font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Rabu, 10 Juni 2026</p>
+            <p className="font-script text-4xl mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">The Wedding of</p>
+            <h1 className="font-serif text-5xl md:text-7xl font-bold tracking-widest mb-4 uppercase drop-shadow-[0_4px_8px_rgba(0,0,0,0.9)] leading-tight">
+              {WEDDING_CONFIG.bride.shortName} <br /> <span className="font-serif text-4xl md:text-5xl opacity-80 block my-1" style={{ WebkitTextFillColor: "initial" }}>{"&"}</span> {WEDDING_CONFIG.groom.shortName}
+            </h1>
+            <p className="font-sans text-xl tracking-widest font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">{WEDDING_CONFIG.dates.dayDate}</p>
          </div>
       </div>
 
@@ -130,9 +133,6 @@ const Index = () => {
                 <VineRoots />
                 <FloatingLeaves />
                 <GoldDust />
-                <Suspense fallback={null}>
-                  <Particles3D count={120} speed={0.1} size={0.014} />
-                </Suspense>
               </>
             )}
             <HeroSection guestName={guestName} />
@@ -158,6 +158,10 @@ const Index = () => {
             <FloralDivider />
             <Suspense fallback={null}>
               <RSVPSection guestName={guestName} />
+            </Suspense>
+            <FloralDivider />
+            <Suspense fallback={null}>
+              <WishesSection />
             </Suspense>
             <Suspense fallback={null}>
               <DigitalEnvelope />

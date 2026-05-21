@@ -3,11 +3,9 @@ import { motion } from "framer-motion";
 import { Copy, Check, Gift } from "lucide-react";
 import { SectionVine } from "./SectionDecorations";
 import { PremiumCardWrapper, FiligreeLine } from "./CardDecorations";
+import { WEDDING_CONFIG } from "@/config/wedding";
 
-const accounts = [
-  { bank: "BSI", number: "7210408023", name: "NUROHIM" },
-  { bank: "SEA BANK", number: "901428633139", name: "AYU ANDIKA VEMIDIAN" },
-];
+const accounts = WEDDING_CONFIG.digitalEnvelope;
 
 const DigitalEnvelope = () => {
   const [show, setShow] = useState(false);

@@ -5,10 +5,36 @@ import FloralFrame from "./FloralFrame";
 import { SectionVine, LocalGoldDust } from "./SectionDecorations";
 
 const stories = [
-  { year: "2020", title: "Pertama Bertemu", desc: "Kami pertama kali bertemu di sebuah acara komunitas. Senyuman pertamamu yang membuatku jatuh hati.", icon: "💫" },
-  { year: "2021", title: "Mulai Dekat", desc: "Dari teman menjadi sahabat, dari sahabat menjadi lebih. Setiap hari terasa istimewa bersamamu.", icon: "💕" },
-  { year: "2023", title: "Lamaran", desc: "Dengan penuh keyakinan dan doa, aku memutuskan untuk melamarmu di bawah langit senja.", icon: "💍" },
-  { year: "2026", title: "Pernikahan", desc: "Hari yang kita nantikan. Bersatu dalam ikatan suci, memulai perjalanan baru bersama.", icon: "🕊️" },
+  {
+    year: "2022",
+    title: "Langkah Dipertemukan",
+    desc: "Di tempat yang paling kami cintai—rumah Allah—langkah kami dipertemukan. Dalam hangatnya kegiatan masjid, barisan doa, dan perjuangan kecil sebagai sesama aktivis dakwah, Allah menumbuhkan rasa dengan cara yang paling sederhana: tanpa hiruk pikuk, tanpa banyak kata, namun penuh ketenangan.",
+    icon: "🕌"
+  },
+  {
+    year: "2022 - 2025",
+    title: "Doa dalam Diam",
+    desc: "Kala itu, kami hanya dua insan yang sama-sama belajar memperbaiki diri. Tidak ada janji yang diikat, tidak pula harapan yang diumbar. Namun diam-diam, nama satu sama lain mulai hadir dalam doa-doa yang dipanjatkan selepas sujud.",
+    icon: "🤲"
+  },
+  {
+    year: "2 Mar 2026",
+    title: "Keseriusan Hati",
+    desc: "Sebuah keseriusan disampaikan. Bukan sekadar tentang cinta, tetapi tentang niat untuk menjaga dalam halal, membersamai dalam taat, dan berjalan bersama menuju ridha-Nya.",
+    icon: "💍"
+  },
+  {
+    year: "23 Mar 2026",
+    title: "Pertemuan Keluarga",
+    desc: "Dua keluarga dipertemukan dalam suasana penuh haru dan syukur. Pertemuan yang bukan hanya menyatukan dua insan, tetapi juga menjadi awal dari terjalinnya dua keluarga dalam ikatan yang insyaAllah diberkahi.",
+    icon: "🤝"
+  },
+  {
+    year: "10 Jun 2026",
+    title: "Akad Pernikahan",
+    desc: "InsyaAllah menjadi hari dimulainya ibadah terpanjang kami. Hari ketika 'aku' dan 'kamu' melebur menjadi 'kita', dalam sebuah akad suci yang disaksikan bumi dan diijabah langit.",
+    icon: "🕊️"
+  }
 ];
 
 const hexPattern = `url("data:image/svg+xml,%3Csvg width='56' height='100' viewBox='0 0 56 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66' fill='none' stroke='%23b89a5a' stroke-width='0.4' opacity='0.1'/%3E%3Cpath d='M28 100L0 84L0 50L28 34L56 50L56 84L28 100' fill='none' stroke='%23b89a5a' stroke-width='0.4' opacity='0.1'/%3E%3C/svg%3E")`;
@@ -190,7 +216,7 @@ const LoveStory = () => {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section className="py-24 px-6 relative overflow-hidden z-10">
+    <section id="cerita" className="py-24 px-6 relative overflow-hidden z-10">
       <div className="absolute inset-0 z-[-2]">
         <img src="/bg.jpeg" alt="Background" className="w-full h-full object-cover opacity-80" />
       </div>
@@ -224,7 +250,7 @@ const LoveStory = () => {
 
       <div className="max-w-xl mx-auto relative">
         {/* Section header */}
-        <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+        <motion.div className="text-center mb-12" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           {/* Rosette */}
           <div className="flex justify-center mb-3 pointer-events-none">
             <svg width="44" height="44" viewBox="0 0 44 44">
@@ -246,6 +272,19 @@ const LoveStory = () => {
             <span className="gradient-gold-text">Love Story</span>
           </h2>
           <div className="divider-gold w-32 mx-auto" />
+        </motion.div>
+
+        {/* Intro text */}
+        <motion.div
+          className="text-center mb-16 px-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <p className="font-serif italic text-sm md:text-base leading-relaxed" style={{ color: "hsl(30 35% 35%)" }}>
+            "Tidak ada pertemuan yang benar-benar kebetulan. Allah telah menuliskan setiap takdir dengan begitu indah, bahkan jauh sebelum kami saling mengenal."
+          </p>
         </motion.div>
 
         {/* Timeline */}
@@ -283,6 +322,26 @@ const LoveStory = () => {
             </svg>
           </div>
         </div>
+
+        {/* Outro text */}
+        <motion.div
+          className="text-center mt-16 px-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <div className="divider-gold w-24 mx-auto mb-6 opacity-60" />
+          <p className="font-serif italic text-sm md:text-base leading-relaxed mb-6" style={{ color: "hsl(30 35% 35%)" }}>
+            "Kami percaya, cinta terbaik bukanlah tentang siapa yang paling sempurna, tetapi tentang dua insan yang saling menggenggam untuk bersama-sama menuju surga-Nya."
+          </p>
+          <p className="font-serif text-sm md:text-base leading-relaxed mb-4" style={{ color: "hsl(30 30% 40%)" }}>
+            Semoga Allah senantiasa menautkan hati ini dalam kebaikan, menguatkan langkah kami dalam setiap ujian, dan menjadikan rumah tangga yang akan dibangun dipenuhi sakinah, mawaddah, wa rahmah.
+          </p>
+          <p className="font-script text-3xl mt-4" style={{ color: "hsl(30 40% 25%)" }}>
+            Aamiin ya Rabbal ‘alamin.
+          </p>
+        </motion.div>
       </div>
     </section>
   );

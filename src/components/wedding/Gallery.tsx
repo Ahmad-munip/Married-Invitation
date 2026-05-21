@@ -44,7 +44,7 @@ const Gallery = () => {
   const [selected, setSelected] = useState<string | null>(null);
 
   return (
-    <section className="py-24 px-6 relative overflow-hidden z-10">
+    <section id="galeri" className="py-24 px-6 relative overflow-hidden z-10">
       <FloralFrame positions={["top-left", "top-right", "bottom-left", "bottom-right"]} size="sm" />
       <SectionVine side="left" />
       <SectionVine side="right" />

@@ -85,6 +85,7 @@ const VideoSection = () => {
               ref={videoRef}
               className="w-full h-full object-cover"
               playsInline
+              preload="none"
               onEnded={() => setPlaying(false)}
             >
               <source src="/pinus.mp4" type="video/mp4" />
