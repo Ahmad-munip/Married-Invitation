@@ -38,7 +38,7 @@ export const WEDDING_CONFIG = {
     { bank: "SEA BANK", number: "901428633139", name: "AYU ANDIKA VEMIDIAN" }
   ],
   endpoints: {
-    googleSheets: "https://script.google.com/macros/s/AKfycbzdbHehTebPZz2FQ-dGGqC5WSB8lONizv_bJB3do0Igc6BpAYHqtPFltycexNn39L_iHQ/exec"
+    googleSheets: "https://script.google.com/macros/s/AKfycbzFw0IHf6YOKwSVls1CCOkrl7ZLMLGBnmBYnM3bETyDfN2Ou0O66zvpgAyt_rH2X6oXqg/exec"
   }
 };
 
