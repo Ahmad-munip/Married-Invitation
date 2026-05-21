@@ -35,6 +35,26 @@ const WishesSection = () => {
       .catch(err => console.error("Error fetching wishes:", err));
   }, []);
 
+  // Listen to local real-time wish submission events
+  useEffect(() => {
+    const handleWishSubmitted = (e: Event) => {
+      const customEvent = e as CustomEvent<{ name: string; message: string }>;
+      if (customEvent.detail && customEvent.detail.message) {
+        const newWish: Wish = {
+          name: customEvent.detail.name,
+          message: customEvent.detail.message,
+          time: "Baru saja"
+        };
+        // Prepend new wish to the top of the list instantly!
+        setWishes(prev => [newWish, ...prev]);
+      }
+    };
+    window.addEventListener("wish-submitted", handleWishSubmitted);
+    return () => {
+      window.removeEventListener("wish-submitted", handleWishSubmitted);
+    };
+  }, []);
+
   return (
     <section className="py-24 px-6 relative overflow-hidden z-10">
       <div className="absolute inset-0 z-[-2]">
@@ -80,11 +100,11 @@ const WishesSection = () => {
                 <CornerOrnament position="top-right" />
                 <CornerOrnament position="bottom-left" />
                 <div className="relative z-10">
-                  <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                    <span className="font-serif font-semibold text-[hsl(30_50%_20%)] break-words max-w-[70%]">{wish.name}</span>
-                    <span className="font-sans-elegant text-[10px] text-[hsl(30_40%_35%_/_0.6)] shrink-0">{wish.time}</span>
+                  <div className="relative mb-2">
+                    <span className="font-serif font-semibold text-[hsl(30_50%_20%)] block break-words pr-20 text-sm md:text-base leading-tight">{wish.name}</span>
+                    <span className="absolute top-0 right-0 font-sans-elegant text-[9px] md:text-[10px] text-[hsl(30_40%_35%_/_0.7)] tracking-wide font-medium">{wish.time}</span>
                   </div>
-                  <p className="font-serif text-sm text-[hsl(30_40%_35%)] leading-relaxed">{wish.message}</p>
+                  <p className="font-serif text-xs md:text-sm text-[hsl(30_40%_35%)] leading-relaxed mt-1">{wish.message}</p>
                 </div>
               </div>
             ))}

@@ -138,12 +138,28 @@ const RSVPSection = ({ guestName = "" }: RSVPSectionProps) => {
         const result = await sendToSheet(data);
         setSubmitMode(result.mode);
       }
+      
+      // Dispatch real-time local event if wish is provided
+      if (form.ucapan.trim() !== "") {
+        window.dispatchEvent(new CustomEvent("wish-submitted", {
+          detail: { name: form.nama, message: form.ucapan }
+        }));
+      }
+
       setPendingCount(getQueueCount());
       setDemoSent(readList(SENT_KEY));
       setSubmitted(true);
     } catch {
       saveToQueue(data);
       setSubmitMode("queued");
+      
+      // Also trigger locally even if queued offline so the guest sees their wish immediately
+      if (form.ucapan.trim() !== "") {
+        window.dispatchEvent(new CustomEvent("wish-submitted", {
+          detail: { name: form.nama, message: form.ucapan }
+        }));
+      }
+
       setPendingCount(getQueueCount());
       setSubmitted(true);
     } finally {
