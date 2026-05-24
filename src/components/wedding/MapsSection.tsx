@@ -27,7 +27,7 @@ const MapsSection = () => {
         </motion.div>
 
         <motion.div
-          className="glass-strong rounded-2xl overflow-hidden"
+          className="glass rounded-2xl overflow-hidden shadow-xl"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

@@ -92,8 +92,8 @@ const ClosingSection = ({ audioRef, isPlaying, setIsPlaying }: ClosingSectionPro
                 <p className="font-sans-elegant text-[10px] uppercase tracking-[0.2em] text-primary/80 mb-2">Informasi Lebih Lanjut</p>
                 <p className="font-serif text-sm text-foreground/80 flex items-center justify-center gap-2">
                   <span>Contact Person:</span>
-                  <a href="https://wa.me/6285850704044" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 transition-colors font-semibold">
-                    085850704044
+                  <a href="https://wa.me/6282325036812" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 transition-colors font-semibold">
+                    082325036812
                   </a>
                 </p>
               </div>
