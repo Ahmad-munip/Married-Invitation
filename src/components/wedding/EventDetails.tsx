@@ -524,7 +524,7 @@ const EventDetails = () => {
       <motion.div className="text-center mb-16"
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }} transition={{ duration: 0.8 }}>
-        <p className="font-sans-elegant text-xs tracking-[0.3em] uppercase text-primary/70 mb-3">Save The Date</p>
+        <p className="font-sans-elegant text-xs tracking-[0.3em] uppercase mb-3" style={{ color: "hsl(30 70% 35%)", textShadow: "0.5px 0.5px 0px #ffffff, -0.5px -0.5px 0px #ffffff, 0.5px -0.5px 0px #ffffff, -0.5px 0.5px 0px #ffffff", fontWeight: "bold" }}>Save The Date</p>
         <h2 className="font-script text-5xl md:text-6xl gradient-gold-text mb-4">Waktu & Tempat</h2>
         <div className="divider-gold w-32 mx-auto" />
       </motion.div>

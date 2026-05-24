@@ -106,32 +106,70 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
 
           {/* Content */}
           <motion.div className="relative z-10 text-center px-6" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.3 }}>
-            <motion.p className="font-sans-elegant text-sm tracking-[0.3em] uppercase text-primary/90 mb-4 font-semibold" 
-              style={{ textShadow: "0 2px 4px rgba(255,255,255,0.8), 0 0 10px rgba(255,255,255,0.6)" }}
+            <motion.p className="font-sans-elegant text-sm tracking-[0.3em] uppercase mb-3 font-bold" 
+              style={{ 
+                color: "hsl(30, 45%, 26%)",
+                textShadow: "0.75px 0.75px 0px #ffffff, -0.75px -0.75px 0px #ffffff, 0.75px -0.75px 0px #ffffff, -0.75px 0.75px 0px #ffffff",
+                letterSpacing: "0.3em"
+              }}
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
               The Wedding of
             </motion.p>
 
-            <motion.h1 className="font-script text-5xl md:text-7xl gradient-gold-text text-glow-gold mb-6 relative z-10 leading-tight"
-              style={{ filter: "drop-shadow(0 2px 6px rgba(255,255,255,0.8)) drop-shadow(0 0 15px rgba(255,255,255,0.4))", paddingRight: "0.1em" }}
+            <motion.h1 className="font-script text-6xl md:text-8xl mb-6 relative z-10 leading-tight"
+              style={{ 
+                background: "linear-gradient(135deg, hsl(30, 60%, 18%) 0%, hsl(32, 55%, 32%) 50%, hsl(38, 70%, 45%) 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                paddingRight: "0.15em",
+                filter: "drop-shadow(0.5px 0.5px 0px #ffffff) drop-shadow(-0.5px -0.5px 0px #ffffff) drop-shadow(0px 3px 6px rgba(100, 70, 30, 0.2))"
+              }}
               initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.8, duration: 0.8 }}>
               {WEDDING_CONFIG.bride.shortName} <br />
-              <span className="font-serif text-4xl md:text-5xl opacity-90 block my-1 gradient-gold-text">{"&"}</span>
+              <span className="font-script text-4xl md:text-5xl block my-1 italic opacity-85"
+                style={{ 
+                  background: "linear-gradient(135deg, hsl(30, 60%, 18%) 0%, hsl(32, 55%, 32%) 50%, hsl(38, 70%, 45%) 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                {"&"}
+              </span>
               {WEDDING_CONFIG.groom.shortName}
             </motion.h1>
 
             <div className="divider-gold w-40 mx-auto mb-8 drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
 
-            <motion.p className="font-serif text-lg text-foreground/90 mb-2 font-semibold" 
-              style={{ textShadow: "0 1px 3px rgba(255,255,255,0.9), 0 0 12px rgba(255,255,255,0.8)" }}
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}>
-              Kepada Yth.
-            </motion.p>
-            <motion.p className="font-serif text-xl text-foreground mb-10 font-bold" 
-              style={{ textShadow: "0 1px 4px rgba(255,255,255,0.9), 0 0 15px rgba(255,255,255,0.8)" }}
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}>
-              {guestName}
-            </motion.p>
+            <motion.div 
+              className="my-8 mx-auto p-6 rounded-2xl border border-[hsl(38_55%_52%_/_0.25)] max-w-[280px] sm:max-w-[320px] relative overflow-hidden"
+              style={{ 
+                background: "linear-gradient(135deg, rgba(253, 251, 247, 0.75) 0%, rgba(245, 240, 228, 0.65) 100%)",
+                backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
+                boxShadow: "0 10px 25px rgba(139, 92, 26, 0.08), inset 0 0 15px rgba(255, 255, 255, 0.6)"
+              }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.2, duration: 0.8 }}
+            >
+              {/* Subtle gold corner ornaments inside the box */}
+              <div className="absolute top-1.5 left-1.5 w-2 h-2 border-t border-l border-[hsl(38_55%_52%_/_0.4)] rounded-tl" />
+              <div className="absolute top-1.5 right-1.5 w-2 h-2 border-t border-r border-[hsl(38_55%_52%_/_0.4)] rounded-tr" />
+              <div className="absolute bottom-1.5 left-1.5 w-2 h-2 border-b border-l border-[hsl(38_55%_52%_/_0.4)] rounded-bl" />
+              <div className="absolute bottom-1.5 right-1.5 w-2 h-2 border-b border-r border-[hsl(38_55%_52%_/_0.4)] rounded-br" />
+
+              <p className="font-sans-elegant text-[10px] tracking-[0.25em] uppercase text-[hsl(30_30%_35%)] mb-2 font-medium">
+                Kepada Yth.
+              </p>
+              
+              <div className="h-[1px] w-12 bg-gradient-to-r from-transparent via-[hsl(38_55%_52%_/_0.3)] to-transparent mx-auto mb-3" />
+
+              <p className="font-serif text-lg sm:text-xl text-[hsl(30_40%_20%)] font-bold tracking-wide">
+                {guestName}
+              </p>
+            </motion.div>
 
             <motion.button
               onClick={onOpen}

@@ -1,5 +1,7 @@
-"nama","link","pesan"
-"Bapak Andi Saputra","https://rohimarried.vercel.app/?to=Bapak+Andi+Saputra","💌 *UNDANGAN PERNIKAHAN* 💌
+======================================================================
+UNTUK: Bapak Andi Saputra
+======================================================================
+💌 *UNDANGAN PERNIKAHAN* 💌
 ━━━━━━━━━━━━━━━━━
 
 *Assalamualaikum Warahmatullahi Wabarakatuh*
@@ -27,8 +29,13 @@ Terima kasih banyak atas perhatiannya.
 *Wassalamualaikum Warahmatullahi Wabarakatuh*
 
 💍 *Nurohim & Ayu*
-#SavannahMarried"
-"Ibu Sari Wulandari","https://rohimarried.vercel.app/?to=Ibu+Sari+Wulandari","💌 *UNDANGAN PERNIKAHAN* 💌
+#SavannahMarried
+
+
+======================================================================
+UNTUK: Ibu Sari Wulandari
+======================================================================
+💌 *UNDANGAN PERNIKAHAN* 💌
 ━━━━━━━━━━━━━━━━━
 
 *Assalamualaikum Warahmatullahi Wabarakatuh*
@@ -56,8 +63,13 @@ Terima kasih banyak atas perhatiannya.
 *Wassalamualaikum Warahmatullahi Wabarakatuh*
 
 💍 *Nurohim & Ayu*
-#SavannahMarried"
-"Bapak Rudi Hartono","https://rohimarried.vercel.app/?to=Bapak+Rudi+Hartono","💌 *UNDANGAN PERNIKAHAN* 💌
+#SavannahMarried
+
+
+======================================================================
+UNTUK: Bapak Rudi Hartono
+======================================================================
+💌 *UNDANGAN PERNIKAHAN* 💌
 ━━━━━━━━━━━━━━━━━
 
 *Assalamualaikum Warahmatullahi Wabarakatuh*
@@ -85,8 +97,13 @@ Terima kasih banyak atas perhatiannya.
 *Wassalamualaikum Warahmatullahi Wabarakatuh*
 
 💍 *Nurohim & Ayu*
-#SavannahMarried"
-"Ibu Dewi Lestari","https://rohimarried.vercel.app/?to=Ibu+Dewi+Lestari","💌 *UNDANGAN PERNIKAHAN* 💌
+#SavannahMarried
+
+
+======================================================================
+UNTUK: Ibu Dewi Lestari
+======================================================================
+💌 *UNDANGAN PERNIKAHAN* 💌
 ━━━━━━━━━━━━━━━━━
 
 *Assalamualaikum Warahmatullahi Wabarakatuh*
@@ -114,8 +131,13 @@ Terima kasih banyak atas perhatiannya.
 *Wassalamualaikum Warahmatullahi Wabarakatuh*
 
 💍 *Nurohim & Ayu*
-#SavannahMarried"
-"Mas Fajar Pratama","https://rohimarried.vercel.app/?to=Mas+Fajar+Pratama","💌 *UNDANGAN PERNIKAHAN* 💌
+#SavannahMarried
+
+
+======================================================================
+UNTUK: Mas Fajar Pratama
+======================================================================
+💌 *UNDANGAN PERNIKAHAN* 💌
 ━━━━━━━━━━━━━━━━━
 
 *Assalamualaikum Warahmatullahi Wabarakatuh*
@@ -143,8 +165,13 @@ Terima kasih banyak atas perhatiannya.
 *Wassalamualaikum Warahmatullahi Wabarakatuh*
 
 💍 *Nurohim & Ayu*
-#SavannahMarried"
-"Mbak Nisa Amelia","https://rohimarried.vercel.app/?to=Mbak+Nisa+Amelia","💌 *UNDANGAN PERNIKAHAN* 💌
+#SavannahMarried
+
+
+======================================================================
+UNTUK: Mbak Nisa Amelia
+======================================================================
+💌 *UNDANGAN PERNIKAHAN* 💌
 ━━━━━━━━━━━━━━━━━
 
 *Assalamualaikum Warahmatullahi Wabarakatuh*
@@ -172,8 +199,13 @@ Terima kasih banyak atas perhatiannya.
 *Wassalamualaikum Warahmatullahi Wabarakatuh*
 
 💍 *Nurohim & Ayu*
-#SavannahMarried"
-"Bapak Hendra Wijaya","https://rohimarried.vercel.app/?to=Bapak+Hendra+Wijaya","💌 *UNDANGAN PERNIKAHAN* 💌
+#SavannahMarried
+
+
+======================================================================
+UNTUK: Bapak Hendra Wijaya
+======================================================================
+💌 *UNDANGAN PERNIKAHAN* 💌
 ━━━━━━━━━━━━━━━━━
 
 *Assalamualaikum Warahmatullahi Wabarakatuh*
@@ -201,8 +233,13 @@ Terima kasih banyak atas perhatiannya.
 *Wassalamualaikum Warahmatullahi Wabarakatuh*
 
 💍 *Nurohim & Ayu*
-#SavannahMarried"
-"Ibu Lina Marlina","https://rohimarried.vercel.app/?to=Ibu+Lina+Marlina","💌 *UNDANGAN PERNIKAHAN* 💌
+#SavannahMarried
+
+
+======================================================================
+UNTUK: Ibu Lina Marlina
+======================================================================
+💌 *UNDANGAN PERNIKAHAN* 💌
 ━━━━━━━━━━━━━━━━━
 
 *Assalamualaikum Warahmatullahi Wabarakatuh*
@@ -230,8 +267,13 @@ Terima kasih banyak atas perhatiannya.
 *Wassalamualaikum Warahmatullahi Wabarakatuh*
 
 💍 *Nurohim & Ayu*
-#SavannahMarried"
-"Keluarga Bapak Arman","https://rohimarried.vercel.app/?to=Keluarga+Bapak+Arman","💌 *UNDANGAN PERNIKAHAN* 💌
+#SavannahMarried
+
+
+======================================================================
+UNTUK: Keluarga Bapak Arman
+======================================================================
+💌 *UNDANGAN PERNIKAHAN* 💌
 ━━━━━━━━━━━━━━━━━
 
 *Assalamualaikum Warahmatullahi Wabarakatuh*
@@ -259,8 +301,13 @@ Terima kasih banyak atas perhatiannya.
 *Wassalamualaikum Warahmatullahi Wabarakatuh*
 
 💍 *Nurohim & Ayu*
-#SavannahMarried"
-"Keluarga Ibu Fitri","https://rohimarried.vercel.app/?to=Keluarga+Ibu+Fitri","💌 *UNDANGAN PERNIKAHAN* 💌
+#SavannahMarried
+
+
+======================================================================
+UNTUK: Keluarga Ibu Fitri
+======================================================================
+💌 *UNDANGAN PERNIKAHAN* 💌
 ━━━━━━━━━━━━━━━━━
 
 *Assalamualaikum Warahmatullahi Wabarakatuh*
@@ -288,4 +335,4 @@ Terima kasih banyak atas perhatiannya.
 *Wassalamualaikum Warahmatullahi Wabarakatuh*
 
 💍 *Nurohim & Ayu*
-#SavannahMarried"
+#SavannahMarried

@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "links": "node scripts/generate-invitation-links.mjs"
+    "links": "node scripts/generate-invitation-links.mjs",
+    "broadcast": "node scripts/generate-broadcasts.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
