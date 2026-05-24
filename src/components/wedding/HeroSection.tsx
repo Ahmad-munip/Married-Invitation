@@ -144,7 +144,7 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
         {/* Text Content */}
         <div className="relative z-10 flex flex-col items-center justify-center w-full mt-4">
         <motion.p
-          className="font-sans-elegant text-xs tracking-[0.4em] uppercase text-primary mb-6"
+          className="font-sans-elegant text-xs tracking-[0.4em] uppercase text-[#7A3E2D]/85 font-semibold mb-6"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
