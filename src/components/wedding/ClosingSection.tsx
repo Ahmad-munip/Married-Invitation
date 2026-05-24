@@ -1,5 +1,5 @@
 import { RefObject, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Volume2, VolumeX } from "lucide-react";
 import FloralFrame from "./FloralFrame";
 import { Slider } from "@/components/ui/slider";
@@ -111,43 +111,76 @@ const ClosingSection = ({ audioRef, isPlaying, setIsPlaying }: ClosingSectionPro
 
       {/* Music Control with equalizer and volume */}
       <div
-        className="fixed bottom-6 right-6 z-40 flex flex-col items-center gap-2"
+        className="fixed bottom-6 right-6 z-40 flex flex-col items-center gap-2 select-none"
         onMouseEnter={() => setShowVolume(true)}
         onMouseLeave={() => setShowVolume(false)}
       >
         {/* Volume slider */}
-        {showVolume && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            className="glass-strong rounded-full px-2 py-3 h-28 flex items-center"
-          >
-            <Slider
-              orientation="vertical"
-              value={[volume]}
-              onValueChange={handleVolume}
-              max={100}
-              step={1}
-              className="h-20"
-            />
-          </motion.div>
-        )}
+        <AnimatePresence>
+          {showVolume && (
+            <motion.div
+              initial={{ opacity: 0, y: 15, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.95 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="bg-[linear-gradient(180deg,rgba(255,252,242,0.9),rgba(244,233,210,0.7))] border border-[hsl(38,72%,52%)]/25 shadow-md shadow-amber-950/10 backdrop-blur-md rounded-full px-2 py-3.5 h-28 flex items-center z-40"
+            >
+              <Slider
+                orientation="vertical"
+                value={[volume]}
+                onValueChange={handleVolume}
+                max={100}
+                step={1}
+                className="h-20"
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
+        {/* Mute/Play Floating Dashboard Button */}
         <button
           onClick={toggleMusic}
-          className="relative w-12 h-12 rounded-full glass-strong flex items-center justify-center glow-gold cursor-pointer transition-transform hover:scale-110"
+          className="relative w-12 h-12 rounded-full flex items-center justify-center cursor-pointer shadow-lg shadow-amber-950/20 transition-all duration-500 overflow-hidden border border-[hsl(38,72%,52%)]/45 bg-[linear-gradient(135deg,rgba(255,252,242,0.85),rgba(244,233,210,0.5))] backdrop-blur-md hover:scale-110 hover:border-[hsl(38,72%,52%)] hover:bg-[#7C2D12]/10 z-40"
           aria-label={isPlaying ? "Pause music" : "Play music"}
         >
-          {/* Equalizer bars */}
+          {/* Expanding Sonar Pulse Waves (CSS animations, no performance cost) */}
           {isPlaying && (
-            <div className="absolute -top-1 left-1/2 -translate-x-1/2 flex gap-[2px]">
-              <div className="eq-bar" style={{ animationDuration: "0.4s" }} />
-              <div className="eq-bar" style={{ animationDuration: "0.6s", animationDelay: "0.1s" }} />
-              <div className="eq-bar" style={{ animationDuration: "0.5s", animationDelay: "0.2s" }} />
+            <>
+              <div 
+                className="absolute inset-0 rounded-full border-2 border-[hsl(38,72%,52%)]/40 icon-pulse-ring pointer-events-none z-0" 
+                style={{ animationDelay: "0s", animationDuration: "2.5s" }} 
+              />
+              <div 
+                className="absolute inset-0 rounded-full border-2 border-[hsl(38,72%,52%)]/20 icon-pulse-ring pointer-events-none z-0" 
+                style={{ animationDelay: "1.2s", animationDuration: "2.5s" }} 
+              />
+            </>
+          )}
+
+          {/* Slow-Orbit Gold Dashed Ring */}
+          <div 
+            className="absolute inset-[-4px] rounded-full border border-dashed border-[hsl(38,72%,52%)]/30 animate-rotate-slow pointer-events-none z-0" 
+            style={{ animationDuration: "20s" }} 
+          />
+
+          {/* Speaker Icon (Shifts up when playing to accommodate the internal equalizers) */}
+          <div className={`relative transition-all duration-300 z-10 ${isPlaying ? "-translate-y-1.5" : ""}`}>
+            {isPlaying ? (
+              <Volume2 className="w-5 h-5 text-[#7C2D12]" />
+            ) : (
+              <VolumeX className="w-5 h-5 text-[#7C2D12]/60" />
+            )}
+          </div>
+
+          {/* Internal Equalizer Bars in the bottom half of the circle */}
+          {isPlaying && (
+            <div className="absolute bottom-1.5 inset-x-0 flex justify-center items-end gap-[2px] h-3 pointer-events-none select-none px-2.5 z-10 opacity-80">
+              <div className="eq-bar" style={{ width: "2px", height: "3px", animationDuration: "0.4s" }} />
+              <div className="eq-bar" style={{ width: "2px", height: "3px", animationDuration: "0.6s", animationDelay: "0.15s" }} />
+              <div className="eq-bar" style={{ width: "2px", height: "3px", animationDuration: "0.5s", animationDelay: "0.3s" }} />
+              <div className="eq-bar" style={{ width: "2px", height: "3px", animationDuration: "0.7s", animationDelay: "0.08s" }} />
             </div>
           )}
-          {isPlaying ? <Volume2 className="w-5 h-5 text-primary" /> : <VolumeX className="w-5 h-5 text-primary/60" />}
         </button>
       </div>
     </>
