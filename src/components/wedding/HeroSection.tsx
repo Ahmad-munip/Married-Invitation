@@ -231,7 +231,7 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
             viewport={{ once: true }}
             transition={{ delay: 4.85 }}
           >
-            <span className="font-sans-elegant text-[10px] uppercase tracking-[0.28em] text-primary/70">Kepada Yth.</span>
+            <span className="font-sans-elegant text-[10px] uppercase tracking-[0.28em] text-[#7A3E2D]/85 font-semibold">Kepada Yth.</span>
             <span className="font-serif text-lg text-foreground/90">{guestName}</span>
           </motion.div>
         )}
@@ -244,7 +244,7 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 5.5 }}
         >
-          <span className="font-sans-elegant text-[10px] tracking-[0.3em] uppercase text-primary/70">Scroll Down</span>
+          <span className="font-sans-elegant text-[10px] tracking-[0.3em] uppercase text-[#7A3E2D]/85 font-semibold">Scroll Down</span>
           <div className="w-5 h-8 rounded-full border border-primary/50 flex justify-center p-1 relative">
             <motion.div
               className="w-1 h-2 bg-primary rounded-full"

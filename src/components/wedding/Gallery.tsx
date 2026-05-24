@@ -66,7 +66,7 @@ const Gallery = () => {
 
       <div className="max-w-5xl mx-auto relative">
         <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="font-sans-elegant text-xs tracking-[0.3em] uppercase text-primary/70 mb-3">Moments</p>
+          <p className="font-sans-elegant text-xs tracking-[0.3em] uppercase text-[#7A3E2D]/85 font-semibold mb-3">Moments</p>
           <h2 className="font-script text-5xl md:text-6xl gradient-gold-text mb-4">Gallery</h2>
           <div className="divider-gold w-32 mx-auto" />
         </motion.div>

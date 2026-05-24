@@ -21,7 +21,7 @@ const MapsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <p className="font-sans-elegant text-xs tracking-[0.3em] uppercase text-primary/70 mb-3">Location</p>
+          <p className="font-sans-elegant text-xs tracking-[0.3em] uppercase text-[#7A3E2D]/85 font-semibold mb-3">Location</p>
           <h2 className="font-script text-5xl gradient-gold-text mb-4">Lokasi Acara</h2>
           <div className="divider-gold w-32 mx-auto" />
         </motion.div>

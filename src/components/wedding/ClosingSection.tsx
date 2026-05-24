@@ -57,7 +57,7 @@ const ClosingSection = ({ audioRef, isPlaying, setIsPlaying }: ClosingSectionPro
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <p className="font-sans-elegant text-xs tracking-[0.3em] uppercase text-primary/70 mb-6">Thank You</p>
+            <p className="font-sans-elegant text-xs tracking-[0.3em] uppercase text-[#7A3E2D]/85 font-semibold mb-6">Thank You</p>
 
             <h2 className="font-script text-4xl md:text-5xl gradient-gold-text mb-8 leading-relaxed">
               "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, supaya kamu merasa tenteram kepadanya."
