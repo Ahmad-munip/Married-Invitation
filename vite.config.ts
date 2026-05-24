@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => ({
     VitePWA({
       selfDestroy: true,
       registerType: "autoUpdate",
-      includeAssets: ["favicon.ico"],
+      includeAssets: ["favicon.png"],
       manifest: {
         name: "Nur Rohim & Ayu",
         short_name: "Wedding",
@@ -32,7 +32,7 @@ export default defineConfig(({ mode }) => ({
         orientation: "portrait",
         start_url: "/",
         icons: [
-          { src: "/favicon.ico", sizes: "64x64", type: "image/x-icon" },
+          { src: "/favicon.png", sizes: "512x512", type: "image/png" },
         ],
       },
       workbox: {
