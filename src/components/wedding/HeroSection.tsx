@@ -103,9 +103,9 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
             <motion.path
                d="M 20 120 L 20 100 L 60 100 L 60 60 Q 200 -20, 340 60 L 340 100 L 380 100 L 380 120 L 380 580 L 380 600 L 340 600 L 340 640 Q 200 720, 60 640 L 60 600 L 20 600 Z"
                stroke="hsl(40 72% 52%)" strokeWidth="2"
-               fill="white"
-               initial={{ pathLength: 0, opacity: 0, fillOpacity: 0 }}
-               whileInView={{ pathLength: 1, opacity: 1, fillOpacity: 0.85 }}
+               fill="rgba(255, 255, 255, 0.85)"
+               initial={{ pathLength: 0, opacity: 0 }}
+               whileInView={{ pathLength: 1, opacity: 1 }}
                viewport={{ once: true }}
                transition={{ duration: 3, delay: 3.5, ease: "easeInOut" }}
             />
