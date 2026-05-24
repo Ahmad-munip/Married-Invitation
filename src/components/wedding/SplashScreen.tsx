@@ -45,8 +45,9 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
           {/* Image Background */}
           <div className="absolute inset-0">
             <img src="/bg.jpeg" alt="Wedding background" className="absolute inset-0 h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-black/20" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
+            <div className="absolute inset-0 bg-[hsl(35_45%_18%_/_0.22)]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-black/35" />
+            <div className="absolute inset-x-0 top-[8%] mx-auto h-[64%] max-w-[560px] rounded-full bg-[radial-gradient(circle,rgba(255,250,238,0.72)_0%,rgba(255,250,238,0.44)_42%,rgba(255,250,238,0)_72%)] blur-sm" />
           </div>
 
 
@@ -105,25 +106,37 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
           ))}
 
           {/* Content */}
-          <motion.div className="relative z-10 text-center px-6" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.3 }}>
-            <motion.p className="font-sans-elegant text-sm tracking-[0.3em] uppercase mb-3 font-bold" 
+          <motion.div
+            className="relative z-10 w-full max-w-[520px] px-5 text-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3 }}
+          >
+            <div className="relative mx-auto rounded-[2rem] border border-[hsl(39_62%_55%_/_0.34)] bg-[linear-gradient(180deg,rgba(255,252,244,0.68),rgba(244,234,212,0.38))] px-4 pb-7 pt-7 shadow-[0_22px_70px_rgba(58,39,18,0.30),inset_0_0_34px_rgba(255,255,255,0.56)] backdrop-blur-[3px] sm:px-8">
+              <div className="pointer-events-none absolute inset-2 rounded-[1.6rem] border border-white/45" />
+              <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[hsl(40_80%_58%_/_0.7)] to-transparent" />
+              <div className="pointer-events-none absolute inset-x-8 bottom-0 h-px bg-gradient-to-r from-transparent via-[hsl(40_80%_58%_/_0.55)] to-transparent" />
+              <div className="pointer-events-none absolute -left-2 top-1/2 h-20 w-px -translate-y-1/2 bg-gradient-to-b from-transparent via-[hsl(40_80%_58%_/_0.55)] to-transparent" />
+              <div className="pointer-events-none absolute -right-2 top-1/2 h-20 w-px -translate-y-1/2 bg-gradient-to-b from-transparent via-[hsl(40_80%_58%_/_0.55)] to-transparent" />
+
+            <motion.p className="relative font-sans-elegant text-sm tracking-[0.3em] uppercase mb-3 font-bold" 
               style={{ 
                 color: "hsl(30, 45%, 26%)",
-                textShadow: "0.75px 0.75px 0px #ffffff, -0.75px -0.75px 0px #ffffff, 0.75px -0.75px 0px #ffffff, -0.75px 0.75px 0px #ffffff",
+                textShadow: "0 1px 0 #ffffff, 0 2px 8px rgba(255,255,255,0.82)",
                 letterSpacing: "0.3em"
               }}
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
               The Wedding of
             </motion.p>
 
-            <motion.h1 className="font-script text-6xl md:text-8xl mb-6 relative z-10 leading-tight"
+            <motion.h1 className="font-script text-6xl md:text-8xl mb-5 relative z-10 leading-tight"
               style={{ 
-                background: "linear-gradient(135deg, hsl(30, 60%, 18%) 0%, hsl(32, 55%, 32%) 50%, hsl(38, 70%, 45%) 100%)",
+                background: "linear-gradient(135deg, hsl(28, 60%, 16%) 0%, hsl(32, 58%, 30%) 48%, hsl(38, 78%, 42%) 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
                 paddingRight: "0.15em",
-                filter: "drop-shadow(0.5px 0.5px 0px #ffffff) drop-shadow(-0.5px -0.5px 0px #ffffff) drop-shadow(0px 3px 6px rgba(100, 70, 30, 0.2))"
+                filter: "drop-shadow(0 1px 0 rgba(255,255,255,0.95)) drop-shadow(0 4px 10px rgba(72,43,16,0.28))"
               }}
               initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.8, duration: 0.8 }}>
               {WEDDING_CONFIG.bride.shortName} <br />
@@ -140,15 +153,16 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
               {WEDDING_CONFIG.groom.shortName}
             </motion.h1>
 
-            <div className="divider-gold w-40 mx-auto mb-8 drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+            <div className="divider-gold w-40 mx-auto drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+            </div>
 
             <motion.div 
-              className="my-8 mx-auto p-6 rounded-2xl border border-[hsl(38_55%_52%_/_0.25)] max-w-[280px] sm:max-w-[320px] relative overflow-hidden"
+              className="my-8 mx-auto p-6 rounded-2xl border border-[hsl(38_55%_52%_/_0.45)] max-w-[280px] sm:max-w-[320px] relative overflow-hidden"
               style={{ 
-                background: "linear-gradient(135deg, rgba(253, 251, 247, 0.75) 0%, rgba(245, 240, 228, 0.65) 100%)",
-                backdropFilter: "blur(8px)",
-                WebkitBackdropFilter: "blur(8px)",
-                boxShadow: "0 10px 25px rgba(139, 92, 26, 0.08), inset 0 0 15px rgba(255, 255, 255, 0.6)"
+                background: "linear-gradient(135deg, rgba(255, 253, 247, 0.92) 0%, rgba(244, 235, 215, 0.86) 100%)",
+                backdropFilter: "blur(10px)",
+                WebkitBackdropFilter: "blur(10px)",
+                boxShadow: "0 18px 45px rgba(66, 42, 18, 0.22), inset 0 0 18px rgba(255, 255, 255, 0.75)"
               }}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
