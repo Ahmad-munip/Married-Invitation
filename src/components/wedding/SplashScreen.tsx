@@ -229,13 +229,15 @@ const SplashScreen = ({ isOpen, onOpen, guestName = "Bapak/Ibu/Saudara/i" }: Spl
             </svg>
 
             {/* Circular Photo */}
-            <div className="w-full h-full rounded-full overflow-hidden border-[4px] sm:border-[5px] md:border-[6px] border-white shadow-[0_6px_16px_rgba(92,33,20,0.2)] relative z-10">
+            <div className="w-full h-full rounded-full overflow-hidden shadow-[0_6px_16px_rgba(92,33,20,0.2)] relative z-10">
               <img 
                 src={couplePhoto} 
                 alt="Foto Ayu & Nurohim" 
                 className="w-full h-full object-cover scale-[1.03] hover:scale-[1.08] transition-transform duration-700 ease-out" 
               />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_45%,rgba(92,33,20,0.1)_100%)] mix-blend-multiply" />
+              {/* iOS Safari Bounded Overlay White Frame (Guarantees border visibility under dynamic scale transforms) */}
+              <div className="absolute inset-0 rounded-full border-[4px] sm:border-[5px] md:border-[6px] border-white pointer-events-none z-20" />
             </div>
             
             {/* Elegant rotating gold stars/glow around the frame - Math Centered */}

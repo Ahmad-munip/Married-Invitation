@@ -77,16 +77,14 @@ const Index = () => {
 
   const handleOpenInvitation = useCallback(() => {
     setSplashOpen(false);
-    if (!audioRef.current) {
-      const audio = new Audio(MUSIC_URL);
-      audio.loop = true;
-      audio.volume = 0.5;
-      audioRef.current = audio;
+    if (audioRef.current) {
+      audioRef.current.volume = 0.5;
+      audioRef.current.play()
+        .then(() => setIsPlaying(true))
+        .catch((err) => {
+          console.error("Audio playback failed:", err);
+        });
     }
-    audioRef.current
-      .play()
-      .then(() => setIsPlaying(true))
-      .catch(() => {});
 
     setTimeout(() => {
       window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
@@ -95,6 +93,13 @@ const Index = () => {
 
   return (
     <div className={`bg-background ${splashOpen ? "h-screen overflow-hidden" : "min-h-screen"} lg:flex lg:items-start`}>
+      <audio
+        ref={audioRef}
+        src={MUSIC_URL}
+        loop
+        preload="auto"
+        style={{ display: "none" }}
+      />
       
       {/* LEFT PANE: Desktop Only Fixed Video Cover */}
       <div className="hidden lg:flex lg:w-[60%] lg:sticky lg:top-0 lg:h-screen lg:flex-col lg:items-center lg:justify-center text-center overflow-hidden">
