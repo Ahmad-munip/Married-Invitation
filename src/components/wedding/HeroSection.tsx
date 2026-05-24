@@ -183,7 +183,7 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
         >
           <div className="divider-gold w-20" />
           <motion.span
-            className="font-script text-3xl text-primary"
+            className="font-script text-3xl gradient-gold-text text-glow-gold"
             animate={{ rotate: [0, 10, -10, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           >

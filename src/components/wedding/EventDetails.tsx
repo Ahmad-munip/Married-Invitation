@@ -386,7 +386,7 @@ const EventCard = ({ event, index }: { event: typeof events[0]; index: number })
           <TopFiligree />
 
           {/* Title */}
-          <motion.h3 className="font-script text-4xl md:text-5xl mb-2" style={{ color: "hsl(30 40% 22%)" }}
+          <motion.h3 className="font-script text-4xl md:text-5xl gradient-gold-text mb-2"
             initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ delay: index * 0.25 + 0.4 }}>
             {event.title}

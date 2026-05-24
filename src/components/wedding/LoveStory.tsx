@@ -164,7 +164,7 @@ const StoryCard = ({ story, index }: { story: typeof stories[0]; index: number }
                 </div>
 
                 {/* Title */}
-                <h3 className="font-script text-2xl mb-2" style={{ color: "hsl(30 40% 22%)" }}>
+                <h3 className="font-script text-2xl mb-2 gradient-gold-text">
                   {story.title}
                 </h3>
 
@@ -268,8 +268,8 @@ const LoveStory = () => {
           </div>
 
           <p className="font-sans-elegant text-xs tracking-[0.3em] uppercase text-primary/70 mb-3">Our Journey</p>
-          <h2 className="font-script text-5xl md:text-6xl mb-4" style={{ color: "hsl(30 40% 22%)" }}>
-            <span className="gradient-gold-text">Love Story</span>
+          <h2 className="font-script text-5xl md:text-6xl gradient-gold-text mb-4">
+            Love Story
           </h2>
           <div className="divider-gold w-32 mx-auto" />
         </motion.div>
@@ -338,7 +338,7 @@ const LoveStory = () => {
           <p className="font-serif text-sm md:text-base leading-relaxed mb-4" style={{ color: "hsl(30 30% 40%)" }}>
             Semoga Allah senantiasa menautkan hati ini dalam kebaikan, menguatkan langkah kami dalam setiap ujian, dan menjadikan rumah tangga yang akan dibangun dipenuhi sakinah, mawaddah, wa rahmah.
           </p>
-          <p className="font-script text-3xl mt-4" style={{ color: "hsl(30 40% 25%)" }}>
+          <p className="font-script text-3xl gradient-gold-text mt-4">
             Aamiin ya Rabbal ‘alamin.
           </p>
         </motion.div>

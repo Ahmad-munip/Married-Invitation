@@ -250,7 +250,7 @@ const RSVPSection = ({ guestName = "" }: RSVPSectionProps) => {
                     <Check className="w-8 h-8 text-primary-foreground" />
                   </div>
                   <FiligreeLine />
-                  <h3 className="font-script text-3xl text-[hsl(30_50%_20%)] mb-3">Terima Kasih!</h3>
+                  <h3 className="font-script text-3xl gradient-gold-text mb-3">Terima Kasih!</h3>
                   <FiligreeLine />
                   <p className="font-serif text-[hsl(30_40%_35%)]">
                     Konfirmasi kehadiran Anda telah berhasil kami terima.

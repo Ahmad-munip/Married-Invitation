@@ -290,8 +290,7 @@ const CountdownTimer = () => {
 
               {/* Title */}
               <motion.h2
-                className="font-script text-4xl md:text-5xl mb-2"
-                style={{ color: "hsl(30 40% 22%)" }}
+                className="font-script text-4xl md:text-5xl gradient-gold-text mb-2"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
