@@ -80,6 +80,10 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     padding-right: 0.15em; /* Fix cursive font clipping issue on right edge */
+    padding-top: 0.15em; /* Fix cursive font clipping issue on top edge (ascenders) */
+    padding-bottom: 0.25em; /* Fix cursive font clipping issue on bottom edge (descenders) */
+    margin-top: -0.15em; /* Offset vertical padding to keep exact layout spacing */
+    margin-bottom: -0.25em;
   }
 
   .glass {

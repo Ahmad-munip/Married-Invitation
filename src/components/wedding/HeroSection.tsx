@@ -153,9 +153,15 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
           We Are Getting Married
         </motion.p>
 
-        <h1 className="font-script text-4xl sm:text-5xl md:text-7xl lg:text-8xl gradient-gold-text text-glow-gold mb-2 whitespace-nowrap">
-          <WordReveal text={WEDDING_CONFIG.bride.shortName} delay={3.8} />
-        </h1>
+        <motion.h1 
+          className="font-script text-4xl sm:text-5xl md:text-7xl lg:text-8xl gradient-gold-text text-glow-gold mb-2 whitespace-nowrap"
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, delay: 3.8, ease: "easeOut" }}
+        >
+          {WEDDING_CONFIG.bride.shortName}
+        </motion.h1>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -186,9 +192,15 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
           <div className="divider-gold w-20" />
         </motion.div>
 
-        <h1 className="font-script text-4xl sm:text-5xl md:text-7xl lg:text-8xl gradient-gold-text text-glow-gold mb-2 whitespace-nowrap">
-          <WordReveal text={WEDDING_CONFIG.groom.shortName} delay={4.1} />
-        </h1>
+        <motion.h1 
+          className="font-script text-4xl sm:text-5xl md:text-7xl lg:text-8xl gradient-gold-text text-glow-gold mb-2 whitespace-nowrap"
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, delay: 4.1, ease: "easeOut" }}
+        >
+          {WEDDING_CONFIG.groom.shortName}
+        </motion.h1>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
