@@ -94,11 +94,11 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
       </motion.div>
 
       {/* Content with parallax and animated frame */}
-      <motion.div className="relative z-10 w-full max-w-[400px] h-[85vh] max-h-[750px] mx-auto text-center px-4 flex flex-col items-center justify-center" style={{ y: contentY }}>
+      <motion.div className="relative z-10 w-full max-w-[420px] min-h-[660px] sm:min-h-[700px] my-10 mx-auto text-center px-6 py-12 flex flex-col items-center justify-center" style={{ y: contentY }}>
         
         {/* Animated Ornate Frame */}
         <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
-          <svg viewBox="0 0 400 700" preserveAspectRatio="xMidYMid meet" className="w-full h-full drop-shadow-xl">
+          <svg viewBox="0 0 400 700" preserveAspectRatio="none" className="w-full h-full drop-shadow-xl">
             {/* Outer Frame */}
             <motion.path
                d="M 20 120 L 20 100 L 60 100 L 60 60 Q 200 -20, 340 60 L 340 100 L 380 100 L 380 120 L 380 580 L 380 600 L 340 600 L 340 640 Q 200 720, 60 640 L 60 600 L 20 600 Z"
@@ -237,22 +237,23 @@ const HeroSection = ({ guestName }: HeroSectionProps) => {
         )}
         </div>
 
-        {/* Scroll Down Indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 5.5 }}
-        >
-          <span className="font-sans-elegant text-[10px] tracking-[0.3em] uppercase text-[#7A3E2D]/85 font-semibold">Scroll Down</span>
-          <div className="w-5 h-8 rounded-full border border-primary/50 flex justify-center p-1 relative">
-            <motion.div
-              className="w-1 h-2 bg-primary rounded-full"
-              animate={{ y: [0, 12, 0], opacity: [1, 0, 1] }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-            />
-          </div>
-        </motion.div>
+      </motion.div>
+
+      {/* Scroll Down Indicator - Viewport Level */}
+      <motion.div
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 z-20"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 5.5 }}
+      >
+        <span className="font-sans-elegant text-[10px] tracking-[0.3em] uppercase text-[#7A3E2D]/85 font-semibold">Scroll Down</span>
+        <div className="w-4 h-7 rounded-full border border-primary/40 flex justify-center p-0.5 relative">
+          <motion.div
+            className="w-0.5 h-1.5 bg-primary rounded-full"
+            animate={{ y: [0, 10, 0], opacity: [1, 0, 1] }}
+            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+          />
+        </div>
       </motion.div>
     </section>
   );
