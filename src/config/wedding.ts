@@ -31,7 +31,9 @@ export const WEDDING_CONFIG = {
       time: "Pukul 10.00 WIB s/d Selesai",
       place: "Kediaman Mempelai Wanita",
       address: "Sukowidi RT 002 RW 005, Kelurahan Sidomakmur, Kec Widodaren, Ngawi",
-    }
+    },
+    mapEmbedUrl: "https://maps.google.com/maps?q=-7.412063090980351,111.26187937879546&t=&z=15&ie=UTF8&iwloc=&output=embed",
+    mapDirUrl: "https://www.google.com/maps/dir/?api=1&destination=-7.412063090980351,111.26187937879546"
   },
   digitalEnvelope: [
     { bank: "BSI", number: "7210408023", name: "NUROHIM" },

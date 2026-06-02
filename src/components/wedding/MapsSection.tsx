@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { MapPin, Navigation } from "lucide-react";
 import MagneticButton from "./MagneticButton";
 import { SectionVine } from "./SectionDecorations";
+import { WEDDING_CONFIG } from "@/config/wedding";
 
 const MapsSection = () => {
   return (
@@ -33,7 +34,7 @@ const MapsSection = () => {
           viewport={{ once: true }}
         >
           <iframe
-            src="https://maps.google.com/maps?q=Sukowidi+RT+002+RW+005,+Kelurahan+Sidomakmur,+Kec+Widodaren,+Ngawi&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            src={WEDDING_CONFIG.venues.mapEmbedUrl}
             width="100%"
             height="350"
             style={{ border: 0 }}
@@ -46,12 +47,12 @@ const MapsSection = () => {
             <div className="flex items-center gap-3">
               <MapPin className="w-5 h-5 text-primary" />
               <div>
-                <p className="font-serif font-semibold text-foreground">Kediaman Mempelai Wanita</p>
-                <p className="font-sans-elegant text-xs text-muted-foreground mt-1 max-w-[250px]">Sukowidi RT 002 RW 005, Kelurahan Sidomakmur, Kec Widodaren, Ngawi</p>
+                <p className="font-serif font-semibold text-foreground">{WEDDING_CONFIG.venues.akad.place}</p>
+                <p className="font-sans-elegant text-xs text-muted-foreground mt-1 max-w-[250px]">{WEDDING_CONFIG.venues.akad.address}</p>
               </div>
             </div>
             <MagneticButton
-              onClick={() => window.open("https://www.google.com/maps/dir/?api=1&destination=Sukowidi+RT+002+RW+005,+Kelurahan+Sidomakmur,+Kec+Widodaren,+Ngawi", "_blank")}
+              onClick={() => window.open(WEDDING_CONFIG.venues.mapDirUrl, "_blank")}
               className="gradient-gold font-sans-elegant text-xs tracking-widest uppercase px-6 py-3 rounded-full text-primary-foreground flex items-center gap-2"
             >
               <Navigation className="w-3 h-3" />
